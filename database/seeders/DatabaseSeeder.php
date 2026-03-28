@@ -20,14 +20,26 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
         ]);
 
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@app.com',
-        ])->assignRole('admin');
+        // Crear usuarios de prueba si no existen
+        if (!User::where('email', 'admin@app.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Admin User',
+                'email' => 'admin@app.com',
+            ])->assignRole('admin');
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ])->assignRole('user');
+        if (!User::where('email', 'organizador@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Organizador Test',
+                'email' => 'organizador@example.com',
+            ])->assignRole('organizador');
+        }
+
+        if (!User::where('email', 'jugador@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Jugador Test',
+                'email' => 'jugador@example.com',
+            ])->assignRole('jugador');
+        }
     }
 }

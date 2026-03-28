@@ -16,66 +16,42 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // Define permissions for Quiniela management
+        // Crear permisos
         $permissions = [
-            // User management
-            'users.create',
-            'users.view',
-            'users.edit',
-            'users.delete',
-
-            // Quiniela management
-            'quinielas.create',
-            'quinielas.view',
-            'quinielas.edit',
-            'quinielas.delete',
-            'quinielas.publish',
-            'quinielas.close',
-
-            // Predictions management
-            'predictions.create',
-            'predictions.view',
-            'predictions.edit',
-            'predictions.delete',
-
-            // Match management
-            'matches.create',
-            'matches.view',
-            'matches.edit',
-            'matches.delete',
-            'matches.score',
-
-            // Scoring
-            'scoring.view',
-            'scoring.calculate',
+            'manage-users',
+            'manage-quinielas',
+            'manage-matches',
+            'manage-teams',
+            'make-predictions',
+            'view-results',
+            'view-leaderboard',
+            'view-audit-logs',
         ];
 
-        // Create permissions
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate([
-                'name' => $permission,
-                'guard_name' => 'web',
-            ]);
+            Permission::create(['name' => $permission]);
         }
 
-        // Create admin role with all permissions
-        $adminRole = Role::firstOrCreate([
-            'name' => 'admin',
-            'guard_name' => 'web',
-        ]);
-        $adminRole->givePermissionTo($permissions);
+        // Crear rol admin con todos los permisos
+        $admin = Role::create(['name' => 'admin'])
+            ->givePermissionTo($permissions);
 
-        // Create user role with basic permissions
-        $userRole = Role::firstOrCreate([
-            'name' => 'user',
-            'guard_name' => 'web',
-        ]);
-        $userRole->givePermissionTo([
-            'quinielas.view',
-            'predictions.create',
-            'predictions.view',
-            'predictions.edit',
-            'scoring.view',
-        ]);
+        // Crear rol organizador con permisos específicos
+        $organizer = Role::create(['name' => 'organizador'])
+            ->givePermissionTo([
+                'manage-quinielas',
+                'manage-matches',
+                'manage-teams',
+                'view-results',
+                'view-leaderboard',
+            ]);
+
+        // Crear rol jugador con permisos básicos
+        $player = Role::create(['name' => 'jugador'])
+            ->givePermissionTo([
+                'make-predictions',
+                'view-results',
+                'view-leaderboard',
+            ]);
     }
 }

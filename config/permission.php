@@ -199,4 +199,17 @@ return [
 
         'store' => 'default',
     ],
+
+    /*
+     * Guards configuration for Spatie Permission
+     */
+    'guards' => [
+        'web' => [
+            'provider' => 'users',
+        ],
+        'api' => [
+            'provider' => 'users',
+            'driver' => 'sanctum',
+        ],
+    ],
 ];
