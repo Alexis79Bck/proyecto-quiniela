@@ -4,6 +4,13 @@ namespace App\Providers;
 
 use App\Domain\Auth\Events\LogAuditEvent;
 use App\Domain\Auth\Listeners\AuditLogListener;
+use App\Domain\Match\Events\MatchResultAvailable;
+use App\Domain\Match\Events\MatchStarted;
+use App\Domain\Prediction\Events\PredictionReminder;
+use App\Domain\Quiniela\Events\NewQuinielaAvailable;
+use App\Domain\Quiniela\Events\WinnersAnnounced;
+use App\Domain\Scoring\Events\LeaderboardUpdated;
+use App\Infrastructure\Notifications\Listeners\SendPusherNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,6 +23,24 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         LogAuditEvent::class => [
             AuditLogListener::class,
+        ],
+        NewQuinielaAvailable::class => [
+            SendPusherNotification::class,
+        ],
+        MatchStarted::class => [
+            SendPusherNotification::class,
+        ],
+        MatchResultAvailable::class => [
+            SendPusherNotification::class,
+        ],
+        LeaderboardUpdated::class => [
+            SendPusherNotification::class,
+        ],
+        PredictionReminder::class => [
+            SendPusherNotification::class,
+        ],
+        WinnersAnnounced::class => [
+            SendPusherNotification::class,
         ],
     ];
 
