@@ -2,6 +2,7 @@
 
 use App\Presentation\Http\Controllers\AuthController;
 use App\Presentation\Http\Controllers\NotificationController;
+use App\Presentation\Http\Controllers\ToastController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{notificationId}/read', [NotificationController::class, 'markAsRead']);
         Route::post('/read-all', [NotificationController::class, 'markAllAsRead']);
         Route::delete('/{notificationId}', [NotificationController::class, 'destroy']);
+    });
+
+    Route::prefix('toasts')->group(function () {
+        Route::post('/broadcast', [ToastController::class, 'broadcast']);
+        Route::post('/broadcast-user', [ToastController::class, 'broadcastToUser']);
+        Route::get('/types', [ToastController::class, 'types']);
+        Route::post('/', [ToastController::class, 'store']);
     });
 });

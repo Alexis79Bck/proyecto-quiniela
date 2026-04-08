@@ -11,6 +11,7 @@ use App\Domain\Quiniela\Events\NewQuinielaAvailable;
 use App\Domain\Quiniela\Events\WinnersAnnounced;
 use App\Domain\Scoring\Events\LeaderboardUpdated;
 use App\Infrastructure\Notifications\Listeners\SendPusherNotification;
+use App\Infrastructure\Toast\Listeners\SendSystemToastNotifications;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -26,6 +27,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewQuinielaAvailable::class => [
             SendPusherNotification::class,
+            SendSystemToastNotifications::class,
         ],
         MatchStarted::class => [
             SendPusherNotification::class,
@@ -41,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         WinnersAnnounced::class => [
             SendPusherNotification::class,
+            SendSystemToastNotifications::class,
         ],
     ];
 
