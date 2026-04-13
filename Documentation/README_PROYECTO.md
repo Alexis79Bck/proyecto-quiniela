@@ -85,26 +85,32 @@ app/
 ### Criterios de Puntuación
 | Criterio | Puntos | Descripción |
 |----------|--------|-------------|
-| Resultado exacto | 10 | Acertar marcador exacto |
-| Ganador correcto | 5 | Acertar equipo ganador |
-| Diferencia correcta | 3 | Acertar diferencia de goles |
-| Goles de equipo | 2 | Acertar goles de un equipo |
+| Ganador/Empate + Marcador exacto | 5 | Acertar marcador exacto |
+| Solo Ganador/Empate correcto | 3 | Acertar equipo ganador |
+| Adicional: Acierto de Goles de un equipo | 1 | Acierto de Goles de un Equipo (Excepto Marcador Exacto) |
+| Bono: Total de Goles | 2 | Bono, aplica si el jugador habilita el bono|
 
 ### Ejemplo
 **Partido**: Brasil 2 - 1 Argentina
 
 | Predicción | Puntos | Razón |
 |------------|--------|-------|
-| Brasil 2 - 1 Argentina | 10 | Resultado exacto |
-| Brasil 3 - 1 Argentina | 5 | Ganador correcto |
-| Brasil 2 - 0 Argentina | 3 | Diferencia correcta |
-| Brasil 1 - 1 Argentina | 0 | Sin acierto |
+| Brasil 2 - 1 Argentina | 5 | Marcador exacto |
+| Brasil 3 - 1 Argentina | 3 | Ganador correcto |
+| Brasil 2 - 0 Argentina | 4 | Ganador correcto + Acierto de Goles de un equipo |
+| Brasil 0 - 1 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 1 - 1 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 2 - 2 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 1 - 2 Argentina | 0 | Sin acierto |
+| Brasil 2 - 1 Argentina | 7 | Marcador exacto + Bono Activado |
+| Brasil 3 - 0 Argentina | 5 | Ganador correcto + Bono Activado |
+| Brasil 1 - 2 Argentina | 2 | Sin acierto + Bono Activado |
 
 ## 👥 Roles y Permisos
 
 ### Roles del Sistema
-1. **Admin**: Acceso total al sistema
-2. **Organizador**: Gestión de quinielas y partidos
+1. **SuperAdmin**: Acceso total al sistema
+2. **Administrador**: Gestión de quinielas y partidos
 3. **Jugador**: Participación en quinielas
 
 ### Permisos Granulares
