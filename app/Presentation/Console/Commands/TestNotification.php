@@ -8,7 +8,7 @@ use App\Domain\Prediction\Events\PredictionReminder;
 use App\Domain\Quiniela\Events\NewQuinielaAvailable;
 use App\Domain\Quiniela\Events\WinnersAnnounced;
 use App\Domain\Scoring\Events\LeaderboardUpdated;
-use App\Domain\User\Models\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class TestNotification extends Command

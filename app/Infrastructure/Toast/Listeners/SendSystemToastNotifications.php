@@ -4,7 +4,7 @@ namespace App\Infrastructure\Toast\Listeners;
 
 use App\Domain\Quiniela\Events\NewQuinielaAvailable;
 use App\Domain\Quiniela\Events\WinnersAnnounced;
-use App\Domain\User\Models\User;
+use App\Models\User;
 use App\Services\ToastService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

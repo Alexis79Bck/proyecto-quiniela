@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Presentation\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function __construct(
+        protected AuthService $authService
+    ) {}
+
     public function register(Request $request): JsonResponse
     {
         $request->validate([
@@ -19,11 +24,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = $this->authService->register($request->only(['name', 'email', 'password']));
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
@@ -40,13 +41,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas son incorrectas.'],
-            ]);
-        }
+        $user = $this->authService->login($request->only(['email', 'password']));
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
@@ -58,7 +53,7 @@ class AuthController extends Controller
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->tokens()->where('id', $request->user()->id)->delete();
+        $this->authService->logout($request->user());
 
         return response()->json(['message' => 'Sesión cerrada correctamente']);
     }

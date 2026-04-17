@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Presentation\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Enums\ToastType;
-use App\Services\ToastService;
+use App\Services\Toast\ToastService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +26,7 @@ class ToastController extends Controller
 
         $user = Auth::user();
         $type = ToastType::from($validated['type']);
-        
+
         $sent = $this->toastService->broadcast(
             $user->id,
             $type,
@@ -99,33 +99,5 @@ class ToastController extends Controller
         return response()->json([
             'types' => $this->toastService->getTypes(),
         ]);
-    }
-
-    public function store(Request $request): JsonResponse
-    {
-        $validated = $request->validate([
-            'type' => 'required|string|in:' . implode(',', ToastType::values()),
-            'message' => 'required|string|max:500',
-            'title' => 'nullable|string|max:100',
-            'duration' => 'nullable|integer|min:1000|max:30000',
-            'dismissible' => 'nullable|boolean',
-        ]);
-
-        $type = ToastType::from($validated['type']);
-
-        $toast = $this->toastService->formatToast(
-            $type,
-            $validated['message'],
-            $validated['title'] ?? null,
-            [
-                'duration' => $validated['duration'] ?? null,
-                'dismissible' => $validated['dismissible'] ?? null,
-            ]
-        );
-
-        return response()->json([
-            'message' => 'Toast creado correctamente',
-            'data' => $toast,
-        ], 201);
     }
 }

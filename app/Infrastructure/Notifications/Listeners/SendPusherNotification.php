@@ -8,7 +8,7 @@ use App\Domain\Prediction\Events\PredictionReminder;
 use App\Domain\Quiniela\Events\NewQuinielaAvailable;
 use App\Domain\Quiniela\Events\WinnersAnnounced;
 use App\Domain\Scoring\Events\LeaderboardUpdated;
-use App\Domain\User\Models\User;
+use App\Models\User;
 use App\Infrastructure\Notifications\Channels\PusherChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
