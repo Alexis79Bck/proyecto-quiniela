@@ -2,14 +2,13 @@
 
 namespace App\Infrastructure\Notifications\Listeners;
 
-use App\Domain\Match\Events\MatchResultAvailable;
-use App\Domain\Match\Events\MatchStarted;
-use App\Domain\Prediction\Events\PredictionReminder;
-use App\Domain\Quiniela\Events\NewQuinielaAvailable;
-use App\Domain\Quiniela\Events\WinnersAnnounced;
-use App\Domain\Scoring\Events\LeaderboardUpdated;
+use App\Events\MatchResultAvailable;
+use App\Events\MatchStarted;
+use App\Events\PredictionReminder;
+use App\Events\NewQuinielaAvailable;
+use App\Events\WinnersAnnounced;
+use App\Events\LeaderboardUpdated;
 use App\Models\User;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 

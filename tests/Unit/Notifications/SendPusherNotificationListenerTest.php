@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Notifications;
 
-use App\Domain\Quiniela\Events\NewQuinielaAvailable;
-use App\Domain\Match\Events\MatchStarted;
-use App\Domain\Match\Events\MatchResultAvailable;
-use App\Domain\Scoring\Events\LeaderboardUpdated;
-use App\Domain\Prediction\Events\PredictionReminder;
-use App\Domain\Quiniela\Events\WinnersAnnounced;
+use App\Events\NewQuinielaAvailable;
+use App\Events\MatchStarted;
+use App\Events\MatchResultAvailable;
+use App\Events\LeaderboardUpdated;
+use App\Events\PredictionReminder;
+use App\Events\WinnersAnnounced;
 use App\Infrastructure\Notifications\Listeners\SendPusherNotification;
 use App\Infrastructure\Notifications\NewQuinielaNotification;
 use App\Infrastructure\Notifications\MatchStartedNotification;

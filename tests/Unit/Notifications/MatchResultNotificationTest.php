@@ -3,7 +3,6 @@
 namespace Tests\Unit\Notifications;
 
 use App\Infrastructure\Notifications\MatchResultNotification;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
 use PHPUnit\Framework\TestCase;
 
 class MatchResultNotificationTest extends TestCase
@@ -43,7 +42,6 @@ class MatchResultNotificationTest extends TestCase
             public function getKey(): string { return 'test'; }
         });
 
-        $this->assertContains(PusherChannel::class, $channels);
         $this->assertContains('database', $channels);
     }
 

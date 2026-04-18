@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Toast;
 
-use App\Services\ToastService;
+use App\Services\Toast\ToastService;
 
 trait SendsToastNotifications
 {

@@ -2,10 +2,10 @@
 
 namespace App\Infrastructure\Toast\Listeners;
 
-use App\Domain\Quiniela\Events\NewQuinielaAvailable;
-use App\Domain\Quiniela\Events\WinnersAnnounced;
+use App\Events\NewQuinielaAvailable;
+use App\Events\WinnersAnnounced;
 use App\Models\User;
-use App\Services\ToastService;
+use App\Services\Toast\ToastService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendSystemToastNotifications implements ShouldQueue

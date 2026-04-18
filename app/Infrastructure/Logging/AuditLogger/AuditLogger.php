@@ -2,12 +2,16 @@
 
 namespace App\Infrastructure\Logging\AuditLogger;
 
-use App\Domain\Auth\Models\AuditLog;
+use App\Repositories\Contracts\AuditLogRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
 class AuditLogger
 {
+    public function __construct(
+        protected AuditLogRepositoryInterface $auditLogRepository
+    ) {}
+
     /**
      * Log an authentication event.
      */
@@ -126,12 +130,12 @@ class AuditLogger
     }
 
     /**
-     * Log to database using AuditLog model.
+     * Log to database using repository.
      */
     protected function logToDatabase(array $data): void
     {
         try {
-            AuditLog::create($data);
+            $this->auditLogRepository->createLog($data);
         } catch (\Exception $e) {
             // Log error but don't fail the request
             Log::channel('security')->error('Failed to create audit log in database', [
