@@ -46,7 +46,7 @@
 - [x] Verificar creación de archivos de log
 
 ### 2.2 Implementar Audit Logger
-- [x] Crear directorio `app/Infrastructure/Logging/AuditLogger/`
+- [x] Crear directorio `app/Infraestructura/Logging/AuditLogger/`
 - [x] Crear clase `AuditLogger`
 - [x] Crear modelo `AuditLog`
 - [x] Crear migración para tabla `audit_logs`
@@ -63,21 +63,20 @@
 - [x] Auditar acciones administrativas
 - [x] Verificar logs generados
 
-## Fase 3: Notificaciones Pushr (Día 4)
+## Fase 3: Notificaciones (Persistencia + Polling) (Día 4)
 
-### 3.1 Instalar y Configurar Pusher
-- [x] Ejecutar `composer require pusher/pusher-php-server`
-- [x] Configurar variables en `.env`
-- [x] Editar `config/broadcasting.php`
-- [x] Configurar conexión `pusher`
-- [x] Verificar conexión a Pusher
+### 3.1 Configurar Notificaciones Persistentes
+- [x] Verificar migración `notifications` table
+- [x] Configurar `BROADCAST_DRIVER=log`
+- [x] Actualizar canales de notificaciones a `database`
 
 ### 3.2 Implementar Sistema de Notificaciones
 - [x] Crear eventos de broadcasting
-- [x] Crear canal de notificaciones
-- [x] Configurar notificaciones en tiempo real
-- [ ] Crear componente de notificaciones en frontend
-- [ ] Verificar recepción de notificaciones
+- [x] Crear notificaciones persistentes
+- [x] Configurar listeners para eventos
+- [x] Actualizar canales a solo `database`
+- [ ] Crear API endpoints para notificaciones
+- [ ] Implementar polling en frontend
 
 ### 3.3 Configurar Eventos Notificables
 - [x] Evento: Nueva quiniela disponible
@@ -88,13 +87,13 @@
 - [x] Evento: Notificación de ganadores
 - [ ] Verificar emisión de eventos
 
-## Fase 4: Estructura DDD y Dominio de Quiniela (Días 5-7)
+## Fase 4: Estructura MVC y Dominio de Quiniela (Días 5-7)
 
 ### 4.1 Crear Estructura de Directorios
-- [ ] Crear directorio `app/Domain/`
-- [ ] Crear directorio `app/Application/`
-- [ ] Crear directorio `app/Infrastructure/`
-- [ ] Crear directorio `app/Presentation/`
+- [ ] Crear directorio `app/Modelo/`
+- [ ] Crear directorio `app/Controladores/`
+- [ ] Crear directorio `app/Infraestructura/`
+- [ ] Crear directorio `app/Vistas/`
 - [ ] Crear directorio `app/Shared/`
 - [ ] Organizar archivos existentes en nueva estructura
 
