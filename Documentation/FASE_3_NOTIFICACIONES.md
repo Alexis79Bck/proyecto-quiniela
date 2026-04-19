@@ -47,7 +47,7 @@ La Fase 3 implementa un sistema completo de notificaciones persistentes utilizan
 
 | Componente | Ubicación | Descripción |
 |------------|-----------|-------------|
-| `NotificationController` | `app/Presentation/Http/Controllers/` | Controlador para API de notificaciones |
+| `NotificationController` | `app/Http/Controllers/` | Controlador para API de notificaciones |
 | `routes/api.php` | `routes/` | Rutas API para notificaciones |
 
 ### 5. Frontend

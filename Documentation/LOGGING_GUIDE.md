@@ -33,7 +33,7 @@ El sistema de logging y auditoría de la Quiniela FIFA 2026 proporciona un regis
    - Procesa eventos de auditoría
    - Ejecución en cola para mejor rendimiento
 
-6. **Middleware AuditMiddleware** (app/Presentation/Http/Middleware/AuditMiddleware.php)
+6. **Middleware AuditMiddleware** (app/Http/Middleware/AuditMiddleware.php)
    - Captura automática de requests HTTP
    - Logging de API requests/responses
 

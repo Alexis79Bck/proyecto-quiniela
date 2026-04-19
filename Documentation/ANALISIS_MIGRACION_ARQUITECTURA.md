@@ -17,7 +17,8 @@ app/
 ├── Application/          # Capa de aplicación (Commands, Queries, DTOs)
 ├── Domain/              # Núcleo del dominio (Modelos, ValueObjects, Events)
 ├── Infrastructure/      # Infraestructura (Repositories, Logging, External APIs)
-├── Presentation/        # Presentación (Controllers, Middleware)
+├── Http/                # Presentación MVC (Controllers, Middleware, Requests)
+├── Console/             # Comandos de Artisan y utilidades CLI
 ├── DTO/                 # Objetos de Transferencia de Datos
 ├── Enums/               # Enumeraciones
 ├── Services/            # Servicios compartidos
