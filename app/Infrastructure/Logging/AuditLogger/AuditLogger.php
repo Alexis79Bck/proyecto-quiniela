@@ -101,9 +101,9 @@ class AuditLogger
 
         // Prepare log data
         $logData = [
-            'user_id' => $userId,
-            'action' => $action,
-            'entity_type' => $entityType,
+            'usuario_id' => $userId,
+            'accion' => $action,
+            'tipo_entidad' => $entityType,
             'entity_id' => $entityId,
             'old_values' => $oldValues,
             'new_values' => $newValues,
@@ -152,14 +152,14 @@ class AuditLogger
     {
         $parts = [];
 
-        if ($data['user_id']) {
-            $parts[] = "User #{$data['user_id']}";
+        if ($data['usuario_id']) {
+            $parts[] = "User #{$data['usuario_id']}";
         }
 
-        $parts[] = $data['action'];
+        $parts[] = $data['accion'];
 
-        if ($data['entity_type']) {
-            $parts[] = "{$data['entity_type']}";
+        if ($data['tipo_entidad']) {
+            $parts[] = "{$data['tipo_entidad']}";
             if ($data['entity_id']) {
                 $parts[] = "#{$data['entity_id']}";
             }

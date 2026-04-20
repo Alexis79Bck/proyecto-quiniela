@@ -10,7 +10,7 @@ class MatchResultAvailable
     use Dispatchable, SerializesModels;
 
     /**
-     * Create a new event instance.
+     * Crear una nueva instancia del evento.
      */
     public function __construct(
         public int $matchId,

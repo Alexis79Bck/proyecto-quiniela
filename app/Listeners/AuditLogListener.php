@@ -24,22 +24,22 @@ class AuditLogListener implements ShouldQueue
     public int $delay = 0;
 
     /**
-     * Create the event listener.
+     * Crear el listener del evento.
      */
     public function __construct(
         protected AuditLogger $auditLogger
     ) {}
 
     /**
-     * Handle the event.
+     * Manejar el evento.
      */
     public function handle(LogAuditEvent $event): void
     {
         // Usar datos del evento directamente en lugar de depender del contexto de request
         // ya que el listener puede ejecutarse de forma asíncrona en la cola
         $this->auditLogger->log(
-            $event->action,
-            $event->entityType,
+            $event->accion,
+            $event->tipoEntidad,
             $event->entityId,
             $event->oldValues,
             $event->newValues,

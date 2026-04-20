@@ -11,12 +11,12 @@ class LogAuditEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * Create a new event instance.
+     * Crear una nueva instancia del evento.
      */
     public function __construct(
         public readonly ?int $userId,
-        public readonly string $action,
-        public readonly ?string $entityType,
+        public readonly string $accion,
+        public readonly ?string $tipoEntidad,
         public readonly ?int $entityId,
         public readonly ?array $oldValues,
         public readonly ?array $newValues,
@@ -27,14 +27,14 @@ class LogAuditEvent
     ) {}
 
     /**
-     * Get the event data as array.
+     * Obtener los datos del evento como arreglo.
      */
     public function toArray(): array
     {
         return [
-            'user_id' => $this->userId,
-            'action' => $this->action,
-            'entity_type' => $this->entityType,
+            'usuario_id' => $this->userId,
+            'accion' => $this->accion,
+            'tipo_entidad' => $this->tipoEntidad,
             'entity_id' => $this->entityId,
             'old_values' => $this->oldValues,
             'new_values' => $this->newValues,

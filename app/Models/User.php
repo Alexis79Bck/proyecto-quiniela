@@ -13,12 +13,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-#[Fillable(['fullname', 'username', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
+#[Fillable(['nombre_completo', 'nombre_usuario', 'correo_electronico', 'clave'])]
+#[Hidden(['clave', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasRoles, HasFactory, Notifiable;
+
+    protected $table = 'usuarios';
 
     /**
      * Get the attributes that should be cast.
@@ -28,13 +30,13 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'correo_verificado' => 'datetime',
+            'clave' => 'hashed',
         ];
     }
 
     /**
-     * Get the quinielas that the user belongs to.
+     * Obtener las quinielas a las que pertenece el usuario.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<Quiniela>
      */

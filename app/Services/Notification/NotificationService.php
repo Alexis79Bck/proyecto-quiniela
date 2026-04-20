@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 class NotificationService
 {
     /**
-     * Get unread notifications since a specific timestamp for a user.
+     * Obtener notificaciones no leídas desde una marca de tiempo específica para un usuario.
      *
      * @param Carbon $since
      * @param User $user
@@ -29,7 +29,7 @@ class NotificationService
     }
 
     /**
-     * Mark a notification as read for a user.
+     * Marcar una notificación como leída para un usuario.
      *
      * @param string $notificationId
      * @param User $user
@@ -50,10 +50,10 @@ class NotificationService
     }
 
     /**
-     * Mark all notifications as read for a user.
+     * Marcar todas las notificaciones como leídas para un usuario.
      *
      * @param User $user
-     * @return int Number of notifications marked as read
+     * @return int Número de notificaciones marcadas como leídas
      */
     public function markAllAsRead(User $user): int
     {
@@ -61,7 +61,7 @@ class NotificationService
     }
 
     /**
-     * Get latest notifications for a user.
+     * Obtener las últimas notificaciones para un usuario.
      *
      * @param User $user
      * @param int $limit

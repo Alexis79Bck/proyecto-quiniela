@@ -17,7 +17,7 @@ class NotificationController extends Controller
         protected NotificationService $notificationService
     ) {}
     /**
-     * Get all notifications for the authenticated user.
+     * Obtener todas las notificaciones para el usuario autenticado.
      */
     public function index(Request $request): JsonResponse
     {
@@ -44,7 +44,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Get unread notifications for the authenticated user.
+     * Obtener notificaciones no leídas para el usuario autenticado.
      */
     public function unread(Request $request): JsonResponse
     {
@@ -71,7 +71,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Mark a notification as read.
+     * Marcar una notificación como leída.
      */
     public function markAsRead(Request $request, string $notificationId): JsonResponse
     {
@@ -92,7 +92,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Mark all notifications as read.
+     * Marcar todas las notificaciones como leídas.
      */
     public function markAllAsRead(Request $request): JsonResponse
     {

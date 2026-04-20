@@ -21,9 +21,9 @@ class Quiniela extends Model
     ];
 
     /**
-     * Get the users that belong to this quiniela.
+     * Obtener los usuarios que pertenecen a esta quiniela.
      */
-    public function users(): BelongsToMany
+    public function usuarios(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }

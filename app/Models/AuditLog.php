@@ -14,9 +14,9 @@ class AuditLog extends Model
     protected $table = 'audit_logs';
 
     protected $fillable = [
-        'user_id',
-        'action',
-        'entity_type',
+        'usuario_id',
+        'accion',
+        'tipo_entidad',
         'entity_id',
         'old_values',
         'new_values',
@@ -35,44 +35,44 @@ class AuditLog extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'usuario_id');
     }
 
     /**
-     * Scope: Filter by action.
+     * Alcance: Filtrar por acción.
      */
     public function scopeByAction($query, string $action)
     {
-        return $query->where('action', $action);
+        return $query->where('accion', $action);
     }
 
     /**
-     * Scope: Filter by entity type.
+     * Alcance: Filtrar por tipo de entidad.
      */
     public function scopeByEntityType($query, string $entityType)
     {
-        return $query->where('entity_type', $entityType);
+        return $query->where('tipo_entidad', $entityType);
     }
 
     /**
-     * Scope: Filter by entity.
+     * Alcance: Filtrar por entidad.
      */
     public function scopeByEntity($query, string $entityType, int $entityId)
     {
-        return $query->where('entity_type', $entityType)
+        return $query->where('tipo_entidad', $entityType)
                      ->where('entity_id', $entityId);
     }
 
     /**
-     * Scope: Filter by user.
+     * Alcance: Filtrar por usuario.
      */
     public function scopeByUser($query, int $userId)
     {
-        return $query->where('user_id', $userId);
+        return $query->where('usuario_id', $userId);
     }
 
     /**
-     * Scope: Filter by date range.
+     * Alcance: Filtrar por rango de fechas.
      */
     public function scopeByDateRange($query, $startDate, $endDate)
     {
@@ -80,7 +80,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Scope: Filter by IP address.
+     * Alcance: Filtrar por dirección IP.
      */
     public function scopeByIpAddress($query, string $ipAddress)
     {
@@ -88,7 +88,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Scope: Get recent logs (last N days).
+     * Alcance: Obtener registros recientes (últimos N días).
      */
     public function scopeRecent($query, int $days = 30)
     {
@@ -96,7 +96,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Scope: Filter by action type (auth, quiniela, prediction, scoring, admin, security, api).
+     * Alcance: Filtrar por tipo de acción (auth, quiniela, prediction, scoring, admin, security, api).
      */
     public function scopeByActionType($query, string $actionType)
     {
@@ -114,11 +114,11 @@ class AuditLog extends Model
             return $query;
         }
 
-        return $query->whereIn('action', $actionPatterns[$actionType]);
+        return $query->whereIn('accion', $actionPatterns[$actionType]);
     }
 
     /**
-     * Get formatted old values.
+     * Obtener valores antiguos formateados.
      */
     public function getFormattedOldValuesAttribute(): ?string
     {
@@ -130,7 +130,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Get formatted new values.
+     * Obtener valores nuevos formateados.
      */
     public function getFormattedNewValuesAttribute(): ?string
     {
@@ -142,7 +142,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Get formatted metadata.
+     * Obtener metadatos formateados.
      */
     public function getFormattedMetadataAttribute(): ?string
     {
@@ -154,7 +154,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Check if this log has changes (old_values or new_values).
+     * Verificar si este registro tiene cambios (old_values o new_values).
      */
     public function hasAuditChanges(): bool
     {
@@ -162,7 +162,7 @@ class AuditLog extends Model
     }
 
     /**
-     * Get changes summary.
+     * Obtener resumen de cambios.
      */
     public function getChangesSummary(): array
     {

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('action'); // login, logout, create_prediction, update_score, etc.
-            $table->string('entity_type')->nullable(); // quiniela, match, prediction, user, etc.
+            $table->foreignId('usuario_id')->nullable()->constrained('usuarios')->nullOnDelete();
+            $table->string('accion'); // login, logout, create_prediction, update_score, etc.
+            $table->string('tipo_entidad')->nullable(); // quiniela, match, prediction, user, etc.
             $table->unsignedBigInteger('entity_id')->nullable();
             $table->json('old_values')->nullable();
             $table->json('new_values')->nullable();
@@ -25,9 +25,9 @@ return new class extends Migration
             $table->timestamps();
 
             // Índices para optimizar consultas
-            $table->index('user_id');
-            $table->index('action');
-            $table->index(['entity_type', 'entity_id']);
+            $table->index('usuario_id');
+            $table->index('accion');
+            $table->index(['tipo_entidad', 'entity_id']);
             $table->index('created_at');
         });
     }
