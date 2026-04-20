@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('fifa_code', 3)->unique();
-            $table->string('flag_url')->nullable();
-            $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('set null');
+            $table->string('nombre');
+            $table->string('codigo_fifa', 3)->unique();
+            $table->string('url_bandera')->nullable();
+            $table->foreignId('grupo_id')->nullable()->constrained('grupos')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('equipos');
     }
 };

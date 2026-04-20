@@ -11,25 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('juegos', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->integer('match_number');
-            $table->foreignId('stage_id')->constrained('stages')->onDelete('cascade');
-            $table->foreignId('home_team_id')->constrained('teams')->onDelete('cascade');
-            $table->foreignId('away_team_id')->constrained('teams')->onDelete('cascade');
-            $table->dateTime('match_date');
-            $table->integer('home_score')->nullable();
-            $table->integer('away_score')->nullable();
-            $table->enum('status', ['scheduled', 'in_progress', 'finished'])->default('scheduled');
+            $table->integer('numero_juego');
+            $table->foreignId('etapa_id')->constrained('etapas')->onDelete('cascade');
+            $table->foreignId('equipo1_id')->constrained('equipos')->onDelete('cascade');
+            $table->foreignId('equipo2_id')->constrained('equipos')->onDelete('cascade');
+            $table->dateTime('fecha_juego');
+            $table->integer('equipo1_goles')->nullable();
+            $table->integer('equipo2_goles')->nullable();
+            $table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
             $table->timestamps();
 
-            // Add indexes for better performance
-            $table->index('stage_id');
-            $table->index('home_team_id');
-            $table->index('away_team_id');
-            $table->index('match_date');
-            $table->index('status');
+            // Índices para mejor rendimiento
+            $table->index('etapa_id');
+            $table->index('equipo1_id');
+            $table->index('equipo2_id');
+            $table->index('fecha_juego');
+            $table->index('estado');
         });
     }
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('juegos');
     }
 };

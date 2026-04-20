@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('etapas', function (Blueprint $table) {
+        Schema::create('ranking', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->integer('orden');
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->integer('puntos_totales');
+            $table->integer('posicion');
+            $table->integer('diferencia_puntos_top1');
+            $table->timestamp('fecha_actualizacion');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('etapas');
+        Schema::dropIfExists('ranking');
     }
 };

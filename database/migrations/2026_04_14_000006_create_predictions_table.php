@@ -11,23 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('predictions', function (Blueprint $table) {
+        Schema::create('predicciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('match_id')->constrained('matches')->onDelete('cascade');
-            $table->integer('home_prediction');
-            $table->integer('away_prediction');
-            $table->integer('points_earned')->default(0);
-            $table->boolean('is_locked')->default(false);
-            $table->boolean('bonus_enabled')->default(false);
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->foreignId('juego_id')->constrained('juegos')->onDelete('cascade');
+            $table->integer('equipo1_prediccion')->nullable();
+            $table->integer('equipo2_prediccion')->nullable();
+            $table->integer('puntos_obtenidos')->default(0);
+            $table->boolean('esta_bloqueado')->default(false);
             $table->timestamps();
 
-            // Unique constraint to prevent duplicate predictions
-            $table->unique(['user_id', 'match_id']);
+            // Restricción única para evitar predicciones duplicadas
+            $table->unique(['usuario_id', 'juego_id']);
 
-            // Add indexes for better performance
-            $table->index('user_id');
-            $table->index('match_id');
+            // Índices para mejor rendimiento
+            $table->index('usuario_id');
+            $table->index('juego_id');
         });
     }
 
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('predictions');
+        Schema::dropIfExists('predicciones');
     }
 };
