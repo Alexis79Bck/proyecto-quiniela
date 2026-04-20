@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->foreignId('juego_id')->constrained('juegos')->onDelete('cascade');
-            $table->integer('equipo1_prediccion')->nullable();
-            $table->integer('equipo2_prediccion')->nullable();
-            $table->integer('puntos_obtenidos')->default(0);
+            $table->unsignedInteger('equipo_local_prediccion')->default(0);
+            $table->unsignedInteger('equipo_visitante_prediccion')->default(0);
+            $table->dateTime('fecha_hora_cierre');
+            $table->unsignedInteger('puntos_obtenidos')->default(0);
             $table->boolean('esta_bloqueado')->default(false);
             $table->timestamps();
 

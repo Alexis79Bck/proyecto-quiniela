@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('nombre_usuario')->unique();
             $table->string('correo_electronico')->unique();
             $table->timestamp('correo_verificado')->nullable();
-            $table->string('clave');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('correo_electronico')->primary();
+            $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });

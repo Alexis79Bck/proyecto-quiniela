@@ -16,19 +16,20 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->integer('numero_juego');
             $table->foreignId('etapa_id')->constrained('etapas')->onDelete('cascade');
-            $table->foreignId('equipo1_id')->constrained('equipos')->onDelete('cascade');
-            $table->foreignId('equipo2_id')->constrained('equipos')->onDelete('cascade');
-            $table->dateTime('fecha_juego');
-            $table->integer('equipo1_goles')->nullable();
-            $table->integer('equipo2_goles')->nullable();
-            $table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
+            $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
+            $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
+            $table->datetime('fecha_hora');
+            $table->unsignedInteger('equipo_local_goles')->default(0);
+            $table->unsignedInteger('equipo_visitante_goles')->default(0);
+            $table->string('estado')->default('programado'); // programado, en_progreso, finalizado
+            //$table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
             $table->timestamps();
 
             // Índices para mejor rendimiento
             $table->index('etapa_id');
-            $table->index('equipo1_id');
-            $table->index('equipo2_id');
-            $table->index('fecha_juego');
+            $table->index('equipo_local_id');
+            $table->index('equipo_visitante_id');
+            $table->index('fecha');
             $table->index('estado');
         });
     }
