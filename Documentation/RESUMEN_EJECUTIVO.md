@@ -26,7 +26,7 @@ Crear una plataforma de quiniela familiar/amistosa donde los usuarios puedan:
 - **Backend**: Laravel 13.x, PHP 8.3+
 - **Autenticación**: Laravel Sanctum + Fortify
 - **Autorización**: Spatie Laravel Permission
-- **Notificaciones**: Pusher (WebSockets)
+- **Notificaciones**: Persistencia + Polling
 - **Frontend**: Tailwind CSS 4.x, Vite 8.x
 - **Base de datos**: MySQL 8.0+ (o PostgreSQL 15+)
 - **Caché**: Redis 7.x (opcional)
@@ -73,10 +73,10 @@ El sistema sigue una arquitectura por capas con separación clara de responsabil
 - Implementar Audit Logger personalizado
 - Configurar canales de log específicos
 
-### Fase 3: Notificaciones Pushr (Día 4)
-- Instalar y configurar Pusher
-- Implementar sistema de notificaciones en tiempo real
-- Configurar eventos de broadcasting
+### Fase 3: Notificaciones (Persistencia + Polling) (Día 4)
+- Implementar sistema de notificaciones persistentes
+- Configurar eventos y listeners
+- Crear API para gestión de notificaciones
 
 ### Fase 4: Estructura DDD y Dominio de Quiniela (Días 5-7)
 - Crear estructura de directorios DDD
@@ -281,13 +281,13 @@ El sistema sigue una arquitectura por capas con separación clara de responsabil
 ### Riesgos Técnicos
 1. **Integración de paquetes**: Conflictos de dependencias
 2. **Performance**: Consultas lentas con muchos datos
-3. **WebSockets**: Configuración compleja de Pusher
+3. **Polling**: Implementación eficiente de polling en frontend
 4. **Testing**: Cobertura de pruebas adecuada
 
 ### Mitigación de Riesgos
 1. **Integración**: Seguir guía de instalación paso a paso
 2. **Performance**: Implementar caché y optimizar consultas
-3. **WebSockets**: Documentación detallada y ejemplos
+3. **Polling**: Documentación detallada y ejemplos de implementación
 4. **Testing**: Pruebas continuas desde el inicio
 
 ## Éxito del Proyecto

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Auth\Fortify;
 
-use App\Domain\User\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;

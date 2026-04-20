@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Notifications;
 
-use App\Domain\User\Models\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +38,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -70,7 +70,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -109,7 +109,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -152,7 +152,7 @@ class PersistenceTest extends TestCase
             'id' => 'complex-data-notification-id',
             'type' => 'App\Infrastructure\Notifications\NewQuinielaNotification',
             'data' => json_encode($notificationData),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -188,7 +188,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -205,7 +205,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Domain\User\Models\User',
+            'notifiable_type' => 'App\Models\User',
             'notifiable_id' => $user2->id,
             'read_at' => null,
             'created_at' => now(),

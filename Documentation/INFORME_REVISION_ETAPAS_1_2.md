@@ -121,7 +121,7 @@ Se ha realizado una revisión exhaustiva de las implementaciones de las **Etapa 
 | Modelo | ✅ Implementado | [`AuditLog.php`](../app/Domain/Auth/Models/AuditLog.php) (197 líneas) |
 | Evento | ✅ Implementado | [`LogAuditEvent.php`](../app/Domain/Auth/Events/LogAuditEvent.php) |
 | Listener | ✅ Implementado | [`AuditLogListener.php`](../app/Domain/Auth/Listeners/AuditLogListener.php) (Queue-based) |
-| Middleware | ✅ Implementado | [`AuditMiddleware.php`](../app/Presentation/Http/Middleware/AuditMiddleware.php) |
+| Middleware | ✅ Implementado | [`AuditMiddleware.php`](../app/Http/Middleware/AuditMiddleware.php) |
 | Migración | ✅ Creada | [`create_audit_logs_table.php`](../database/migrations/2026_03_29_000001_create_audit_logs_table.php) |
 | EventServiceProvider | ✅ Configurado | [`EventServiceProvider.php`](../app/Providers/EventServiceProvider.php) con listener registrado |
 
@@ -196,7 +196,6 @@ Se ha realizado una revisión exhaustiva de las implementaciones de las **Etapa 
 "Domain\\": "app/Domain/",
 "Application\\": "app/Application/",
 "Infrastructure\\": "app/Infrastructure/",
-"Presentation\\": "app/Presentation/",
 "Shared\\": "app/Shared/"
 ```
 
@@ -228,7 +227,7 @@ Se ha realizado una revisión exhaustiva de las implementaciones de las **Etapa 
 ### ⚠️ Observaciones Menores
 1. **Email Verification**: Deshabilitado temporalmente en Fortify (requiere configuración SMTP)
 2. **Rutas API**: No se encontró archivo `routes/api.php` (pendiente para Fase 6)
-3. **Controladores API**: Directorio `app/Presentation/Api/Controllers/` vacío (pendiente para Fase 6)
+3. **Controladores API**: Directorio `app/Http/Controllers/` vacío o pendiente (pendiente para Fase 6)
 
 ### 📝 Notas Importantes
 - Las Etapas 1 y 2 están **completas y funcionales**
@@ -257,7 +256,7 @@ El proyecto está listo para proceder con las **Etapas 3 y 4** según el plan de
 1. Proceder con **Fase 3**: Notificaciones Pusher
 2. Proceder con **Fase 4**: Estructura DDD y Dominio de Quiniela
 3. Crear archivo `routes/api.php` cuando se implemente la Fase 6
-4. Implementar controladores API en `app/Presentation/Api/Controllers/`
+4. Implementar controladores API en `app/Http/Controllers/`
 
 ---
 

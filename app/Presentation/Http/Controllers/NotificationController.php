@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Http\Controllers;
 
-use App\Domain\User\Models\User;
+use App\Models\User;
 use App\DTO\NotificationDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

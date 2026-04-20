@@ -133,7 +133,7 @@ Implementar un sistema completo de logging y auditoría que permita:
 
 ### Paso 6: Crear Middleware AuditMiddleware
 
-**Archivo**: [`app/Presentation/Http/Middleware/AuditMiddleware.php`](app/Presentation/Http/Middleware/AuditMiddleware.php:1)
+**Archivo**: [`app/Http/Middleware/AuditMiddleware.php`](app/Http/Middleware/AuditMiddleware.php:1)
 
 **Responsabilidades**:
 - Capturar automáticamente requests HTTP
@@ -238,7 +238,7 @@ AUDIT_LOG_RETENTION_DAYS=90
 - `app/Infrastructure/Logging/AuditLogger/AuditLogger.php`
 - `app/Domain/Auth/Events/LogAuditEvent.php`
 - `app/Domain/Auth/Listeners/AuditLogListener.php`
-- `app/Presentation/Http/Middleware/AuditMiddleware.php`
+- `app/Http/Middleware/AuditMiddleware.php`
 - `app/Helpers/audit.php` (opcional)
 - `database/seeders/AuditConfigSeeder.php` (opcional)
 - `Documentation/LOGGING_GUIDE.md`

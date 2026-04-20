@@ -1,16 +1,16 @@
-# Fase 3: Sistema de Alertas y Notificaciones Pusher
+# Fase 3: Sistema de Alertas y Notificaciones (Persistencia + Polling)
 
 ## 📋 Resumen
 
-La Fase 3 implementa un sistema completo de notificaciones en tiempo real utilizando Pusher como proveedor de WebSockets. El sistema permite notificar a los usuarios sobre eventos importantes del sistema de quinielas.
+La Fase 3 implementa un sistema completo de notificaciones persistentes utilizando polling desde el frontend. El sistema permite notificar a los usuarios sobre eventos importantes del sistema de quinielas, almacenando todas las notificaciones en la base de datos para acceso offline y visualización mediante polling.
 
 ## 🎯 Objetivos
 
-- ✅ Implementar notificaciones en tiempo real con Pusher
-- ✅ Crear eventos de broadcasting para diferentes tipos de notificaciones
-- ✅ Implementar sistema de notificaciones persistente
+- ✅ Implementar notificaciones persistentes en base de datos
+- ✅ Crear eventos para diferentes tipos de notificaciones
+- ✅ Implementar sistema de polling desde el frontend
 - ✅ Crear API REST para gestión de notificaciones
-- ✅ Implementar frontend para visualización de notificaciones
+- ✅ Implementar frontend para visualización de notificaciones con toasts
 
 ## 📦 Componentes Implementados
 
@@ -29,18 +29,17 @@ La Fase 3 implementa un sistema completo de notificaciones en tiempo real utiliz
 
 | Notificación | Ubicación | Canales |
 |--------------|-----------|---------|
-| `NewQuinielaNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
-| `MatchStartedNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
-| `MatchResultNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
-| `LeaderboardUpdateNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
-| `PredictionReminderNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
-| `WinnersNotification` | `app/Infrastructure/Notifications/` | broadcast, database |
+| `NewQuinielaNotification` | `app/Infrastructure/Notifications/` | database |
+| `MatchStartedNotification` | `app/Infrastructure/Notifications/` | database |
+| `MatchResultNotification` | `app/Infrastructure/Notifications/` | database |
+| `LeaderboardUpdateNotification` | `app/Infrastructure/Notifications/` | database |
+| `PredictionReminderNotification` | `app/Infrastructure/Notifications/` | database |
+| `WinnersNotification` | `app/Infrastructure/Notifications/` | database |
 
 ### 3. Infraestructura
 
 | Componente | Ubicación | Descripción |
 |------------|-----------|-------------|
-| `PusherChannel` | `app/Infrastructure/Notifications/Channels/` | Canal personalizado para Pusher |
 | `SendPusherNotification` | `app/Infrastructure/Notifications/Listeners/` | Listener para enviar notificaciones |
 | `create_notifications_table` | `database/migrations/` | Migración para tabla de notificaciones |
 
@@ -48,73 +47,37 @@ La Fase 3 implementa un sistema completo de notificaciones en tiempo real utiliz
 
 | Componente | Ubicación | Descripción |
 |------------|-----------|-------------|
-| `NotificationController` | `app/Presentation/Http/Controllers/` | Controlador para API de notificaciones |
+| `NotificationController` | `app/Http/Controllers/` | Controlador para API de notificaciones |
 | `routes/api.php` | `routes/` | Rutas API para notificaciones |
 
 ### 5. Frontend
 
 | Componente | Ubicación | Descripción |
 |------------|-----------|-------------|
-| `echo.js` | `resources/js/` | Configuración de Laravel Echo |
 | `NotificationToast.vue` | `resources/js/components/` | Componente de notificación toast |
+| `polling.js` | `resources/js/services/` | Servicio de polling para notificaciones |
 
 ### 6. Comandos de Prueba
 
 | Comando | Descripción |
 |---------|-------------|
 | `php artisan notifications:test` | Probar emisión de notificaciones |
-| `php artisan pusher:test` | Verificar conexión a Pusher |
 
 ## 🔧 Configuración
 
 ### Variables de Entorno (.env)
 
 ```bash
-# Pusher Configuration
-PUSHER_APP_KEY=tu-pusher-app-key
-PUSHER_APP_SECRET=tu-pusher-app-secret
-PUSHER_APP_ID=tu-pusher-app-id
-PUSHER_APP_CLUSTER=us2
-
-BROADCAST_DRIVER=pusher
-VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+# Notification Polling Configuration
+NOTIFICATION_POLLING_INTERVAL=30000  # Intervalo de polling en ms (30 segundos)
+BROADCAST_DRIVER=log  # No se usa broadcasting, solo persistencia
 ```
 
-### Configuración de Broadcasting (config/broadcasting.php)
+### Configuración de Queue (config/queue.php)
 
-```php
-'connections' => [
-    'pusher' => [
-        'driver' => 'pusher',
-        'key' => env('PUSHER_APP_KEY'),
-        'secret' => env('PUSHER_APP_SECRET'),
-        'app_id' => env('PUSHER_APP_ID'),
-        'options' => [
-            'cluster' => env('PUSHER_APP_CLUSTER'),
-            'encrypted' => true,
-        ],
-    ],
-],
-```
+Asegurarse de que las colas estén configuradas para procesar notificaciones en background.
 
-## 📡 Canales de Notificación
-
-### Canales Públicos
-
-| Canal | Eventos | Descripción |
-|-------|---------|-------------|
-| `quinielas` | `new-quiniela-available`, `winners-announced` | Notificaciones de quinielas |
-| `matches` | `match-started`, `match-result-available` | Notificaciones de partidos |
-| `leaderboard.{quinielaId}` | `leaderboard-updated` | Actualizaciones de clasificación |
-
-### Canales Privados
-
-| Canal | Eventos | Descripción |
-|-------|---------|-------------|
-| `user.{userId}` | Todos los eventos | Notificaciones específicas del usuario |
-
-## 🔌 API REST
+##  API REST
 
 ### Endpoints de Notificaciones
 
@@ -155,23 +118,28 @@ VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
 ## 🎨 Frontend
 
-### Configuración de Laravel Echo
+### Configuración de Polling
 
-El archivo `resources/js/echo.js` configura Laravel Echo con Pusher y proporciona funciones para suscribirse a canales de notificaciones.
+El archivo `resources/js/services/polling.js` implementa el polling periódico para consultar notificaciones no leídas.
 
 ```javascript
-import { subscribeToNotifications, subscribeToLeaderboard } from './echo';
+import { pollNotifications } from './polling';
 
-// Suscribirse a notificaciones del usuario
-subscribeToNotifications(userId);
-
-// Suscribirse a actualizaciones de leaderboard
-subscribeToLeaderboard(quinielaId);
+// Iniciar polling de notificaciones
+pollNotifications(userId, {
+  interval: 30000, // 30 segundos
+  onNewNotifications: (notifications) => {
+    // Mostrar toasts
+    notifications.forEach(notification => {
+      showToast(notification.data.message, 'info');
+    });
+  }
+});
 ```
 
 ### Componente NotificationToast
 
-El componente `NotificationToast.vue` muestra notificaciones toast en el frontend.
+El componente `NotificationToast.vue` muestra notificaciones toast en el frontend mediante polling.
 
 ```vue
 <NotificationToast
@@ -199,12 +167,6 @@ php artisan notifications:test --type=reminder
 php artisan notifications:test --type=winners
 ```
 
-### Verificar Conexión a Pusher
-
-```bash
-php artisan pusher:test
-```
-
 ## 📊 Base de Datos
 
 ### Tabla notifications
@@ -224,24 +186,23 @@ php artisan pusher:test
 
 1. **Evento Disparado**: Un evento del dominio es disparado (ej: `NewQuinielaAvailable`)
 2. **Listener Ejecutado**: El listener `SendPusherNotification` recibe el evento
-3. **Notificación Creada**: Se crea la notificación correspondiente
-4. **Envío a Pusher**: La notificación se envía a través del canal `PusherChannel`
-5. **Broadcasting**: Pusher transmite la notificación a los clientes suscritos
-6. **Frontend Recibe**: El frontend recibe la notificación a través de Laravel Echo
-7. **UI Actualizada**: Se muestra la notificación al usuario
+3. **Notificación Creada**: Se crea la notificación correspondiente y se guarda en la base de datos
+4. **Persistencia**: La notificación queda almacenada en la tabla `notifications`
+5. **Polling del Frontend**: El frontend consulta periódicamente la API para notificaciones no leídas
+6. **UI Actualizada**: Se muestran las notificaciones como toasts al usuario
 
 ## 🚀 Próximos Pasos
 
-- [ ] Configurar credenciales de Pusher en `.env`
-- [ ] Probar emisión de eventos
-- [ ] Probar recepción de notificaciones en frontend
-- [ ] Verificar persistencia de notificaciones
+- [ ] Implementar servicio de polling en el frontend
+- [ ] Probar emisión de eventos y persistencia
+- [ ] Probar recepción de notificaciones vía polling
+- [ ] Verificar persistencia de notificaciones para usuarios offline
 - [ ] Implementar notificaciones por email (opcional)
 - [ ] Implementar notificaciones push (PWA)
 
 ## 📝 Notas Importantes
 
-1. **Credenciales de Pusher**: Es necesario configurar las credenciales de Pusher en el archivo `.env` para que el sistema funcione correctamente.
+1. **Persistencia**: Todas las notificaciones se almacenan en la base de datos, permitiendo acceso offline.
 
 2. **Cola de Trabajos**: Las notificaciones se envían a través de colas para mejorar el rendimiento. Asegúrate de tener un worker de cola ejecutándose:
 
@@ -251,25 +212,25 @@ php artisan pusher:test
 
 3. **Autenticación**: Los endpoints de la API requieren autenticación con Sanctum.
 
-4. **Canales Privados**: Los canales privados requieren autenticación. Laravel Echo automáticamente maneja la autenticación cuando el usuario está autenticado.
+4. **Polling**: El frontend debe implementar polling periódico para consultar notificaciones no leídas.
 
 ## 🐛 Solución de Problemas
 
-### Las notificaciones no se reciben
+### Las notificaciones no se muestran en el frontend
 
-1. Verifica que las credenciales de Pusher estén configuradas correctamente en `.env`
+1. Verifica que el polling esté implementado y ejecutándose en el frontend
 2. Verifica que el worker de cola esté ejecutándose: `php artisan queue:work`
-3. Verifica que el broadcasting esté habilitado: `BROADCAST_DRIVER=pusher`
-4. Revisa los logs de Laravel para errores
-
-### Error de conexión a Pusher
-
-1. Verifica que las credenciales de Pusher sean correctas
-2. Verifica que el cluster de Pusher sea correcto
-3. Verifica que no haya restricciones de firewall
+3. Verifica que las notificaciones se estén guardando en la base de datos
+4. Revisa los logs de Laravel para errores en la emisión de eventos
 
 ### Las notificaciones no se persisten
 
 1. Verifica que la migración se haya ejecutado: `php artisan migrate:status`
 2. Verifica que el usuario tenga el trait `Notifiable`
 3. Verifica que las notificaciones implementen `ShouldQueue`
+
+### Polling no funciona
+
+1. Verifica que el intervalo de polling esté configurado correctamente
+2. Verifica que las llamadas a la API devuelvan las notificaciones esperadas
+3. Revisa la consola del navegador para errores de JavaScript

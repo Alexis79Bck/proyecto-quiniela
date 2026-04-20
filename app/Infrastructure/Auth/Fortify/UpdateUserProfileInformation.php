@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Auth\Fortify;
 
-use App\Domain\User\Models\User;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;

@@ -2,8 +2,7 @@
 
 namespace App\Infrastructure\Notifications;
 
-use App\Domain\Quiniela\Events\WinnersAnnounced;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
+use App\Events\WinnersAnnounced;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -29,7 +28,7 @@ class WinnersNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return [PusherChannel::class, 'database'];
+        return ['database'];
     }
 
     /**

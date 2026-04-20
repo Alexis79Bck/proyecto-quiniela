@@ -95,15 +95,14 @@ app/
 │   │   └── Pushr/
 │   └── External/
 │       └── FIFA-API/
-├── Presentation/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   ├── Middleware/
-│   │   └── Requests/
-│   ├── Api/
-│   │   └── Controllers/
-│   └── Console/
-│       └── Commands/
+├── Http/
+│   ├── Controllers/
+│   ├── Middleware/
+│   └── Requests/
+├── Api/
+│   └── Controllers/
+├── Console/
+│   └── Commands/
 └── Shared/
     ├── ValueObjects/
     ├── Events/
@@ -367,7 +366,7 @@ composer require pusher/pusher-php-server
 - `GET /api/matches/{id}`: Detalle de partido
 
 #### 6.2 Controladores Web
-**Ubicación**: `app/Presentation/Http/Controllers/`
+**Ubicación**: `app/Http/Controllers/`
 
 **Controladores**:
 - `AuthController`: Autenticación

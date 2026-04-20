@@ -11,25 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('juegos', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->integer('match_number');
-            $table->foreignId('stage_id')->constrained('stages')->onDelete('cascade');
-            $table->foreignId('home_team_id')->constrained('teams')->onDelete('cascade');
-            $table->foreignId('away_team_id')->constrained('teams')->onDelete('cascade');
-            $table->dateTime('match_date');
-            $table->integer('home_score')->nullable();
-            $table->integer('away_score')->nullable();
-            $table->enum('status', ['scheduled', 'in_progress', 'finished'])->default('scheduled');
+            $table->integer('numero_juego');
+            $table->foreignId('etapa_id')->constrained('etapas')->onDelete('cascade');
+            $table->foreignId('equipo_local_id')->constrained('equipos')->onDelete('cascade');
+            $table->foreignId('equipo_visitante_id')->constrained('equipos')->onDelete('cascade');
+            $table->datetime('fecha_hora');
+            $table->unsignedInteger('equipo_local_goles')->default(0);
+            $table->unsignedInteger('equipo_visitante_goles')->default(0);
+            $table->string('estado')->default('programado'); // programado, en_progreso, finalizado
+            //$table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
             $table->timestamps();
 
-            // Add indexes for better performance
-            $table->index('stage_id');
-            $table->index('home_team_id');
-            $table->index('away_team_id');
-            $table->index('match_date');
-            $table->index('status');
+            // Índices para mejor rendimiento
+            $table->index('etapa_id');
+            $table->index('equipo_local_id');
+            $table->index('equipo_visitante_id');
+            $table->index('fecha');
+            $table->index('estado');
         });
     }
 
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('juegos');
     }
 };
