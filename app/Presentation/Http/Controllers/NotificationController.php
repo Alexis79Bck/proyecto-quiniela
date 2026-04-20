@@ -3,9 +3,11 @@
 namespace App\Presentation\Http\Controllers;
 
 use App\Domain\User\Models\User;
+use App\DTO\NotificationDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
@@ -20,8 +22,13 @@ class NotificationController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
+        // Convert to DTOs
+        $notificationDTOs = collect($notifications->items())->map(function ($notification) {
+            return NotificationDTO::fromModel($notification)->toArray();
+        });
+
         return response()->json([
-            'data' => $notifications->items(),
+            'data' => $notificationDTOs,
             'meta' => [
                 'current_page' => $notifications->currentPage(),
                 'last_page' => $notifications->lastPage(),
@@ -42,8 +49,13 @@ class NotificationController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
+        // Convert to DTOs
+        $notificationDTOs = collect($notifications->items())->map(function ($notification) {
+            return NotificationDTO::fromModel($notification)->toArray();
+        });
+
         return response()->json([
-            'data' => $notifications->items(),
+            'data' => $notificationDTOs,
             'meta' => [
                 'current_page' => $notifications->currentPage(),
                 'last_page' => $notifications->lastPage(),
@@ -74,7 +86,7 @@ class NotificationController extends Controller
 
         return response()->json([
             'message' => 'Notificación marcada como leída',
-            'data' => $notification,
+            'data' => NotificationDTO::fromModel($notification)->toArray(),
         ]);
     }
 
@@ -129,6 +141,80 @@ class NotificationController extends Controller
         return response()->json([
             'unread_count' => $unreadCount,
             'total_count' => $totalCount,
+        ]);
+    }
+
+    /**
+     * Get notifications since a specific timestamp for polling.
+     */
+    public function poll(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        $since = $request->query('since', now()->subMinutes(5)->toISOString());
+        $sinceCarbon = Carbon::parse($since);
+
+        $notifications = $user->notifications()
+            ->where('created_at', '>', $sinceCarbon)
+            ->orderBy('created_at', 'desc')
+            ->limit(50)
+            ->get();
+
+        // Convert to DTOs
+        $notificationDTOs = $notifications->map(function ($notification) {
+            return NotificationDTO::fromModel($notification)->toArray();
+        });
+
+        return response()->json([
+            'data' => $notificationDTOs,
+            'meta' => [
+                'last_check' => now()->toISOString(),
+                'has_new' => $notificationDTOs->isNotEmpty(),
+                'count' => $notificationDTOs->count(),
+            ],
+        ]);
+    }
+
+    /**
+     * Get latest notifications for the authenticated user.
+     */
+    public function latest(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        $limit = $request->query('limit', 10);
+
+        $notifications = $user->notifications()
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get();
+
+        // Convert to DTOs
+        $notificationDTOs = $notifications->map(function ($notification) {
+            return NotificationDTO::fromModel($notification)->toArray();
+        });
+
+        return response()->json([
+            'data' => $notificationDTOs,
+            'meta' => [
+                'count' => $notificationDTOs->count(),
+            ],
+        ]);
+    }
+
+    /**
+     * Health check endpoint for notification service.
+     */
+    public function health(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        
+        $unreadCount = $user->unreadNotifications()->count();
+        $totalCount = $user->notifications()->count();
+
+        return response()->json([
+            'status' => 'ok',
+            'unread_count' => $unreadCount,
+            'total_count' => $totalCount,
+            'timestamp' => now()->toISOString(),
         ]);
     }
 }
