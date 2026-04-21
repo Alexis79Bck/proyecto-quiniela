@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesAndPermissionsSeeder::class,
+            GrupoSeeder::class,
+            EquipoSeeder::class,
         ]);
 
         // Crear usuarios de prueba si no existen

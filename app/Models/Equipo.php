@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Grupo;
 use App\Models\Partido;
 
+#[Fillable([
+    'nombre',
+    'fifa_codigo',
+    'url_bandera',
+    'grupo_id'
+])]
 class Equipo extends Model
 {
     use HasFactory;
@@ -23,11 +30,11 @@ class Equipo extends Model
 
     public function partidosComoLocal(): HasMany
     {
-        return $this->hasMany(Partido::class, 'equipo_local');
+        return $this->hasMany(Partido::class, 'equipo_local_id');
     }
 
     public function partidosComoVisitante(): HasMany
     {
-        return $this->hasMany(Partido::class, 'equipo_visitante');
+        return $this->hasMany(Partido::class, 'equipo_visitante_id');
     }
 }

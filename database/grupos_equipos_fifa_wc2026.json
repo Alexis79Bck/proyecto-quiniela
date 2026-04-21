@@ -1,0 +1,398 @@
+[
+  {
+    "grupo": "A",
+    "selecciones": [
+      {
+        "nombre": "México",
+        "metadata": {
+          "codigo_fifa": "MEX",
+          "iso_3166_1_alfa_2": "mx"
+        }
+      },
+      {
+        "nombre": "Sudáfrica",
+        "metadata": {
+          "codigo_fifa": "RSA",
+          "iso_3166_1_alfa_2": "za"
+        }
+      },
+      {
+        "nombre": "República de Corea",
+        "metadata": {
+          "codigo_fifa": "KOR",
+          "iso_3166_1_alfa_2": "kr"
+        }
+      },
+      {
+        "nombre": "Chequia",
+        "metadata": {
+          "codigo_fifa": "CZE",
+          "iso_3166_1_alfa_2": "cz"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "B",
+    "selecciones": [
+      {
+        "nombre": "Canadá",
+        "metadata": {
+          "codigo_fifa": "CAN",
+          "iso_3166_1_alfa_2": "ca"
+        }
+      },
+      {
+        "nombre": "Bosnia y Herzegovina",
+        "metadata": {
+          "codigo_fifa": "BIH",
+          "iso_3166_1_alfa_2": "ba"
+        }
+      },
+      {
+        "nombre": "Catar",
+        "metadata": {
+          "codigo_fifa": "QAT",
+          "iso_3166_1_alfa_2": "qa"
+        }
+      },
+      {
+        "nombre": "Suiza",
+        "metadata": {
+          "codigo_fifa": "SUI",
+          "iso_3166_1_alfa_2": "ch"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "C",
+    "selecciones": [
+      {
+        "nombre": "Brasil",
+        "metadata": {
+          "codigo_fifa": "BRA",
+          "iso_3166_1_alfa_2": "br"
+        }
+      },
+      {
+        "nombre": "Marruecos",
+        "metadata": {
+          "codigo_fifa": "MAR",
+          "iso_3166_1_alfa_2": "ma"
+        }
+      },
+      {
+        "nombre": "Haití",
+        "metadata": {
+          "codigo_fifa": "HAI",
+          "iso_3166_1_alfa_2": "ht"
+        }
+      },
+      {
+        "nombre": "Escocia",
+        "metadata": {
+          "codigo_fifa": "SCO",
+          "iso_3166_1_alfa_2": "gb-sct"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "D",
+    "selecciones": [
+      {
+        "nombre": "Estados Unidos",
+        "metadata": {
+          "codigo_fifa": "USA",
+          "iso_3166_1_alfa_2": "us"
+        }
+      },
+      {
+        "nombre": "Paraguay",
+        "metadata": {
+          "codigo_fifa": "PAR",
+          "iso_3166_1_alfa_2": "py"
+        }
+      },
+      {
+        "nombre": "Australia",
+        "metadata": {
+          "codigo_fifa": "AUS",
+          "iso_3166_1_alfa_2": "au"
+        }
+      },
+      {
+        "nombre": "Turquía",
+        "metadata": {
+          "codigo_fifa": "TUR",
+          "iso_3166_1_alfa_2": "tr"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "E",
+    "selecciones": [
+      {
+        "nombre": "Alemania",
+        "metadata": {
+          "codigo_fifa": "GER",
+          "iso_3166_1_alfa_2": "de"
+        }
+      },
+      {
+        "nombre": "Curaçao",
+        "metadata": {
+          "codigo_fifa": "CUW",
+          "iso_3166_1_alfa_2": "cw"
+        }
+      },
+      {
+        "nombre": "Costa de Marfil",
+        "metadata": {
+          "codigo_fifa": "CIV",
+          "iso_3166_1_alfa_2": "ci"
+        }
+      },
+      {
+        "nombre": "Ecuador",
+        "metadata": {
+          "codigo_fifa": "ECU",
+          "iso_3166_1_alfa_2": "ec"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "F",
+    "selecciones": [
+      {
+        "nombre": "Países Bajos",
+        "metadata": {
+          "codigo_fifa": "NED",
+          "iso_3166_1_alfa_2": "nl"
+        }
+      },
+      {
+        "nombre": "Japón",
+        "metadata": {
+          "codigo_fifa": "JPN",
+          "iso_3166_1_alfa_2": "jp"
+        }
+      },
+      {
+        "nombre": "Suecia",
+        "metadata": {
+          "codigo_fifa": "SWE",
+          "iso_3166_1_alfa_2": "se"
+        }
+      },
+      {
+        "nombre": "Túnez",
+        "metadata": {
+          "codigo_fifa": "TUN",
+          "iso_3166_1_alfa_2": "tn"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "G",
+    "selecciones": [
+      {
+        "nombre": "Bélgica",
+        "metadata": {
+          "codigo_fifa": "BEL",
+          "iso_3166_1_alfa_2": "be"
+        }
+      },
+      {
+        "nombre": "Egipto",
+        "metadata": {
+          "codigo_fifa": "EGY",
+          "iso_3166_1_alfa_2": "eg"
+        }
+      },
+      {
+        "nombre": "Irán",
+        "metadata": {
+          "codigo_fifa": "IRN",
+          "iso_3166_1_alfa_2": "ir"
+        }
+      },
+      {
+        "nombre": "Nueva Zelanda",
+        "metadata": {
+          "codigo_fifa": "NZL",
+          "iso_3166_1_alfa_2": "nz"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "H",
+    "selecciones": [
+      {
+        "nombre": "España",
+        "metadata": {
+          "codigo_fifa": "ESP",
+          "iso_3166_1_alfa_2": "es"
+        }
+      },
+      {
+        "nombre": "Cabo Verde",
+        "metadata": {
+          "codigo_fifa": "CPV",
+          "iso_3166_1_alfa_2": "cv"
+        }
+      },
+      {
+        "nombre": "Arabia Saudí",
+        "metadata": {
+          "codigo_fifa": "KSA",
+          "iso_3166_1_alfa_2": "sa"
+        }
+      },
+      {
+        "nombre": "Uruguay",
+        "metadata": {
+          "codigo_fifa": "URU",
+          "iso_3166_1_alfa_2": "uy"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "I",
+    "selecciones": [
+      {
+        "nombre": "Francia",
+        "metadata": {
+          "codigo_fifa": "FRA",
+          "iso_3166_1_alfa_2": "fr"
+        }
+      },
+      {
+        "nombre": "Senegal",
+        "metadata": {
+          "codigo_fifa": "SEN",
+          "iso_3166_1_alfa_2": "sn"
+        }
+      },
+      {
+        "nombre": "Irak",
+        "metadata": {
+          "codigo_fifa": "IRQ",
+          "iso_3166_1_alfa_2": "iq"
+        }
+      },
+      {
+        "nombre": "Noruega",
+        "metadata": {
+          "codigo_fifa": "NOR",
+          "iso_3166_1_alfa_2": "no"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "J",
+    "selecciones": [
+      {
+        "nombre": "Argentina",
+        "metadata": {
+          "codigo_fifa": "ARG",
+          "iso_3166_1_alfa_2": "ar"
+        }
+      },
+      {
+        "nombre": "Argelia",
+        "metadata": {
+          "codigo_fifa": "ALG",
+          "iso_3166_1_alfa_2": "dz"
+        }
+      },
+      {
+        "nombre": "Austria",
+        "metadata": {
+          "codigo_fifa": "AUT",
+          "iso_3166_1_alfa_2": "at"
+        }
+      },
+      {
+        "nombre": "Jordania",
+        "metadata": {
+          "codigo_fifa": "JOR",
+          "iso_3166_1_alfa_2": "jo"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "K",
+    "selecciones": [
+      {
+        "nombre": "Portugal",
+        "metadata": {
+          "codigo_fifa": "POR",
+          "iso_3166_1_alfa_2": "pt"
+        }
+      },
+      {
+        "nombre": "República Democrática del Congo",
+        "metadata": {
+          "codigo_fifa": "COD",
+          "iso_3166_1_alfa_2": "cd"
+        }
+      },
+      {
+        "nombre": "Uzbekistán",
+        "metadata": {
+          "codigo_fifa": "UZB",
+          "iso_3166_1_alfa_2": "uz"
+        }
+      },
+      {
+        "nombre": "Colombia",
+        "metadata": {
+          "codigo_fifa": "COL",
+          "iso_3166_1_alfa_2": "co"
+        }
+      }
+    ]
+  },
+  {
+    "grupo": "L",
+    "selecciones": [
+      {
+        "nombre": "Inglaterra",
+        "metadata": {
+          "codigo_fifa": "ENG",
+          "iso_3166_1_alfa_2": "gb-eng"
+        }
+      },
+      {
+        "nombre": "Croacia",
+        "metadata": {
+          "codigo_fifa": "CRO",
+          "iso_3166_1_alfa_2": "hr"
+        }
+      },
+      {
+        "nombre": "Ghana",
+        "metadata": {
+          "codigo_fifa": "GHA",
+          "iso_3166_1_alfa_2": "gh"
+        }
+      },
+      {
+        "nombre": "Panamá",
+        "metadata": {
+          "codigo_fifa": "PAN",
+          "iso_3166_1_alfa_2": "pa"
+        }
+      }
+    ]
+  }
+]

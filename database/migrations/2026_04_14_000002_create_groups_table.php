@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedInteger('top_1_equipo_id')->nullable();
+            $table->unsignedInteger('top_2_equipo_id')->nullable();
+            $table->unsignedInteger('top_3_equipo_id')->nullable();
             $table->timestamps();
         });
     }
