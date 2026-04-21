@@ -13,6 +13,7 @@ use App\Models\Equipo;
 use App\Models\Prediccion;
 
 #[Fillable([
+    'uuid',
     'etapa_id',
     'equipo_local_id',
     'equipo_visitante_id',
@@ -21,11 +22,11 @@ use App\Models\Prediccion;
     'equipo_visitante_goles',
     'estado',
 ])]
-class Partido extends Model
+class Juego extends Model
 {
     use HasFactory;
 
-    protected $table = 'partidos';
+    protected $table = 'juegos';
 
     protected $casts = [
         'fecha_hora' => 'datetime',
@@ -40,12 +41,12 @@ class Partido extends Model
 
     public function equipoLocal(): BelongsTo
     {
-        return $this->belongsTo(Equipo::class, 'equipo_local');
+        return $this->belongsTo(Equipo::class, 'equipo_local_id');
     }
 
     public function equipoVisitante(): BelongsTo
     {
-        return $this->belongsTo(Equipo::class, 'equipo_visitante');
+        return $this->belongsTo(Equipo::class, 'equipo_visitante_id');
     }
 
     public function predicciones(): HasMany

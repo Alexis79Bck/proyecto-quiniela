@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Grupo;
-use App\Models\Partido;
+use App\Models\Juego;
 
 #[Fillable([
     'nombre',
@@ -28,13 +28,13 @@ class Equipo extends Model
         return $this->belongsTo(Grupo::class);
     }
 
-    public function partidosComoLocal(): HasMany
+    public function juegosComoLocal(): HasMany
     {
-        return $this->hasMany(Partido::class, 'equipo_local_id');
+        return $this->hasMany(Juego::class, 'equipo_local_id');
     }
 
-    public function partidosComoVisitante(): HasMany
+    public function juegosComoVisitante(): HasMany
     {
-        return $this->hasMany(Partido::class, 'equipo_visitante_id');
+        return $this->hasMany(Juego::class, 'equipo_visitante_id');
     }
 }

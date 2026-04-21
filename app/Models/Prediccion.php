@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Usuario;
-use App\Models\Partido;
+use App\Models\Juego;
 
 class Prediccion extends Model
 {
@@ -20,8 +20,8 @@ class Prediccion extends Model
         return $this->belongsTo(Usuario::class);
     }
 
-    public function partido(): BelongsTo
+    public function juego(): BelongsTo
     {
-        return $this->belongsTo(Partido::class);
+        return $this->belongsTo(Juego::class);
     }
 }

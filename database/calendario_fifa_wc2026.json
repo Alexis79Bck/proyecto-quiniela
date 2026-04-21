@@ -1,0 +1,434 @@
+[
+    {
+        "fecha": "11-06-2026",
+        "hora": "15:00",
+        "equipo_local": "México",
+        "equipo_visitante": "Sudáfrica"
+    },
+    {
+        "fecha": "11-06-2026",
+        "hora": "22:00",
+        "equipo_local": "República de Corea",
+        "equipo_visitante": "Chequia"
+    },
+    {
+        "fecha": "12-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Canadá",
+        "equipo_visitante": "Bosnia y Herzegovina"
+    },
+    {
+        "fecha": "12-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Estados Unidos",
+        "equipo_visitante": "Paraguay"
+    },
+    {
+        "fecha": "13-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Catar",
+        "equipo_visitante": "Suiza"
+    },
+    {
+        "fecha": "13-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Brasil",
+        "equipo_visitante": "Marruecos"
+    },
+    {
+        "fecha": "13-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Haití",
+        "equipo_visitante": "Escocia"
+    },
+    {
+        "fecha": "14-06-2026",
+        "hora": "00:00",
+        "equipo_local": "Australia",
+        "equipo_visitante": "Turquía"
+    },
+    {
+        "fecha": "14-06-2026",
+        "hora": "13:00",
+        "equipo_local": "Alemania",
+        "equipo_visitante": "Curazao"
+    },
+    {
+        "fecha": "14-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Países Bajos",
+        "equipo_visitante": "Japón"
+    },
+    {
+        "fecha": "14-06-2026",
+        "hora": "19:00",
+        "equipo_local": "Costa de Marfil",
+        "equipo_visitante": "Ecuador"
+    },
+    {
+        "fecha": "14-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Suecia",
+        "equipo_visitante": "Túnez"
+    },
+    {
+        "fecha": "15-06-2026",
+        "hora": "12:00",
+        "equipo_local": "España",
+        "equipo_visitante": "Islas de Cabo Verde"
+    },
+    {
+        "fecha": "15-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Bélgica",
+        "equipo_visitante": "Egipto"
+    },
+    {
+        "fecha": "15-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Arabia Saudí",
+        "equipo_visitante": "Uruguay"
+    },
+    {
+        "fecha": "15-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Irán",
+        "equipo_visitante": "Nueva Zelanda"
+    },
+    {
+        "fecha": "16-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Francia",
+        "equipo_visitante": "Senegal"
+    },
+    {
+        "fecha": "16-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Irak",
+        "equipo_visitante": "Noruega"
+    },
+    {
+        "fecha": "16-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Argentina",
+        "equipo_visitante": "Argelia"
+    },
+    {
+        "fecha": "17-06-2026",
+        "hora": "00:00",
+        "equipo_local": "Austria",
+        "equipo_visitante": "Jordania"
+    },
+    {
+        "fecha": "17-06-2026",
+        "hora": "13:00",
+        "equipo_local": "Portugal",
+        "equipo_visitante": "República Democrática del Congo"
+    },
+    {
+        "fecha": "17-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Inglaterra",
+        "equipo_visitante": "Croacia"
+    },
+    {
+        "fecha": "17-06-2026",
+        "hora": "19:00",
+        "equipo_local": "Ghana",
+        "equipo_visitante": "Panamá"
+    },
+    {
+        "fecha": "17-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Uzbekistán",
+        "equipo_visitante": "Colombia"
+    },
+    {
+        "fecha": "18-06-2026",
+        "hora": "12:00",
+        "equipo_local": "Chequia",
+        "equipo_visitante": "Sudáfrica"
+    },
+    {
+        "fecha": "18-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Suiza",
+        "equipo_visitante": "Bosnia y Herzegovina"
+    },
+    {
+        "fecha": "18-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Canadá",
+        "equipo_visitante": "Catar"
+    },
+    {
+        "fecha": "18-06-2026",
+        "hora": "21:00",
+        "equipo_local": "México",
+        "equipo_visitante": "República de Corea"
+    },
+    {
+        "fecha": "19-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Estados Unidos",
+        "equipo_visitante": "Australia"
+    },
+    {
+        "fecha": "19-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Escocia",
+        "equipo_visitante": "Marruecos"
+    },
+    {
+        "fecha": "19-06-2026",
+        "hora": "20:30",
+        "equipo_local": "Brasil",
+        "equipo_visitante": "Haití"
+    },
+    {
+        "fecha": "19-06-2026",
+        "hora": "23:00",
+        "equipo_local": "Turquía",
+        "equipo_visitante": "Paraguay"
+    },
+    {
+        "fecha": "20-06-2026",
+        "hora": "13:00",
+        "equipo_local": "Países Bajos",
+        "equipo_visitante": "Suecia"
+    },
+    {
+        "fecha": "20-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Alemania",
+        "equipo_visitante": "Costa de Marfil"
+    },
+    {
+        "fecha": "20-06-2026",
+        "hora": "20:00",
+        "equipo_local": "Ecuador",
+        "equipo_visitante": "Curazao"
+    },
+    {
+        "fecha": "21-06-2026",
+        "hora": "00:00",
+        "equipo_local": "Túnez",
+        "equipo_visitante": "Japón"
+    },
+    {
+        "fecha": "21-06-2026",
+        "hora": "12:00",
+        "equipo_local": "España",
+        "equipo_visitante": "Arabia Saudí"
+    },
+    {
+        "fecha": "21-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Bélgica",
+        "equipo_visitante": "Irán"
+    },
+    {
+        "fecha": "21-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Uruguay",
+        "equipo_visitante": "Islas de Cabo Verde"
+    },
+    {
+        "fecha": "21-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Nueva Zelanda",
+        "equipo_visitante": "Egipto"
+    },
+    {
+        "fecha": "22-06-2026",
+        "hora": "13:00",
+        "equipo_local": "Argentina",
+        "equipo_visitante": "Austria"
+    },
+    {
+        "fecha": "22-06-2026",
+        "hora": "17:00",
+        "equipo_local": "Francia",
+        "equipo_visitante": "Irak"
+    },
+    {
+        "fecha": "22-06-2026",
+        "hora": "20:00",
+        "equipo_local": "Noruega",
+        "equipo_visitante": "Senegal"
+    },
+    {
+        "fecha": "22-06-2026",
+        "hora": "23:00",
+        "equipo_local": "Jordania",
+        "equipo_visitante": "Argelia"
+    },
+    {
+        "fecha": "23-06-2026",
+        "hora": "13:00",
+        "equipo_local": "Portugal",
+        "equipo_visitante": "Uzbekistán"
+    },
+    {
+        "fecha": "23-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Inglaterra",
+        "equipo_visitante": "Ghana"
+    },
+    {
+        "fecha": "23-06-2026",
+        "hora": "19:00",
+        "equipo_local": "Panamá",
+        "equipo_visitante": "Croacia"
+    },
+    {
+        "fecha": "23-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Colombia",
+        "equipo_visitante": "República Democrática del Congo"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Suiza",
+        "equipo_visitante": "Canadá"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Bosnia y Herzegovina",
+        "equipo_visitante": "Catar"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Escocia",
+        "equipo_visitante": "Brasil"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "18:00",
+        "equipo_local": "Marruecos",
+        "equipo_visitante": "Haití"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Chequia",
+        "equipo_visitante": "México"
+    },
+    {
+        "fecha": "24-06-2026",
+        "hora": "21:00",
+        "equipo_local": "Sudáfrica",
+        "equipo_visitante": "República de Corea"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Curazao",
+        "equipo_visitante": "Costa de Marfil"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "16:00",
+        "equipo_local": "Ecuador",
+        "equipo_visitante": "Alemania"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "19:00",
+        "equipo_local": "Japón",
+        "equipo_visitante": "Suecia"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "19:00",
+        "equipo_local": "Túnez",
+        "equipo_visitante": "Países Bajos"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Turquía",
+        "equipo_visitante": "Estados Unidos"
+    },
+    {
+        "fecha": "25-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Paraguay",
+        "equipo_visitante": "Australia"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Noruega",
+        "equipo_visitante": "Francia"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "15:00",
+        "equipo_local": "Senegal",
+        "equipo_visitante": "Irak"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "20:00",
+        "equipo_local": "Islas de Cabo Verde",
+        "equipo_visitante": "Arabia Saudí"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "20:00",
+        "equipo_local": "Uruguay",
+        "equipo_visitante": "España"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "23:00",
+        "equipo_local": "Egipto",
+        "equipo_visitante": "Irán"
+    },
+    {
+        "fecha": "26-06-2026",
+        "hora": "23:00",
+        "equipo_local": "Nueva Zelanda",
+        "equipo_visitante": "Bélgica"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "17:00",
+        "equipo_local": "Panamá",
+        "equipo_visitante": "Inglaterra"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "17:00",
+        "equipo_local": "Croacia",
+        "equipo_visitante": "Ghana"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "19:30",
+        "equipo_local": "Colombia",
+        "equipo_visitante": "Portugal"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "19:30",
+        "equipo_local": "República Democrática del Congo",
+        "equipo_visitante": "Uzbekistán"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Argelia",
+        "equipo_visitante": "Austria"
+    },
+    {
+        "fecha": "27-06-2026",
+        "hora": "22:00",
+        "equipo_local": "Jordania",
+        "equipo_visitante": "Argentina"
+    }
+]

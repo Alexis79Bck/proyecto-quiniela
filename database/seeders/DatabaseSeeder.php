@@ -17,33 +17,35 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            RolesAndPermissionsSeeder::class,
+           // RolesAndPermissionsSeeder::class,
+            EtapaSeeder::class,
             GrupoSeeder::class,
             EquipoSeeder::class,
+            JuegoSeeder::class,
         ]);
 
         // Crear usuarios de prueba si no existen
-        if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
-            Usuario::factory()->create([
-                'nombre_completo' => 'Admin User',
-                'nombre_usuario' => 'admin',
-                'correo_electronico' => 'admin@app.com',
-            ])->assignRole('admin');
-        }
+        // if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'nombre_completo' => 'Admin User',
+        //         'nombre_usuario' => 'admin',
+        //         'correo_electronico' => 'admin@app.com',
+        //     ])->assignRole('admin');
+        // }
 
-        if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
-            Usuario::factory()->create([
-                'nombre_completo' => 'Organizador Test',
-                'nombre_usuario' => 'organizador',
-                'correo_electronico' => 'organizador@example.com',
-            ])->assignRole('organizador');
-        }
+        // if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'nombre_completo' => 'Organizador Test',
+        //         'nombre_usuario' => 'organizador',
+        //         'correo_electronico' => 'organizador@example.com',
+        //     ])->assignRole('organizador');
+        // }
 
-        if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
-            Usuario::factory()->create([
-                'name' => 'Jugador Test',
-                'email' => 'jugador@example.com',
-            ])->assignRole('jugador');
-        }
+        // if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'name' => 'Jugador Test',
+        //         'email' => 'jugador@example.com',
+        //     ])->assignRole('jugador');
+        // }
     }
 }
