@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Notifications;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use App\Infrastructure\Notifications\NewQuinielaNotification;
@@ -12,13 +12,13 @@ class NotificationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
+    protected Usuario $user;
 
     protected function setUp(): void
     {
         parent::setUp();
         
-        $this->user = User::factory()->create();
+        $this->user = Usuario::factory()->create();
     }
 
     public function test_user_can_get_notifications(): void

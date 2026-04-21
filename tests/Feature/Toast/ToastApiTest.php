@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Toast;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -10,12 +10,12 @@ class ToastApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
+    protected Usuario $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create();
+        $this->user = Usuario::factory()->create();
     }
 
     public function test_authenticated_user_can_broadcast_toast(): void

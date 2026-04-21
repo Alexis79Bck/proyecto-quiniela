@@ -2,29 +2,29 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\User;
+use App\Models\Usuario;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
 class UserRepository extends BaseEloquentRepository implements UserRepositoryInterface
 {
-    public function __construct(User $model)
+    public function __construct(Usuario $model)
     {
         parent::__construct($model);
     }
 
-    public function create(array $attributes): User
+    public function create(array $attributes): Usuario
     {
         return parent::create($attributes);
     }
 
-    public function find(int $id): ?User
+    public function find(int $id): ?Usuario
     {
         return parent::find($id);
     }
 
-    public function findByEmail(string $email): ?User
+    public function findByEmail(string $email): ?Usuario
     {
-        return $this->model->where('email', $email)->first();
+        return $this->model->where('correo_electronico', $email)->first();
     }
 
     public function all(array $columns = ['*']): \Illuminate\Database\Eloquent\Collection

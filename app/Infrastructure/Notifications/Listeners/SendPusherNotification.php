@@ -8,7 +8,7 @@ use App\Events\PredictionReminder;
 use App\Events\NewQuinielaAvailable;
 use App\Events\WinnersAnnounced;
 use App\Events\LeaderboardUpdated;
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
 
@@ -117,7 +117,7 @@ class SendPusherNotification implements ShouldQueue
     {
         // Para eventos que requieren todos los usuarios, usar chunk para eficiencia
         if ($this->requiresAllUsers($event)) {
-            User::chunk(100, function ($users) use ($notification) {
+            Usuario::chunk(100, function ($users) use ($notification) {
                 Notification::send($users, $notification);
             });
             return;
@@ -157,19 +157,18 @@ class SendPusherNotification implements ShouldQueue
         return match (true) {
             // Recordatorio de predicción: solo al usuario específico
             $event instanceof PredictionReminder => 
-                User::where('id', $event->userId)->lazy(100),
+                Usuario::where('id', $event->userId)->lazy(100),
             
             // Actualización de leaderboard: solo usuarios de la quiniela
             // TODO: Requiere implementar relación quinielas() en modelo User
             $event instanceof LeaderboardUpdated => 
-                User::whereHas('quinielas', function ($query) use ($event) {
+                Usuario::whereHas('quinielas', function ($query) use ($event) {
                     $query->where('quiniela_id', $event->quinielaId);
                 })->limit($maxLimit)->lazy(100),
             
             // Ganadores anunciados: solo usuarios de la quiniela
-            // TODO: Requiere implementar relación quinielas() en modelo User
             $event instanceof WinnersAnnounced => 
-                User::whereHas('quinielas', function ($query) use ($event) {
+                Usuario::whereHas('quinielas', function ($query) use ($event) {
                     $query->where('quiniela_id', $event->quinielaId);
                 })->limit($maxLimit)->lazy(100),
             

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -21,22 +21,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Crear usuarios de prueba si no existen
-        if (!User::where('email', 'admin@app.com')->exists()) {
-            User::factory()->create([
-                'name' => 'Admin User',
-                'email' => 'admin@app.com',
+        if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
+            Usuario::factory()->create([
+                'nombre_completo' => 'Admin User',
+                'nombre_usuario' => 'admin',
+                'correo_electronico' => 'admin@app.com',
             ])->assignRole('admin');
         }
 
-        if (!User::where('email', 'organizador@example.com')->exists()) {
-            User::factory()->create([
-                'name' => 'Organizador Test',
-                'email' => 'organizador@example.com',
+        if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
+            Usuario::factory()->create([
+                'nombre_completo' => 'Organizador Test',
+                'nombre_usuario' => 'organizador',
+                'correo_electronico' => 'organizador@example.com',
             ])->assignRole('organizador');
         }
 
-        if (!User::where('email', 'jugador@example.com')->exists()) {
-            User::factory()->create([
+        if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
+            Usuario::factory()->create([
                 'name' => 'Jugador Test',
                 'email' => 'jugador@example.com',
             ])->assignRole('jugador');

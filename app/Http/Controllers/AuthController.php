@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Usuario;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -19,12 +18,13 @@ class AuthController extends Controller
     public function register(Request $request): JsonResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nombre_completo' => ['required', 'string', 'max:255'],
+            'nombre_usuario' => ['required', 'string', 'max:255', 'unique:usuarios'],
+            'correo_electronico' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user = $this->authService->register($request->only(['name', 'email', 'password']));
+        $user = $this->authService->register($request->only(['nombre_completo', 'nombre_usuario', 'correo_electronico', 'password']));
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
@@ -37,11 +37,11 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $request->validate([
-            'email' => ['required', 'email'],
+            'correo_electronico' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        $user = $this->authService->login($request->only(['email', 'password']));
+        $user = $this->authService->login($request->only(['correo_electronico', 'password']));
 
         $token = $user->createToken('auth-token')->plainTextToken;
 

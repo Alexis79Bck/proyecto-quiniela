@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Services\Notification\NotificationService;
 use App\DTO\NotificationDTO;
 use Illuminate\Http\JsonResponse;

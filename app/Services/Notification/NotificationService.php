@@ -2,7 +2,7 @@
 
 namespace App\Services\Notification;
 
-use App\Models\User;
+use App\Models\Usuario;
 use App\DTO\NotificationDTO;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -13,10 +13,10 @@ class NotificationService
      * Obtener notificaciones no leídas desde una marca de tiempo específica para un usuario.
      *
      * @param Carbon $since
-     * @param User $user
+     * @param Usuario $user
      * @return Collection
      */
-    public function getUnreadSince(Carbon $since, User $user): Collection
+    public function getUnreadSince(Carbon $since, Usuario $user): Collection
     {
         $notifications = $user->unreadNotifications()
             ->where('created_at', '>', $since)
@@ -32,10 +32,10 @@ class NotificationService
      * Marcar una notificación como leída para un usuario.
      *
      * @param string $notificationId
-     * @param User $user
+     * @param Usuario $user
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function markAsRead(string $notificationId, User $user)
+    public function markAsRead(string $notificationId, Usuario $user)
     {
         $notification = $user->notifications()
             ->where('id', $notificationId)
@@ -52,10 +52,10 @@ class NotificationService
     /**
      * Marcar todas las notificaciones como leídas para un usuario.
      *
-     * @param User $user
+     * @param Usuario $user
      * @return int Número de notificaciones marcadas como leídas
      */
-    public function markAllAsRead(User $user): int
+    public function markAllAsRead(Usuario $user): int
     {
         return $user->unreadNotifications()->update(['read_at' => now()]);
     }
@@ -63,11 +63,11 @@ class NotificationService
     /**
      * Obtener las últimas notificaciones para un usuario.
      *
-     * @param User $user
+     * @param Usuario $user
      * @param int $limit
      * @return Collection
      */
-    public function getLatest(User $user, int $limit = 10): Collection
+    public function getLatest(Usuario $user, int $limit = 10): Collection
     {
         $notifications = $user->notifications()
             ->orderBy('created_at', 'desc')

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Notifications;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Notifications\DatabaseNotification;
@@ -12,13 +12,13 @@ class HealthCheckTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
+    protected Usuario $user;
 
     protected function setUp(): void
     {
         parent::setUp();
         
-        $this->user = User::factory()->create();
+        $this->user = Usuario::factory()->create();
     }
 
     public function test_health_returns_ok_status(): void

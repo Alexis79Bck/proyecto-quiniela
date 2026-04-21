@@ -4,7 +4,7 @@ namespace App\Infrastructure\Toast\Listeners;
 
 use App\Events\NewQuinielaAvailable;
 use App\Events\WinnersAnnounced;
-use App\Models\User;
+use App\Models\Usuario;
 use App\Services\Toast\ToastService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -28,8 +28,8 @@ class SendSystemToastNotifications implements ShouldQueue
     protected function getRecipients(object $event): \Illuminate\Support\Collection
     {
         return match (true) {
-            $event instanceof NewQuinielaAvailable => User::all()->pluck('id'),
-            $event instanceof WinnersAnnounced => User::all()->pluck('id'),
+            $event instanceof NewQuinielaAvailable => Usuario::all()->pluck('id'),
+            $event instanceof WinnersAnnounced => Usuario::all()->pluck('id'),
             default => collect(),
         };
     }

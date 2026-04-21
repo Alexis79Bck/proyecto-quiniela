@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Notifications;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Illuminate\Support\Facades\DB;
@@ -13,13 +13,13 @@ class PersistenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
+    protected Usuario $user;
 
     protected function setUp(): void
     {
         parent::setUp();
         
-        $this->user = User::factory()->create();
+        $this->user = Usuario::factory()->create();
     }
 
     public function test_notifications_persist_in_database(): void
@@ -38,7 +38,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -70,7 +70,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -109,7 +109,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -152,7 +152,7 @@ class PersistenceTest extends TestCase
             'id' => 'complex-data-notification-id',
             'type' => 'App\Infrastructure\Notifications\NewQuinielaNotification',
             'data' => json_encode($notificationData),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -175,7 +175,7 @@ class PersistenceTest extends TestCase
     public function test_multiple_users_notifications_are_isolated(): void
     {
         // Create second user
-        $user2 = User::factory()->create();
+        $user2 = Usuario::factory()->create();
 
         // Create notifications for both users manually
         $notification1Data = [
@@ -188,7 +188,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $this->user->id,
             'read_at' => null,
             'created_at' => now(),
@@ -205,7 +205,7 @@ class PersistenceTest extends TestCase
                 'startDate' => '2026-01-01',
                 'endDate' => '2026-12-31',
             ]),
-            'notifiable_type' => 'App\Models\User',
+            'notifiable_type' => 'App\Models\Usuario',
             'notifiable_id' => $user2->id,
             'read_at' => null,
             'created_at' => now(),

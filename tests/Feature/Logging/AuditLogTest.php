@@ -6,7 +6,7 @@ use App\Events\LogAuditEvent;
 use App\Infrastructure\Logging\AuditLogger\AuditLogger;
 use App\Listeners\AuditLogListener;
 use App\Models\AuditLog;
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

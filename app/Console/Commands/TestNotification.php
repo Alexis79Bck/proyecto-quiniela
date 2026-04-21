@@ -8,7 +8,7 @@ use App\Events\PredictionReminder;
 use App\Events\NewQuinielaAvailable;
 use App\Events\WinnersAnnounced;
 use App\Events\LeaderboardUpdated;
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Console\Command;
 
 class TestNotification extends Command
@@ -22,14 +22,14 @@ class TestNotification extends Command
 
         $this->info('Probando sistema de notificaciones...');
 
-        $user = User::first();
+        $user = Usuario::first();
 
         if (!$user) {
             $this->error('No hay usuarios en la base de datos. Ejecuta las migraciones y seeders primero.');
             return Command::FAILURE;
         }
 
-        $this->info("Usuario de prueba: {$user->name} (ID: {$user->id})");
+        $this->info("Usuario de prueba: {$user->nombre_completo} (ID: {$user->id})");
 
         $types = $type === 'all' ? ['quiniela', 'match', 'result', 'leaderboard', 'reminder', 'winners'] : [$type];
 
@@ -43,7 +43,7 @@ class TestNotification extends Command
         return Command::SUCCESS;
     }
 
-    protected function testNotification(string $type, User $user): void
+    protected function testNotification(string $type, Usuario $user): void
     {
         $this->info("\nProbando notificación: {$type}");
 

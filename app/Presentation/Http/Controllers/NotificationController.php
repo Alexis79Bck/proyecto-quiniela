@@ -2,7 +2,6 @@
 
 namespace App\Presentation\Http\Controllers;
 
-use App\Models\User;
 use App\DTO\NotificationDTO;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
