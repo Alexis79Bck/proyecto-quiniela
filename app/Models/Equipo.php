@@ -12,7 +12,7 @@ use App\Models\Juego;
 
 #[Fillable([
     'nombre',
-    'fifa_codigo',
+    'codigo_fifa',
     'url_bandera',
     'grupo_id'
 ])]

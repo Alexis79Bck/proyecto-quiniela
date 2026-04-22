@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use App\Models\Juego;
 use App\Models\Equipo;
-use App\Models\Etapa;
 use App\Enums\MatchStatus;
 use Illuminate\Support\Str;
 
@@ -20,15 +19,6 @@ class JuegoSeeder extends Seeder
         // Cargar calendario desde JSON
         $jsonPath = database_path('calendario_fifa_wc2026.json');
         $calendario = json_decode(File::get($jsonPath), true, flags:JSON_OBJECT_AS_ARRAY);
-        
-        // // Obtener todas las etapas disponibles
-        // $etapas = Etapa::all()->keyBy('nombre');
-        
-        // // Obtener todos los equipos por nombre
-        // $equipos = Equipo::all()->keyBy('nombre');
-        
-       
-        // Determinar la etapa para cada juego (basado en la fecha)
 
         foreach ($calendario as $partido) {
             // Parsear fecha y hora
@@ -40,7 +30,6 @@ class JuegoSeeder extends Seeder
 
             // Saltar si no se encuentran los equipos
             if (!$equipoLocal || !$equipoVisitante ) {
-                dd("Local: {$equipoLocal}, Visitante: {$equipoVisitante}, Partido Local: {$partido['equipo_local']}, Partido Visitante: {$partido['equipo_visitante']}");
                 $this->command->warn("⚠️  Equipos o etapa no encontrados para: {$partido['equipo_local']} vs {$partido['equipo_visitante']}");
                 continue;
             }
