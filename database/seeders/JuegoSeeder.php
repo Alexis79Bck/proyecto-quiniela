@@ -19,31 +19,28 @@ class JuegoSeeder extends Seeder
     {
         // Cargar calendario desde JSON
         $jsonPath = database_path('calendario_fifa_wc2026.json');
-        $calendario = json_decode(File::get($jsonPath), true);
-
-        // Obtener todas las etapas disponibles
-        $etapas = Etapa::all()->keyBy('nombre');
-
-        // Obtener todos los equipos por nombre
-        $equipos = Equipo::all()->keyBy('nombre');
-
+        $calendario = json_decode(File::get($jsonPath), true, flags:JSON_OBJECT_AS_ARRAY);
+        
+        // // Obtener todas las etapas disponibles
+        // $etapas = Etapa::all()->keyBy('nombre');
+        
+        // // Obtener todos los equipos por nombre
+        // $equipos = Equipo::all()->keyBy('nombre');
+        
+       
         // Determinar la etapa para cada juego (basado en la fecha)
-        $fechaFaseGrupos = \Carbon\Carbon::createFromFormat('d-m-Y', '27-06-2026');
 
         foreach ($calendario as $partido) {
             // Parsear fecha y hora
             $fechaHora = \Carbon\Carbon::createFromFormat('d-m-Y H:i', "{$partido['fecha']} {$partido['hora']}");
 
-            // Determinar etapa (Fase de Grupos u otra)
-            $etapaNombre = $fechaHora <= $fechaFaseGrupos ? 'Fase de Grupos' : 'Fase Final';
-            $etapa = $etapas->get($etapaNombre);
-
             // Buscar equipos
-            $equipoLocal = $equipos->get($partido['equipo_local']);
-            $equipoVisitante = $equipos->get($partido['equipo_visitante']);
+            $equipoLocal =  Equipo::where('nombre', $partido['equipo_local'])->first();
+            $equipoVisitante = Equipo::where('nombre', $partido['equipo_visitante'])->first();
 
             // Saltar si no se encuentran los equipos
-            if (!$equipoLocal || !$equipoVisitante || !$etapa) {
+            if (!$equipoLocal || !$equipoVisitante ) {
+                dd("Local: {$equipoLocal}, Visitante: {$equipoVisitante}, Partido Local: {$partido['equipo_local']}, Partido Visitante: {$partido['equipo_visitante']}");
                 $this->command->warn("⚠️  Equipos o etapa no encontrados para: {$partido['equipo_local']} vs {$partido['equipo_visitante']}");
                 continue;
             }
@@ -51,7 +48,7 @@ class JuegoSeeder extends Seeder
             // Crear el juego
             Juego::create([
                 'uuid' => Str::uuid(),
-                'etapa_id' => $etapa->id,
+                'etapa_id' => 1,
                 'equipo_local_id' => $equipoLocal->id,
                 'equipo_visitante_id' => $equipoVisitante->id,
                 'fecha_hora' => $fechaHora,

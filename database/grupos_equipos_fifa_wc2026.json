@@ -24,7 +24,7 @@
         }
       },
       {
-        "nombre": "Chequia",
+        "nombre": "República Checa",
         "metadata": {
           "codigo_fifa": "CZE",
           "iso_3166_1_alfa_2": "cz"
@@ -142,7 +142,7 @@
         }
       },
       {
-        "nombre": "Curaçao",
+        "nombre": "Curazao",
         "metadata": {
           "codigo_fifa": "CUW",
           "iso_3166_1_alfa_2": "cw"

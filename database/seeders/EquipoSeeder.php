@@ -29,5 +29,7 @@ class EquipoSeeder extends Seeder
                 ]);
             }
         }
+
+        $this->command->info('✅ Equipos creados exitosamente.');
     }
 }

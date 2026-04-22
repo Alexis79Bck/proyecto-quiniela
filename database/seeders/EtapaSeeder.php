@@ -24,5 +24,7 @@ class EtapaSeeder extends Seeder
         foreach ($etapas as $etapa) {
             \App\Models\Etapa::create($etapa);
         }
+
+        $this->command->info('✅ Etapas creadas exitosamente.');
     }
 }

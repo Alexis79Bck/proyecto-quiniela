@@ -28,7 +28,7 @@ return new class extends Migration
             $table->index('etapa_id');
             $table->index('equipo_local_id');
             $table->index('equipo_visitante_id');
-            $table->index('fecha');
+            $table->index('fecha_hora');
             $table->index('estado');
         });
     }

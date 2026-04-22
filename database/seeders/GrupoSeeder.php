@@ -31,5 +31,6 @@ class GrupoSeeder extends Seeder
             \App\Models\Grupo::create($grupo);
         }
 
+        $this->command->info('✅ Grupos creados exitosamente.');
     }
 }
