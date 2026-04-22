@@ -3,7 +3,6 @@
 namespace Tests\Unit\Notifications;
 
 use App\Infrastructure\Notifications\MatchStartedNotification;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
 use PHPUnit\Framework\TestCase;
 
 class MatchStartedNotificationTest extends TestCase
@@ -40,7 +39,6 @@ class MatchStartedNotificationTest extends TestCase
             public function getKey(): string { return 'test'; }
         });
 
-        $this->assertContains(PusherChannel::class, $channels);
         $this->assertContains('database', $channels);
     }
 

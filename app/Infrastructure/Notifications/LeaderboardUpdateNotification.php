@@ -2,8 +2,7 @@
 
 namespace App\Infrastructure\Notifications;
 
-use App\Domain\Scoring\Events\LeaderboardUpdated;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
+use App\Events\LeaderboardUpdated;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -29,7 +28,7 @@ class LeaderboardUpdateNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return [PusherChannel::class, 'database'];
+        return ['database'];
     }
 
     /**

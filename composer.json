@@ -34,7 +34,6 @@
             "Domain\\": "app/Domain/",
             "Application\\": "app/Application/",
             "Infrastructure\\": "app/Infrastructure/",
-            "Presentation\\": "app/Presentation/",
             "Shared\\": "app/Shared/"
         }
     },

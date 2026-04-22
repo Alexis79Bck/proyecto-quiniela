@@ -3,7 +3,6 @@
 namespace Tests\Unit\Notifications;
 
 use App\Infrastructure\Notifications\WinnersNotification;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
 use PHPUnit\Framework\TestCase;
 
 class WinnersNotificationTest extends TestCase
@@ -41,9 +40,8 @@ class WinnersNotificationTest extends TestCase
             public function getChannelType(): string { return 'database'; }
         });
 
-        $this->assertContains(PusherChannel::class, $channels);
         $this->assertContains('database', $channels);
-        $this->assertCount(2, $channels);
+        $this->assertCount(1, $channels);
     }
 
     public function test_to_broadcast_returns_correct_data(): void

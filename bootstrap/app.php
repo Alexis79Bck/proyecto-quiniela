@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Audit Middleware - Captura automática de requests para logging
-        $middleware->append(\App\Presentation\Http\Middleware\AuditMiddleware::class);
+        $middleware->append(\App\Http\Middleware\AuditMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

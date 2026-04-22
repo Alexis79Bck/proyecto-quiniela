@@ -5,8 +5,13 @@
     "guidelines": true,
     "mcp": true,
     "nightwatch_mcp": false,
+    "packages": [
+        "spatie/laravel-permission"
+    ],
     "sail": false,
     "skills": [
-        "laravel-best-practices"
+        "fortify-development",
+        "laravel-best-practices",
+        "laravel-permission-development"
     ]
 }

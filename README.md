@@ -49,7 +49,7 @@
 - ⚽ **Sistema de Predicciones** - Pronósticos por partido
 - 🏆 **Motor de Puntuación Automática** - Cálculo inteligente
 - 📈 **Clasificación en Tiempo Real** - Leaderboard dinámico
-- 🔔 **Notificaciones Push** - WebSockets con Pusher
+- 🔔 **Notificaciones Persistentes** - Polling con base de datos
 - 📝 **Auditoría Completa** - Logging de todas las acciones
 - 🏗️ **Arquitectura DDD** - Escalable y mantenible
 
@@ -80,7 +80,7 @@
 | 🔐 **Laravel Sanctum** | API tokens y autenticación SPA |
 | 🔑 **Laravel Fortify** | Autenticación headless |
 | 🛡️ **Spatie Permission** | Roles y permisos granulares |
-| 🔔 **Pusher** | WebSockets para tiempo real |
+| 🔔 **Database Notifications** | Notificaciones persistentes |
 
 ---
 
@@ -139,7 +139,7 @@ php artisan migrate
 php artisan db:seed
 
 # Instalar paquetes
-composer require laravel/sanctum laravel/fortify spatie/laravel-permission pusher/pusher-php-server
+composer require laravel/sanctum laravel/fortify spatie/laravel-permission
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
@@ -177,11 +177,6 @@ DB_PORT=3306
 DB_DATABASE=quiniela_fifa_2026
 DB_USERNAME=quiniela_user
 DB_PASSWORD=tu_password_seguro
-
-PUSHER_APP_KEY=tu-pusher-app-key
-PUSHER_APP_SECRET=tu-pusher-app-secret
-PUSHER_APP_ID=tu-pusher-app-id
-PUSHER_APP_CLUSTER=us2
 
 SANCTUM_STATEFUL_DOMAINS=localhost:8000
 ```

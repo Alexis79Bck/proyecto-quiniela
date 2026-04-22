@@ -3,7 +3,7 @@
 namespace Tests\Unit\Services;
 
 use App\Enums\ToastType;
-use App\Services\ToastService;
+use App\Services\Toast\ToastService;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;

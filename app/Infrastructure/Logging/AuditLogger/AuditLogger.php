@@ -2,12 +2,16 @@
 
 namespace App\Infrastructure\Logging\AuditLogger;
 
-use App\Domain\Auth\Models\AuditLog;
+use App\Repositories\Contracts\AuditLogRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
 class AuditLogger
 {
+    public function __construct(
+        protected AuditLogRepositoryInterface $auditLogRepository
+    ) {}
+
     /**
      * Log an authentication event.
      */
@@ -97,9 +101,9 @@ class AuditLogger
 
         // Prepare log data
         $logData = [
-            'user_id' => $userId,
-            'action' => $action,
-            'entity_type' => $entityType,
+            'usuario_id' => $userId,
+            'accion' => $action,
+            'tipo_entidad' => $entityType,
             'entity_id' => $entityId,
             'old_values' => $oldValues,
             'new_values' => $newValues,
@@ -126,12 +130,12 @@ class AuditLogger
     }
 
     /**
-     * Log to database using AuditLog model.
+     * Log to database using repository.
      */
     protected function logToDatabase(array $data): void
     {
         try {
-            AuditLog::create($data);
+            $this->auditLogRepository->createLog($data);
         } catch (\Exception $e) {
             // Log error but don't fail the request
             Log::channel('security')->error('Failed to create audit log in database', [
@@ -148,14 +152,14 @@ class AuditLogger
     {
         $parts = [];
 
-        if ($data['user_id']) {
-            $parts[] = "User #{$data['user_id']}";
+        if ($data['usuario_id']) {
+            $parts[] = "User #{$data['usuario_id']}";
         }
 
-        $parts[] = $data['action'];
+        $parts[] = $data['accion'];
 
-        if ($data['entity_type']) {
-            $parts[] = "{$data['entity_type']}";
+        if ($data['tipo_entidad']) {
+            $parts[] = "{$data['tipo_entidad']}";
             if ($data['entity_id']) {
                 $parts[] = "#{$data['entity_id']}";
             }

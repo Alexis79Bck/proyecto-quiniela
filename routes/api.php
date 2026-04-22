@@ -1,8 +1,8 @@
 <?php
 
-use App\Presentation\Http\Controllers\AuthController;
-use App\Presentation\Http\Controllers\NotificationController;
-use App\Presentation\Http\Controllers\ToastController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ToastController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

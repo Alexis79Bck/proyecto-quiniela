@@ -2,8 +2,7 @@
 
 namespace App\Infrastructure\Notifications;
 
-use App\Domain\Match\Events\MatchResultAvailable;
-use App\Infrastructure\Notifications\Channels\PusherChannel;
+use App\Events\MatchResultAvailable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
@@ -31,7 +30,7 @@ class MatchResultNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return [PusherChannel::class, 'database'];
+        return ['database'];
     }
 
     /**

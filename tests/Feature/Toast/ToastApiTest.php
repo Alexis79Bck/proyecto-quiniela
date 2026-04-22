@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Toast;
 
-use App\Domain\User\Models\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
