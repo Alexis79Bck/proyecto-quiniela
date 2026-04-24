@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -13,10 +14,10 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        // Crear permisos
+        $guard = config('auth.defaults.guard', 'web');
+
         $permissions = [
             'manage-users',
             'manage-quinielas',
@@ -29,29 +30,28 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::findOrCreate($permission, $guard);
         }
 
-        // Crear rol admin con todos los permisos
-        $admin = Role::create(['name' => 'admin'])
-            ->givePermissionTo($permissions);
-
-        // Crear rol organizador con permisos específicos
-        $organizer = Role::create(['name' => 'organizador'])
-            ->givePermissionTo([
+        $roles = [
+            'admin' => $permissions,
+            'organizador' => [
                 'manage-quinielas',
                 'manage-matches',
                 'manage-teams',
                 'view-results',
                 'view-leaderboard',
-            ]);
-
-        // Crear rol jugador con permisos básicos
-        $player = Role::create(['name' => 'jugador'])
-            ->givePermissionTo([
+            ],
+            'jugador' => [
                 'make-predictions',
                 'view-results',
                 'view-leaderboard',
-            ]);
+            ],
+        ];
+
+        foreach ($roles as $roleName => $rolePermissions) {
+            $role = Role::findOrCreate($roleName, $guard);
+            $role->syncPermissions($rolePermissions);
+        }
     }
 }
