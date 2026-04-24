@@ -26,31 +26,17 @@ Crear una plataforma de quiniela familiar/amistosa donde los usuarios puedan:
 - **Backend**: Laravel 13.x, PHP 8.3+
 - **Autenticación**: Laravel Sanctum + Fortify
 - **Autorización**: Spatie Laravel Permission
-- **Notificaciones**: Persistencia + Polling
+- **Notificaciones**: Persistencia + Polling (Opcional, no indispensable en esta etapa)
 - **Frontend**: Tailwind CSS 4.x, Vite 8.x
-- **Base de datos**: MySQL 8.0+ (o PostgreSQL 15+)
-- **Caché**: Redis 7.x (opcional)
+- **Base de datos**: PostgreSQL 15+ (o MySQL 8.0+)
+- **Caché**: Basado en archivo, para posible escalabilidad Redis 7.x (opcional)
 
 ## Arquitectura del Sistema
 
-### Estructura DDD (Domain-Driven Design)
-El sistema sigue una arquitectura por capas con separación clara de responsabilidades:
+### Estructura MVC standar + DDD Ligero (Domain-Driven Design Lite)
+El sistema sigue una arquitectura MVC estandard pero con la aplicacion de patrones de diseño para la separacion de responsabilidades:
 
-```
-┌─────────────────────────────────────────┐
-│         Presentation Layer              │
-│  (Controllers, Views, API Endpoints)    │
-├─────────────────────────────────────────┤
-│         Application Layer               │
-│    (Commands, Queries, DTOs, Events)    │
-├─────────────────────────────────────────┤
-│           Domain Layer                  │
-│  (Models, Value Objects, Services)      │
-├─────────────────────────────────────────┤
-│        Infrastructure Layer             │
-│ (Repositories, External Services, etc)  │
-└─────────────────────────────────────────┘
-```
+
 
 ### Dominios del Sistema
 1. **Auth Domain**: Autenticación y autorización
@@ -73,16 +59,16 @@ El sistema sigue una arquitectura por capas con separación clara de responsabil
 - Implementar Audit Logger personalizado
 - Configurar canales de log específicos
 
-### Fase 3: Notificaciones (Persistencia + Polling) (Día 4)
+### Fase 3: Notificaciones (Persistencia + Polling) (Día 4) (opcional para futuro)
 - Implementar sistema de notificaciones persistentes
 - Configurar eventos y listeners
 - Crear API para gestión de notificaciones
 
-### Fase 4: Estructura DDD y Dominio de Quiniela (Días 5-7)
-- Crear estructura de directorios DDD
+### Fase 4: Estructura MVC y Patrones de diseño (Días 5-7)
+- Crear estructura de directorios MVC Standar + PAtrones de Diseño
 - Crear migraciones para el dominio de Quiniela
 - Crear modelos y relaciones
-- Crear Value Objects
+- Crear Enums y DTOs necesarios.
 
 ### Fase 5: Lógica de Negocio (Días 8-10)
 - Implementar servicios de puntuación
