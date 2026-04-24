@@ -28,7 +28,7 @@ class AuthService
     {
         $user = Usuario::where('correo_electronico', $credentials['correo_electronico'])->first();
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'correo_electronico' => ['Las credenciales proporcionadas son incorrectas.'],
             ]);

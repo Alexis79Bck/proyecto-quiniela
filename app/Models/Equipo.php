@@ -7,14 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Grupo;
-use App\Models\Juego;
 
 #[Fillable([
     'nombre',
     'codigo_fifa',
     'url_bandera',
-    'grupo_id'
+    'grupo_id',
 ])]
 class Equipo extends Model
 {

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Usuario;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository extends BaseEloquentRepository implements UserRepositoryInterface
 {
@@ -27,7 +28,7 @@ class UserRepository extends BaseEloquentRepository implements UserRepositoryInt
         return $this->model->where('correo_electronico', $email)->first();
     }
 
-    public function all(array $columns = ['*']): \Illuminate\Database\Eloquent\Collection
+    public function all(array $columns = ['*']): Collection
     {
         return parent::all($columns);
     }
@@ -38,6 +39,7 @@ class UserRepository extends BaseEloquentRepository implements UserRepositoryInt
         if ($user) {
             return $user->update($attributes);
         }
+
         return false;
     }
 
@@ -47,6 +49,7 @@ class UserRepository extends BaseEloquentRepository implements UserRepositoryInt
         if ($user) {
             return $user->delete();
         }
+
         return false;
     }
 }

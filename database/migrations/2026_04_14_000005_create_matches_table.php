@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('equipo_local_goles')->default(0);
             $table->unsignedInteger('equipo_visitante_goles')->default(0);
             $table->string('estado')->default('programado'); // programado, en_progreso, finalizado
-            //$table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
+            // $table->enum('estado', ['programado', 'en_progreso', 'finalizado'])->default('programado');
             $table->timestamps();
 
             // Índices para mejor rendimiento

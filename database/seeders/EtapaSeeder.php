@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Etapa;
 use Illuminate\Database\Seeder;
 
 class EtapaSeeder extends Seeder
@@ -22,7 +22,7 @@ class EtapaSeeder extends Seeder
         ];
 
         foreach ($etapas as $etapa) {
-            \App\Models\Etapa::create($etapa);
+            Etapa::create($etapa);
         }
 
         $this->command->info('✅ Etapas creadas exitosamente.');

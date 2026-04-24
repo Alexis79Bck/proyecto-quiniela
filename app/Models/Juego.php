@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Etapa;
-use App\Models\Equipo;
-use App\Models\Prediccion;
 
 #[Fillable([
     'uuid',
@@ -53,5 +50,4 @@ class Juego extends Model
     {
         return $this->hasMany(Prediccion::class);
     }
-
 }

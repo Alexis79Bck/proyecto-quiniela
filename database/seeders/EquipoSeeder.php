@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -20,8 +21,8 @@ class EquipoSeeder extends Seeder
 
             foreach ($grupo['selecciones'] as $seleccion) {
                 $codigoIso = $seleccion['metadata']['iso_3166_1_alfa_2'];
-                
-                \App\Models\Equipo::create([
+
+                Equipo::create([
                     'nombre' => $seleccion['nombre'],
                     'codigo_fifa' => $seleccion['metadata']['codigo_fifa'],
                     'url_bandera' => asset("images/flags/svg/{$codigoIso}.png"),

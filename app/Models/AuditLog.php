@@ -59,7 +59,7 @@ class AuditLog extends Model
     public function scopeByEntity($query, string $entityType, int $entityId)
     {
         return $query->where('tipo_entidad', $entityType)
-                     ->where('entity_id', $entityId);
+            ->where('entity_id', $entityId);
     }
 
     /**
@@ -109,7 +109,7 @@ class AuditLog extends Model
             'api' => ['api_request', 'api_response', 'api_error'],
         ];
 
-        if (!isset($actionPatterns[$actionType])) {
+        if (! isset($actionPatterns[$actionType])) {
             return $query;
         }
 
@@ -121,7 +121,7 @@ class AuditLog extends Model
      */
     public function getFormattedOldValuesAttribute(): ?string
     {
-        if (!$this->old_values) {
+        if (! $this->old_values) {
             return null;
         }
 
@@ -133,7 +133,7 @@ class AuditLog extends Model
      */
     public function getFormattedNewValuesAttribute(): ?string
     {
-        if (!$this->new_values) {
+        if (! $this->new_values) {
             return null;
         }
 
@@ -145,7 +145,7 @@ class AuditLog extends Model
      */
     public function getFormattedMetadataAttribute(): ?string
     {
-        if (!$this->metadata) {
+        if (! $this->metadata) {
             return null;
         }
 
@@ -157,7 +157,7 @@ class AuditLog extends Model
      */
     public function hasAuditChanges(): bool
     {
-        return !empty($this->old_values) || !empty($this->new_values);
+        return ! empty($this->old_values) || ! empty($this->new_values);
     }
 
     /**

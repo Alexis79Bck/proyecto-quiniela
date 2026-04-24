@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {

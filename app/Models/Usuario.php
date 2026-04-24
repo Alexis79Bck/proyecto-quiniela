@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
+use Database\Factories\UsuarioFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,8 +28,8 @@ use Spatie\Permission\Traits\HasRoles;
 #[Hidden(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'])]
 class Usuario extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UsuarioFactory> */
-    use HasApiTokens, HasRoles, HasFactory, Notifiable;
+    /** @use HasFactory<UsuarioFactory> */
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     protected $table = 'usuarios';
 
@@ -69,12 +72,12 @@ class Usuario extends Authenticatable
      */
     public function tiene2FAHabilitado(): bool
     {
-        return ! is_null($this->two_factor_secret) && 
+        return ! is_null($this->two_factor_secret) &&
                ! is_null($this->two_factor_confirmed_at);
     }
 
-    protected static function newFactory(): \Illuminate\Database\Eloquent\Factories\Factory
+    protected static function newFactory(): Factory
     {
-        return \Database\Factories\UserFactory::new();
+        return UserFactory::new();
     }
 }

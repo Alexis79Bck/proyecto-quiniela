@@ -70,17 +70,17 @@ class AuditLogger
 
     /**
      * Main logging method.
-     * 
-     * @param string $action The action being logged
-     * @param string|null $entityType The type of entity (e.g., 'user', 'quiniela')
-     * @param int|null $entityId The ID of the entity
-     * @param array|null $oldValues The old values before the change
-     * @param array|null $newValues The new values after the change
-     * @param array $metadata Additional metadata
-     * @param string $logChannel The log channel to use
-     * @param int|null $userId Optional user ID (uses auth context if not provided)
-     * @param string|null $ipAddress Optional IP address (uses request context if not provided)
-     * @param string|null $userAgent Optional user agent (uses request context if not provided)
+     *
+     * @param  string  $action  The action being logged
+     * @param  string|null  $entityType  The type of entity (e.g., 'user', 'quiniela')
+     * @param  int|null  $entityId  The ID of the entity
+     * @param  array|null  $oldValues  The old values before the change
+     * @param  array|null  $newValues  The new values after the change
+     * @param  array  $metadata  Additional metadata
+     * @param  string  $logChannel  The log channel to use
+     * @param  int|null  $userId  Optional user ID (uses auth context if not provided)
+     * @param  string|null  $ipAddress  Optional IP address (uses request context if not provided)
+     * @param  string|null  $userAgent  Optional user agent (uses request context if not provided)
      */
     public function log(
         string $action,

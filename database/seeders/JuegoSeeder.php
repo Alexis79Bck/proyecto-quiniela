@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Enums\MatchStatus;
+use App\Models\Equipo;
+use App\Models\Juego;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-use App\Models\Juego;
-use App\Models\Equipo;
-use App\Enums\MatchStatus;
 use Illuminate\Support\Str;
 
 class JuegoSeeder extends Seeder
@@ -18,19 +19,20 @@ class JuegoSeeder extends Seeder
     {
         // Cargar calendario desde JSON
         $jsonPath = database_path('calendario_fifa_wc2026.json');
-        $calendario = json_decode(File::get($jsonPath), true, flags:JSON_OBJECT_AS_ARRAY);
+        $calendario = json_decode(File::get($jsonPath), true, flags: JSON_OBJECT_AS_ARRAY);
 
         foreach ($calendario as $partido) {
             // Parsear fecha y hora
-            $fechaHora = \Carbon\Carbon::createFromFormat('d-m-Y H:i', "{$partido['fecha']} {$partido['hora']}");
+            $fechaHora = Carbon::createFromFormat('d-m-Y H:i', "{$partido['fecha']} {$partido['hora']}");
 
             // Buscar equipos
-            $equipoLocal =  Equipo::where('nombre', $partido['equipo_local'])->first();
+            $equipoLocal = Equipo::where('nombre', $partido['equipo_local'])->first();
             $equipoVisitante = Equipo::where('nombre', $partido['equipo_visitante'])->first();
 
             // Saltar si no se encuentran los equipos
-            if (!$equipoLocal || !$equipoVisitante ) {
+            if (! $equipoLocal || ! $equipoVisitante) {
                 $this->command->warn("⚠️  Equipos o etapa no encontrados para: {$partido['equipo_local']} vs {$partido['equipo_visitante']}");
+
                 continue;
             }
 

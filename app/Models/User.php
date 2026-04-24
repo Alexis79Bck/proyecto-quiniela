@@ -2,6 +2,4 @@
 
 namespace App\Models;
 
-class User extends Usuario
-{
-}
+class User extends Usuario {}

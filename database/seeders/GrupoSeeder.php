@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Grupo;
 use Illuminate\Database\Seeder;
 
 class GrupoSeeder extends Seeder
@@ -28,7 +28,7 @@ class GrupoSeeder extends Seeder
         ];
 
         foreach ($grupos as $grupo) {
-            \App\Models\Grupo::create($grupo);
+            Grupo::create($grupo);
         }
 
         $this->command->info('✅ Grupos creados exitosamente.');

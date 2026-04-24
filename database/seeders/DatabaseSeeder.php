@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Usuario;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,14 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-          //  RolesAndPermissionsSeeder::class,
+            //  RolesAndPermissionsSeeder::class,
             EtapaSeeder::class,
             GrupoSeeder::class,
             EquipoSeeder::class,
             JuegoSeeder::class,
         ]);
 
-        //Crear usuarios de prueba si no existen
+        // Crear usuarios de prueba si no existen
         // if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
         //     Usuario::factory()->create([
         //         'nombre_completo' => 'Admin User',
