@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\MatchStatus;
 use App\Models\Equipo;
+use App\Models\Etapa;
 use App\Models\Juego;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -19,9 +20,10 @@ class JuegoSeeder extends Seeder
     {
         // Cargar calendario desde JSON
         $jsonPath = database_path('calendario_fifa_wc2026.json');
-        $calendario = json_decode(File::get($jsonPath), true, flags: JSON_OBJECT_AS_ARRAY);
-
-        foreach ($calendario as $partido) {
+        $calendario = json_decode(File::get($jsonPath), true);
+        $etapa = Etapa::where('nombre', $calendario[0]['etapa'])->first();
+        
+        foreach ($calendario[0]['partidos'] as $partido) {
             // Parsear fecha y hora
             $fechaHora = Carbon::createFromFormat('d-m-Y H:i', "{$partido['fecha']} {$partido['hora']}");
 
@@ -38,8 +40,7 @@ class JuegoSeeder extends Seeder
 
             // Crear el juego
             Juego::create([
-                'uuid' => Str::uuid(),
-                'etapa_id' => 1,
+                'etapa_id' => $etapa->id,
                 'equipo_local_id' => $equipoLocal->id,
                 'equipo_visitante_id' => $equipoVisitante->id,
                 'fecha_hora' => $fechaHora,
