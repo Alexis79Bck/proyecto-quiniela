@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,8 +13,9 @@ class AuthenticationTest extends TestCase
     public function test_user_can_register(): void
     {
         $response = $this->postJson('/api/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'nombre_completo' => 'Test User',
+            'nombre_usuario' => 'testuser',
+            'correo_electronico' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
@@ -23,22 +24,23 @@ class AuthenticationTest extends TestCase
         $response->assertJsonStructure([
             'user' => [
                 'id',
-                'name',
-                'email',
+                'nombre_completo',
+                'nombre_usuario',
+                'correo_electronico',
             ],
             'token',
         ]);
 
-        $this->assertDatabaseHas('users', [
-            'email' => 'test@example.com',
-            'name' => 'Test User',
+        $this->assertDatabaseHas('usuarios', [
+            'correo_electronico' => 'test@example.com',
+            'nombre_completo' => 'Test User',
         ]);
     }
 
     public function test_user_can_login(): void
     {
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
+        $user = Usuario::factory()->create([
+            'correo_electronico' => 'test@example.com',
             'password' => bcrypt('password123'),
         ]);
 
@@ -78,7 +80,7 @@ class AuthenticationTest extends TestCase
 
     public function test_user_can_logout(): void
     {
-        $user = User::factory()->create();
+        $user = Usuario::factory()->create();
         $token = $user->createToken('test-token');
 
         $response = $this->actingAs($user, 'sanctum')

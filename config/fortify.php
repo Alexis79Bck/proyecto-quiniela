@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'passwords' => 'users',
+    'passwords' => 'usuarios',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'username' => 'correo_electronico',
+    'username' => 'nombre_usuario',
 
     'email' => 'correo_electronico',
 
@@ -116,7 +116,7 @@ return [
 
     'limiters' => [
         'login' => 'login',
-        'two-factor' => 'two-factor',
+        // 'two-factor' => 'two-factor',
     ],
 
     /*

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('etapas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('orden');
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

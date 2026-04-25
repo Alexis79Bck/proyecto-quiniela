@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Quiniela;
 use App\Repositories\Contracts\QuinielaRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class QuinielaRepository extends BaseEloquentRepository implements QuinielaRepositoryInterface
 {
@@ -22,17 +23,17 @@ class QuinielaRepository extends BaseEloquentRepository implements QuinielaRepos
         return parent::find($id);
     }
 
-    public function all(array $columns = ['*']): \Illuminate\Database\Eloquent\Collection
+    public function all(array $columns = ['*']): Collection
     {
         return parent::all($columns);
     }
 
-    public function findByUser(int $userId): \Illuminate\Database\Eloquent\Collection
+    public function findByUser(int $userId): Collection
     {
         return $this->model->where('user_id', $userId)->get();
     }
 
-    public function findActive(): \Illuminate\Database\Eloquent\Collection
+    public function findActive(): Collection
     {
         return $this->model->where('is_active', true)->get();
     }
@@ -43,6 +44,7 @@ class QuinielaRepository extends BaseEloquentRepository implements QuinielaRepos
         if ($quiniela) {
             return $quiniela->update($attributes);
         }
+
         return false;
     }
 
@@ -52,6 +54,7 @@ class QuinielaRepository extends BaseEloquentRepository implements QuinielaRepos
         if ($quiniela) {
             return $quiniela->delete();
         }
+
         return false;
     }
 }

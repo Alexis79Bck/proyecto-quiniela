@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -11,11 +11,12 @@ class AuthService
     /**
      * Register a new user
      */
-    public function register(array $data): User
+    public function register(array $data): Usuario
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        return Usuario::create([
+            'nombre_completo' => $data['nombre_completo'],
+            'nombre_usuario' => $data['nombre_usuario'],
+            'correo_electronico' => $data['correo_electronico'],
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -23,13 +24,13 @@ class AuthService
     /**
      * Attempt to authenticate a user
      */
-    public function login(array $credentials): User
+    public function login(array $credentials): Usuario
     {
-        $user = User::where('email', $credentials['email'])->first();
+        $user = Usuario::where('correo_electronico', $credentials['correo_electronico'])->first();
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas son incorrectas.'],
+                'correo_electronico' => ['Las credenciales proporcionadas son incorrectas.'],
             ]);
         }
 
@@ -39,7 +40,7 @@ class AuthService
     /**
      * Logout user by revoking tokens
      */
-    public function logout(User $user): void
+    public function logout(Usuario $user): void
     {
         $user->tokens()->delete();
     }

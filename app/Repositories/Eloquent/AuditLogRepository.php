@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\AuditLog;
 use App\Repositories\Contracts\AuditLogRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class AuditLogRepository extends BaseEloquentRepository implements AuditLogRepositoryInterface
 {
@@ -22,7 +23,7 @@ class AuditLogRepository extends BaseEloquentRepository implements AuditLogRepos
         return parent::find($id);
     }
 
-    public function all(array $columns = ['*']): \Illuminate\Database\Eloquent\Collection
+    public function all(array $columns = ['*']): Collection
     {
         return parent::all($columns);
     }

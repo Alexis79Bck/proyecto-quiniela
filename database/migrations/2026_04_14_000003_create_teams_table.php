@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('codigo_fifa', 3)->unique();
             $table->string('url_bandera')->nullable();
-            $table->foreignId('grupo_id')->nullable()->constrained('grupos')->onDelete('set null');
+            $table->unsignedInteger('puntos')->default(0);
+            $table->string('grupo')->nullable();
             $table->timestamps();
         });
     }

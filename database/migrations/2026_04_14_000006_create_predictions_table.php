@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('predicciones', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->foreignId('juego_id')->constrained('juegos')->onDelete('cascade');
             $table->unsignedInteger('equipo_local_prediccion')->default(0);

@@ -2,7 +2,7 @@
 
 namespace App\Presentation\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,14 +14,16 @@ class AuthController extends Controller
     public function register(Request $request): JsonResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nombre_completo' => ['required', 'string', 'max:255'],
+            'nombre_usuario' => ['required', 'string', 'max:255', 'unique:usuarios'],
+            'correo_electronico' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $user = Usuario::create([
+            'nombre_completo' => $request->nombre_completo,
+            'nombre_usuario' => $request->nombre_usuario,
+            'correo_electronico' => $request->correo_electronico,
             'password' => Hash::make($request->password),
         ]);
 
@@ -36,15 +38,15 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $request->validate([
-            'email' => ['required', 'email'],
+            'correo_electronico' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = Usuario::where('correo_electronico', $request->correo_electronico)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Las credenciales proporcionadas son incorrectas.'],
+                'correo_electronico' => ['Las credenciales proporcionadas son incorrectas.'],
             ]);
         }
 

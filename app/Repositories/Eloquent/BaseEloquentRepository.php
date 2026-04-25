@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use Illuminate\Database\Eloquent\{Model, Collection};
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseEloquentRepository
 {
