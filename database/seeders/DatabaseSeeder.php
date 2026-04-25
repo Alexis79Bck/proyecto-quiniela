@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +15,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            //  RolesAndPermissionsSeeder::class,
+            EtapaSeeder::class,
+            EquipoSeeder::class,
+            JuegoSeeder::class,
         ]);
+
+        // Crear usuarios de prueba si no existen
+        // if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'nombre_completo' => 'Admin User',
+        //         'nombre_usuario' => 'admin',
+        //         'correo_electronico' => 'admin@app.com',
+        //     ])->assignRole('admin');
+        // }
+
+        // if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'nombre_completo' => 'Organizador Test',
+        //         'nombre_usuario' => 'organizador',
+        //         'correo_electronico' => 'organizador@example.com',
+        //     ])->assignRole('organizador');
+        // }
+
+        // if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
+        //     Usuario::factory()->create([
+        //         'nombre_completo' => 'Jugador Test',
+        //         'nombre_usuario' => 'jugador',
+        //         'correo_electronico' => 'jugador@example.com',
+        //     ])->assignRole('jugador');
+        // }
     }
 }

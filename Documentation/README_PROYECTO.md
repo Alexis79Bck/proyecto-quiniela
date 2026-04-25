@@ -23,9 +23,9 @@ Preparar el proyecto Laravel como **base fundacional** para el desarrollo de una
 - ✅ Sistema de predicciones
 - ✅ Motor de puntuación automática
 - ✅ Clasificación en tiempo real
-- ✅ Notificaciones push (Pusher)
+- ✅ Notificaciones persistentes (Polling)
 - ✅ Auditoría completa de acciones
-- ✅ Arquitectura DDD escalable
+- ✅ Arquitectura MVC escalable
 
 ## 📚 Documentación Generada
 
@@ -42,19 +42,19 @@ Preparar el proyecto Laravel como **base fundacional** para el desarrollo de una
 
 ## 🏗️ Arquitectura del Sistema
 
-### Estructura DDD (Domain-Driven Design)
+### Estructura MVC
 ```
 app/
-├── Domain/           # Lógica de negocio
+├── Modelo/           # Lógica de negocio
 │   ├── Auth/        # Autenticación
 │   ├── User/        # Usuarios
 │   ├── Quiniela/    # Quinielas
 │   ├── Match/       # Partidos
 │   ├── Prediction/  # Predicciones
 │   └── Scoring/     # Puntuaciones
-├── Application/      # Casos de uso
-├── Infrastructure/   # Servicios externos
-├── Presentation/     # Controllers y vistas
+├── Controladores/    # Casos de uso
+├── Infraestructura/  # Servicios externos
+├── Vistas/           # Blade y componentes
 └── Shared/          # Utilidades compartidas
 ```
 
@@ -62,7 +62,7 @@ app/
 - **Laravel Sanctum**: Autenticación API y SPA
 - **Laravel Fortify**: Autenticación headless
 - **Spatie Laravel Permission**: Roles y permisos
-- **Pusher**: Notificaciones en tiempo real
+- **Database Notifications**: Notificaciones persistentes
 
 ## 📅 Plan de Implementación
 
@@ -71,8 +71,8 @@ app/
 |------|----------|-------------|
 | **Fase 1** | 2 días | Configuración base y autenticación |
 | **Fase 2** | 1 día | Logging y auditoría |
-| **Fase 3** | 1 día | Notificaciones Pusher |
-| **Fase 4** | 3 días | Estructura DDD y dominio de Quiniela |
+| **Fase 3** | 1 día | Notificaciones (Persistencia + Polling) |
+| **Fase 4** | 3 días | Estructura MVC y dominio de Quiniela |
 | **Fase 5** | 3 días | Lógica de negocio |
 | **Fase 6** | 3 días | API y controladores |
 | **Fase 7** | 3 días | Frontend y vistas |
@@ -85,26 +85,32 @@ app/
 ### Criterios de Puntuación
 | Criterio | Puntos | Descripción |
 |----------|--------|-------------|
-| Resultado exacto | 10 | Acertar marcador exacto |
-| Ganador correcto | 5 | Acertar equipo ganador |
-| Diferencia correcta | 3 | Acertar diferencia de goles |
-| Goles de equipo | 2 | Acertar goles de un equipo |
+| Ganador/Empate + Marcador exacto | 5 | Acertar marcador exacto |
+| Solo Ganador/Empate correcto | 3 | Acertar equipo ganador |
+| Adicional: Acierto de Goles de un equipo | 1 | Acierto de Goles de un Equipo (Excepto Marcador Exacto) |
+| Bono: Total de Goles | 2 | Bono, aplica si el jugador habilita el bono|
 
 ### Ejemplo
 **Partido**: Brasil 2 - 1 Argentina
 
 | Predicción | Puntos | Razón |
 |------------|--------|-------|
-| Brasil 2 - 1 Argentina | 10 | Resultado exacto |
-| Brasil 3 - 1 Argentina | 5 | Ganador correcto |
-| Brasil 2 - 0 Argentina | 3 | Diferencia correcta |
-| Brasil 1 - 1 Argentina | 0 | Sin acierto |
+| Brasil 2 - 1 Argentina | 5 | Marcador exacto |
+| Brasil 3 - 1 Argentina | 3 | Ganador correcto |
+| Brasil 2 - 0 Argentina | 4 | Ganador correcto + Acierto de Goles de un equipo |
+| Brasil 0 - 1 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 1 - 1 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 2 - 2 Argentina | 1 | Sin Acierto + Acierto de Goles de un equipo |
+| Brasil 1 - 2 Argentina | 0 | Sin acierto |
+| Brasil 2 - 1 Argentina | 7 | Marcador exacto + Bono Activado |
+| Brasil 3 - 0 Argentina | 5 | Ganador correcto + Bono Activado |
+| Brasil 1 - 2 Argentina | 2 | Sin acierto + Bono Activado |
 
 ## 👥 Roles y Permisos
 
 ### Roles del Sistema
-1. **Admin**: Acceso total al sistema
-2. **Organizador**: Gestión de quinielas y partidos
+1. **SuperAdmin**: Acceso total al sistema
+2. **Administrador**: Gestión de quinielas y partidos
 3. **Jugador**: Participación en quinielas
 
 ### Permisos Granulares
@@ -128,7 +134,6 @@ app/
 - Notificación de ganadores
 
 ### Canales de Notificación
-- **Broadcast**: Tiempo real (WebSockets)
 - **Database**: Persistente
 - **Mail**: Email (opcional)
 
@@ -182,10 +187,10 @@ app/
 ```
 proyecto-quiniela/
 ├── app/
-│   ├── Domain/              # Lógica de negocio
-│   ├── Application/         # Casos de uso
-│   ├── Infrastructure/      # Servicios externos
-│   ├── Presentation/        # Controllers y vistas
+│   ├── Modelo/              # Lógica de negocio
+│   ├── Controladores/       # Casos de uso
+│   ├── Infraestructura/     # Servicios externos
+│   ├── Vistas/              # Blade y componentes
 │   └── Shared/              # Utilidades compartidas
 ├── database/
 │   ├── migrations/          # Migraciones de BD
@@ -233,8 +238,8 @@ proyecto-quiniela/
 - **Permission**: Roles y permisos granulares
 
 ### Notificaciones
-- **Pusher**: WebSockets para tiempo real
-- **Broadcasting**: Laravel Broadcasting
+- **Database Notifications**: Persistencia y polling
+- **API REST**: Gestión de notificaciones
 
 ### Desarrollo
 - **Pint**: Code style
@@ -269,7 +274,7 @@ proyecto-quiniela/
 1. Implementar Fase 1: Autenticación
 2. Implementar Fase 2: Logging
 3. Implementar Fase 3: Notificaciones
-4. Implementar Fase 4: Estructura DDD
+4. Implementar Fase 4: Estructura MVC
 
 ### Mediano Plazo (Semanas 4-6)
 1. Implementar Fase 5: Lógica de negocio
@@ -326,7 +331,7 @@ proyecto-quiniela/
 
 ## 🎉 Conclusión
 
-Este proyecto proporciona una **base sólida y profesional** para el desarrollo de una aplicación de quiniela para el Mundial 2026. La arquitectura DDD garantiza escalabilidad y mantenibilidad, mientras que los paquetes implementados proporcionan funcionalidades robustas de autenticación, autorización y notificaciones.
+Este proyecto proporciona una **base sólida y profesional** para el desarrollo de una aplicación de quiniela para el Mundial 2026. La arquitectura MVC garantiza escalabilidad y mantenibilidad, mientras que los paquetes implementados proporcionan funcionalidades robustas de autenticación, autorización y notificaciones.
 
 El equipo de desarrollo está equipado con toda la documentación necesaria para comenzar la implementación de manera efectiva y eficiente.
 

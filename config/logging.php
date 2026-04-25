@@ -127,6 +127,56 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | Custom Log Channels - Quiniela FIFA 2026
+        |--------------------------------------------------------------------------
+        |
+        | Canales de logging personalizados para el sistema de quiniela.
+        | Cada canal tiene configuración específica de nivel y retención.
+        |
+        */
+
+        'audit' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit.log'),
+            'level' => 'info',
+            'days' => 90,
+            'replace_placeholders' => true,
+        ],
+
+        'security' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/security.log'),
+            'level' => 'warning',
+            'days' => 180,
+            'replace_placeholders' => true,
+        ],
+
+        'prediction' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/prediction.log'),
+            'level' => 'info',
+            'days' => 90,
+            'replace_placeholders' => true,
+        ],
+
+        'scoring' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/scoring.log'),
+            'level' => 'info',
+            'days' => 90,
+            'replace_placeholders' => true,
+        ],
+
+        'api' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
     ],
 
 ];

@@ -134,6 +134,15 @@ MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS="noreply@quiniela-fifa2026.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
+# Pusher Configuration
+PUSHER_APP_KEY=tu-pusher-app-key
+PUSHER_APP_SECRET=tu-pusher-app-secret
+PUSHER_APP_ID=tu-pusher-app-id
+PUSHER_APP_CLUSTER=us2
+
+# Sanctum Configuration
+SANCTUM_STATEFUL_DOMAINS=localhost:8000
+
 # ===========================================
 # CONFIGURACIÓN DE PUSHER (NOTIFICACIONES)
 # ===========================================
@@ -215,6 +224,7 @@ php artisan migrate
 ```bash
 # Instalar Pusher
 composer require pusher/pusher-php-server
+npm install pusher-js
 ```
 
 ### 8. Configurar Paquetes
