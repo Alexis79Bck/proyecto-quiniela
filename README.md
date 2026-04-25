@@ -27,7 +27,7 @@
 
 ## 📋 Descripción
 
-**Sistema de Quiniela FIFA 2026** es una plataforma web que permite a usuarios pronosticar resultados de partidos del Mundial 2026, acumular puntos según criterios de acierto y competir en clasificaciones en tiempo real.
+**Sistema de Quiniela FIFA 2026** es una plataforma web diseñada para que los usuarios puedan realizar predicciones de los resultados de los partidos del Mundial FIFA 2026. Los participantes acumulan puntos según sus aciertos y compiten en clasificaciones dinámicas en tiempo real.
 
 ### 🎮 Concepto del Juego
 
@@ -36,22 +36,22 @@
 | **Evento** | FIFA Copa Mundial de Fútbol 2026 |
 | **Mecánica** | Pronosticar resultados de cada encuentro |
 | **Puntuación** | Sistema de puntos según aciertos |
-| **Clasificación** | Ladder system en tiempo real |
-| **Etapas** | Fase de grupos → Brackets (16vos hasta final) |
-| **Audiencia** | Grupo limitado (familia/amigos) |
+| **Clasificación** | Sistema de clasificación en tiempo real |
+| **Etapas** | Fase de grupos → Eliminatorias |
+| **Audiencia** | Grupos cerrados (familia/amigos) |
 
 ---
 
 ## ✨ Características Principales
 
-- 🔐 **Autenticación Robusta** - Sanctum + Fortify con 2FA
+- 🔐 **Autenticación Segura** - Laravel Sanctum + Fortify con 2FA
 - 🛡️ **Control de Acceso Granular** - Spatie Permission
 - ⚽ **Sistema de Predicciones** - Pronósticos por partido
 - 🏆 **Motor de Puntuación Automática** - Cálculo inteligente
 - 📈 **Clasificación en Tiempo Real** - Leaderboard dinámico
-- 🔔 **Notificaciones Persistentes** - Polling con base de datos
-- 📝 **Auditoría Completa** - Logging de todas las acciones
-- 🏗️ **Arquitectura DDD** - Escalable y mantenible
+- 🔔 **Notificaciones Persistentes** - Polling con base de datos (Opcional)
+- 📝 **Auditoría Completa** - Registro de todas las acciones
+- 🏗️ **Arquitectura MVC + DDD lite** - Escalable y mantenible
 
 ---
 
@@ -61,26 +61,27 @@
 
 | Tecnología | Versión | Descripción |
 |------------|---------|-------------|
-| ![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?logo=php&logoColor=white) | 8.3+ | Lenguaje de programación |
-| ![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?logo=laravel&logoColor=white) | 13.x | Framework web |
-| ![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white) | 8.0+ | Base de datos |
-| ![Redis](https://img.shields.io/badge/Redis-7.x-DC382D?logo=redis&logoColor=white) | 7.x | Caché (opcional) |
+| PHP | 8.3+ | Lenguaje de programación |
+| Laravel | 13.x | Framework web |
+| PostgreSQL | 18.0+ | Base de datos (Recomendado) |
+| MySQL | 8.0+ | Base de datos (Opcional) |
+| Redis | 7.x | Caché (opcional) |
 
 ### Frontend
 
 | Tecnología | Versión | Descripción |
 |------------|---------|-------------|
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?logo=tailwindcss&logoColor=white) | 4.x | Framework CSS |
-| ![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white) | 8.x | Build tool |
+| Tailwind CSS | 4.x | Framework CSS |
+| Vite | 8.x | Herramienta de construcción |
 
 ### Paquetes Principales
 
 | Paquete | Función |
 |---------|---------|
-| 🔐 **Laravel Sanctum** | API tokens y autenticación SPA |
-| 🔑 **Laravel Fortify** | Autenticación headless |
-| 🛡️ **Spatie Permission** | Roles y permisos granulares |
-| 🔔 **Database Notifications** | Notificaciones persistentes |
+| Laravel Sanctum | API tokens y autenticación SPA |
+| Laravel Fortify | Autenticación headless |
+| Spatie Permission | Roles y permisos granulares |
+| Database Notifications | Notificaciones persistentes (opcional) |
 
 ---
 
@@ -117,22 +118,7 @@ composer install
 npm install
 ```
 
-### 3️⃣ Configurar Base de Datos
-
-```bash
-# MySQL (Recomendado)
-mysql -u root -p
-CREATE DATABASE quiniela_fifa_2026 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'quiniela_user'@'localhost' IDENTIFIED BY 'tu_password_seguro';
-GRANT ALL PRIVILEGES ON quiniela_fifa_2026.* TO 'quiniela_user'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-
-# O SQLite (Desarrollo)
-touch database/database.sqlite
-```
-
-### 4️⃣ Migraciones y Paquetes
+### 3️⃣ Migraciones y Paquetes
 
 ```bash
 php artisan migrate
@@ -148,12 +134,11 @@ php artisan fortify:install
 php artisan db:seed --class=RolesAndPermissionsSeeder
 ```
 
-### 5️⃣ Iniciar Servicios
+### 4️⃣ Iniciar Servicios
 
 ```bash
 php artisan serve          # Servidor de desarrollo
 npm run dev                # Vite (otra terminal)
-php artisan queue:work     # Queue worker (otra terminal)
 php artisan pail           # Logs en tiempo real (otra terminal)
 ```
 
@@ -185,180 +170,6 @@ SANCTUM_STATEFUL_DOMAINS=localhost:8000
 
 ---
 
-## 🏗️ Arquitectura
-
-### Estructura DDD (Domain-Driven Design)
-
-```
-app/
-├── Domain/              # 🎯 Lógica de negocio
-│   ├── Auth/           #   Autenticación
-│   ├── User/           #   Usuarios
-│   ├── Quiniela/       #   Quinielas
-│   ├── Match/          #   Partidos
-│   ├── Prediction/     #   Predicciones
-│   └── Scoring/        #   Puntuaciones
-├── Application/         # ⚙️ Casos de uso
-├── Infrastructure/      # 🔧 Servicios externos
-├── Presentation/        # 🎨 Controllers y vistas
-└── Shared/             # 🔄 Utilidades compartidas
-```
-
-### Beneficios
-
-| Beneficio | Descripción |
-|-----------|-------------|
-| 📦 **Modularidad** | Código organizado por dominios |
-| 🔄 **Escalabilidad** | Fácil agregar nuevas funcionalidades |
-| 🧪 **Testeabilidad** | Componentes aislados y testeables |
-| 🛠️ **Mantenibilidad** | Código limpio y mantenible |
-
-> 📖 Para más detalles, consulta [ARQUITECTURA.md](Documentation/ARQUITECTURA.md)
-
----
-
-## 🎮 Sistema de Puntuación
-
-### Criterios de Puntuación
-
-| Criterio | Puntos | Descripción |
-|----------|--------|-------------|
-| 🎯 **Resultado Exacto** | 10 pts | Acertar marcador exacto |
-| 🏆 **Ganador Correcto** | 5 pts | Acertar equipo ganador |
-| 📊 **Diferencia Correcta** | 3 pts | Acertar diferencia de goles |
-| ⚽ **Goles de Equipo** | 2 pts | Acertar goles de un equipo |
-
-### Ejemplo Práctico
-
-**Partido**: Brasil 2 - 1 Argentina
-
-| Predicción | Puntos | Razón |
-|------------|--------|-------|
-| Brasil 2 - 1 Argentina | **10** | 🎯 Resultado exacto |
-| Brasil 3 - 1 Argentina | **5** | 🏆 Ganador correcto |
-| Brasil 2 - 0 Argentina | **3** | 📊 Diferencia correcta |
-| Brasil 1 - 1 Argentina | **0** | ❌ Sin acierto |
-
----
-
-## 👥 Roles y Permisos
-
-### Roles del Sistema
-
-| Rol | Descripción | Acceso |
-|-----|-------------|--------|
-| 👑 **Admin** | Acceso total al sistema | Todos los permisos |
-| 📋 **Organizador** | Gestión de quinielas y partidos | Gestión limitada |
-| 🎮 **Jugador** | Participación en quinielas | Predicciones y resultados |
-
-### Permisos Granulares
-
-```php
-🔐 manage-users          // Gestionar usuarios
-📋 manage-quinielas      // Gestionar quinielas
-⚽ manage-matches        // Gestionar partidos
-🏟️ manage-teams          // Gestionar equipos
-🎯 make-predictions      // Realizar predicciones
-📊 view-results          // Ver resultados
-🏆 view-leaderboard      // Ver clasificación
-📝 view-audit-logs       // Ver logs de auditoría
-```
-
----
-
-## 🔔 Sistema de Notificaciones
-
-### Eventos Notificables
-
-| Evento | Descripción |
-|--------|-------------|
-| 🆕 Nueva quiniela disponible | Cuando se crea una nueva quiniela |
-| ⚽ Inicio de partido | Cuando comienza un partido |
-| 🏆 Resultado de partido | Cuando termina un partido |
-| 📊 Actualización de clasificación | Cambios en el leaderboard |
-| ⏰ Recordatorio de predicción | Antes de que cierren las predicciones |
-| 🎉 Notificación de ganadores | Anuncio de ganadores |
-
-### Canales de Notificación
-
-| Canal | Descripción |
-|-------|-------------|
-| 📡 **Broadcast** | Tiempo real (WebSockets) |
-| 💾 **Database** | Persistente |
-| 📧 **Mail** | Email (opcional) |
-
----
-
-## 🔒 Seguridad
-
-### Medidas Implementadas
-
-| Medida | Descripción |
-|--------|-------------|
-| 🔑 **Tokens de API** | Con expiración automática |
-| ⏱️ **Rate Limiting** | Protección contra abuso |
-| 🛡️ **Protección CSRF** | Seguridad en formularios |
-| 🔐 **Autenticación 2FA** | Dos factores disponible |
-| 👥 **Roles y Permisos** | Control de acceso granular |
-| 📝 **Auditoría** | Acciones críticas registradas |
-| 🔒 **Encriptación** | Datos sensibles protegidos |
-
----
-
-## 📊 Monitoreo y Auditoría
-
-### Canales de Logging
-
-| Canal | Retención | Descripción |
-|-------|-----------|-------------|
-| 📋 `audit` | 90 días | Acciones críticas |
-| 🔒 `security` | 180 días | Intentos de acceso |
-| 🎯 `prediction` | 60 días | Predicciones realizadas |
-| 🏆 `scoring` | 60 días | Cálculos de puntuación |
-
-### Eventos Auditados
-
-- ✅ Login/logout de usuarios
-- ✅ Creación/modificación de quinielas
-- ✅ Realización de predicciones
-- ✅ Cambios en puntuaciones
-- ✅ Acciones administrativas
-- ✅ Errores del sistema
-
----
-
-## 📁 Estructura del Proyecto
-
-```
-proyecto-quiniela/
-├── 📁 app/
-│   ├── 📁 Domain/              # Lógica de negocio
-│   ├── 📁 Application/         # Casos de uso
-│   ├── 📁 Infrastructure/      # Servicios externos
-│   ├── 📁 Presentation/        # Controllers y vistas
-│   └── 📁 Shared/              # Utilidades compartidas
-├── 📁 database/
-│   ├── 📁 migrations/          # Migraciones de BD
-│   ├── 📁 seeders/             # Datos iniciales
-│   └── 📁 factories/           # Factories para pruebas
-├── 📁 resources/
-│   ├── 📁 views/               # Vistas Blade
-│   ├── 📁 css/                 # Estilos
-│   └── 📁 js/                  # JavaScript
-├── 📁 routes/
-│   ├── 📄 web.php              # Rutas web
-│   └── 📄 api.php              # Rutas API
-├── 📁 tests/
-│   ├── 📁 Unit/                # Pruebas unitarias
-│   └── 📁 Feature/             # Pruebas de integración
-├── 📁 Documentation/           # Documentación del proyecto
-├── 📁 config/                  # Configuraciones
-├── 📁 storage/                 # Almacenamiento
-└── 📁 public/                  # Archivos públicos
-```
-
----
-
 ## 📖 Documentación
 
 | Documento | Descripción | Audiencia |
@@ -372,48 +183,9 @@ proyecto-quiniela/
 
 ---
 
-
-## 🤝 Contribución
-
-¡Las contribuciones son bienvenidas! Para contribuir:
-
-1. 🍴 Fork el proyecto
-2. 🌿 Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. 💾 Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 Push a la rama (`git push origin feature/AmazingFeature`)
-5. 🔍 Abre un Pull Request
-
-### Estándares de Código
-
-- ✅ Seguir estándares PSR-12
-- ✅ Escribir código limpio y documentado
-- ✅ Realizar code reviews
-- ✅ Ejecutar pruebas continuamente
-- ✅ Mantener documentación actualizada
-
----
-
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la **Licencia MIT** - ver el archivo [LICENSE](LICENSE) para detalles.
-
----
-
-## 📞 Soporte
-
-### Para Preguntas Técnicas
-
-1. 📖 Revisar documentación relevante
-2. 🚀 Consultar [GUIA_INSTALACION.md](Documentation/GUIA_INSTALACION.md)
-3. ✅ Revisar [CHECKLIST_IMPLEMENTACION.md](Documentation/CHECKLIST_IMPLEMENTACION.md)
-4. 📧 Contactar líder técnico
-
-### Para Problemas de Configuración
-
-1. 🚀 Seguir [GUIA_INSTALACION.md](Documentation/GUIA_INSTALACION.md) paso a paso
-2. 🔍 Revisar solución de problemas
-3. ⚙️ Verificar variables de entorno
-4. 📝 Consultar logs de error
+Este proyecto está licenciado bajo la **Licencia MIT** - consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
