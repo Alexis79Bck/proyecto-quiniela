@@ -2,35 +2,38 @@
 
 namespace Database\Seeders;
 
-use App\Models\Grupo;
-use Illuminate\Database\Seeder;
+// Nota: Grupo ya no es una tabla, se gestiona mediante el Enum App\Enums\Grupo
+// Este seeder se mantiene comentado por compatibilidad, pero no se ejecuta
 
-class GrupoSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        $grupos = [
-            ['nombre' => 'Grupo A'],
-            ['nombre' => 'Grupo B'],
-            ['nombre' => 'Grupo C'],
-            ['nombre' => 'Grupo D'],
-            ['nombre' => 'Grupo E'],
-            ['nombre' => 'Grupo F'],
-            ['nombre' => 'Grupo G'],
-            ['nombre' => 'Grupo H'],
-            ['nombre' => 'Grupo I'],
-            ['nombre' => 'Grupo J'],
-            ['nombre' => 'Grupo K'],
-            ['nombre' => 'Grupo L'],
-        ];
+// use App\Models\Grupo;
+// use Illuminate\Database\Seeder;
 
-        foreach ($grupos as $grupo) {
-            Grupo::create($grupo);
-        }
+// class GrupoSeeder extends Seeder
+// {
+//     /**
+//      * Run the database seeds.
+//      */
+//     public function run(): void
+//     {
+//         $grupos = [
+//             ['nombre' => 'Grupo A'],
+//             ['nombre' => 'Grupo B'],
+//             ['nombre' => 'Grupo C'],
+//             ['nombre' => 'Grupo D'],
+//             ['nombre' => 'Grupo E'],
+//             ['nombre' => 'Grupo F'],
+//             ['nombre' => 'Grupo G'],
+//             ['nombre' => 'Grupo H'],
+//             ['nombre' => 'Grupo I'],
+//             ['nombre' => 'Grupo J'],
+//             ['nombre' => 'Grupo K'],
+//             ['nombre' => 'Grupo L'],
+//         ];
 
-        $this->command->info('✅ Grupos creados exitosamente.');
-    }
-}
+//         foreach ($grupos as $grupo) {
+//             Grupo::create($grupo);
+//         }
+
+//         $this->command->info('✅ Grupos creados exitosamente.');
+//     }
+// }
