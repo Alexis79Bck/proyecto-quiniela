@@ -5,11 +5,18 @@ namespace App\Services;
 use App\Models\Prediccion;
 use App\Models\Juego;
 use App\Models\Usuario;
+use App\Repositories\Contracts\JuegoRepositoryInterface;
+use App\Repositories\Contracts\PrediccionRepositoryInterface;
 use Illuminate\Support\Facades\Config;
 use Carbon\Carbon;
 
 class PredictionService
 {
+    public function __construct(
+        private PrediccionRepositoryInterface $prediccionRepository,
+        private JuegoRepositoryInterface $juegoRepository
+    ) {}
+
     public function createPrediction(Usuario $user, Juego $match, array $data): Prediccion
     {
         // Check if prediction is allowed (before deadline)
@@ -17,11 +24,11 @@ class PredictionService
             throw new \Exception('Prediction deadline has passed.');
         }
 
-        return Prediccion::create([
+        return $this->prediccionRepository->create([
             'usuario_id' => $user->id,
             'juego_id' => $match->id,
-            'goles_local' => $data['goles_local'],
-            'goles_visitante' => $data['goles_visitante'],
+            'equipo_local_prediccion' => $data['goles_local'],
+            'equipo_visitante_prediccion' => $data['goles_visitante'],
         ]);
     }
 
@@ -31,35 +38,17 @@ class PredictionService
             throw new \Exception('Prediction deadline has passed.');
         }
 
-        $prediction->update($data);
-        return $prediction;
+        $this->prediccionRepository->update($prediction->id, [
+            'equipo_local_prediccion' => $data['goles_local'],
+            'equipo_visitante_prediccion' => $data['goles_visitante'],
+        ]);
+
+        return $prediction->fresh();
     }
 
     public function calculateScore(Prediccion $prediction): int
     {
-        $match = $prediction->juego;
-
-        if ($match->estado !== 'finalizado') {
-            return 0;
-        }
-
-        $actualLocal = $match->goles_local;
-        $actualVisitante = $match->goles_visitante;
-        $predictedLocal = $prediction->goles_local;
-        $predictedVisitante = $prediction->goles_visitante;
-
-        if ($predictedLocal == $actualLocal && $predictedVisitante == $actualVisitante) {
-            return Config::get('quiniela.scoring.exact_score');
-        }
-
-        $actualResult = $this->getMatchResult($actualLocal, $actualVisitante);
-        $predictedResult = $this->getMatchResult($predictedLocal, $predictedVisitante);
-
-        if ($actualResult === $predictedResult) {
-            return Config::get('quiniela.scoring.correct_result');
-        }
-
-        return Config::get('quiniela.scoring.no_points');
+        return $this->prediccionRepository->calculatePoints($prediction->id);
     }
 
     private function isPredictionAllowed(Juego $match): bool
@@ -67,12 +56,5 @@ class PredictionService
         $deadlineHours = Config::get('quiniela.deadlines.prediction_deadline_hours');
         $deadline = Carbon::parse($match->fecha_hora)->subHours($deadlineHours);
         return now()->lessThan($deadline);
-    }
-
-    private function getMatchResult(int $local, int $visitante): string
-    {
-        if ($local > $visitante) return 'local';
-        if ($local < $visitante) return 'visitante';
-        return 'draw';
     }
 }

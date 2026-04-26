@@ -19,8 +19,8 @@ class MatchResource extends JsonResource
             'equipo_local' => $this->equipoLocal->nombre ?? null,
             'equipo_visitante' => $this->equipoVisitante->nombre ?? null,
             'fecha_hora' => $this->fecha_hora,
-            'goles_local' => $this->goles_local,
-            'goles_visitante' => $this->goles_visitante,
+            'equipo_local_goles' => $this->equipo_local_goles,
+            'equipo_visitante_goles' => $this->equipo_visitante_goles,
             'estado' => $this->estado,
             'etapa' => $this->etapa->nombre ?? null,
         ];

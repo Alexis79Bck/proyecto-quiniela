@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ReglaPuntuacion: int
+enum ScoringRule: int
 {
     case RESULTADO_EXACTO = 5;
     case SOLO_GANADOR = 3;

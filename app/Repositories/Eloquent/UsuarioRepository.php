@@ -3,10 +3,10 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Usuario;
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\UsuarioRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
-class UserRepository extends BaseEloquentRepository implements UserRepositoryInterface
+class UsuarioRepository extends BaseEloquentRepository implements UsuarioRepositoryInterface
 {
     public function __construct(Usuario $model)
     {

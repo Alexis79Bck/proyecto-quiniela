@@ -14,7 +14,7 @@ abstract class BaseEloquentRepository
         $this->model = $model;
     }
 
-    public function create(array $attributes): Model
+    public function create(array $attributes)
     {
         return $this->model->create($attributes);
     }

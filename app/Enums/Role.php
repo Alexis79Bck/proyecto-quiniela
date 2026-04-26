@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Rol: string
+enum Role: string
 {
     case ADMIN = 'Administrador';
     case JUGADOR = 'Jugador';   // o 'Miembro', 'Participante'
@@ -11,10 +11,10 @@ enum Rol: string
     public function permisos(): array
     {
         return match($this) {
-            self::ADMIN => Permiso::values(), // todos
+            self::ADMIN => Permission::values(), // todos
             self::JUGADOR => [
-                Permiso::VER_PARTIDOS->value,
-                Permiso::CREAR_PREDICCIONES->value,
+                Permission::VER_PARTIDOS->value,
+                Permission::CREAR_PREDICCIONES->value,
             ],
         };
     }

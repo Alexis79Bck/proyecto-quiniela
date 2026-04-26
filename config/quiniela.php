@@ -6,11 +6,10 @@ return [
     | Configuracion de Quiniela 
     |--------------------------------------------------------------------------
     |
-    |
     */
 
     'deadline' => [
-        'prediction_deadline_minutes' => 1, // Minutes before match start when predictions close
+        'prediction_deadline_minutes' => 5, // Minutes before match start when predictions close
     ],
 
     'tournament_info' => [

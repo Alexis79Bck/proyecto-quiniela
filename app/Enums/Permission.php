@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Permiso: string
+enum Permission: string
 {
     case VER_DASHBOARD = 'ver dashboard';
     case VER_PARTIDOS = 'ver partidos';
