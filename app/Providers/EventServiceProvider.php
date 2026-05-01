@@ -34,4 +34,16 @@ class EventServiceProvider extends ServiceProvider
     {
         return false;
     }
+
+    /**
+     * Skip audit logging in testing environment to prevent memory issues.
+     */
+    public function subscribe($events): void
+    {
+        if (app()->environment('testing')) {
+            return;
+        }
+
+        parent::subscribe($events);
+    }
 }

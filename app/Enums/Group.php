@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Grupo: string
+enum Group: string
 {
     case A = 'A';
     case B = 'B';

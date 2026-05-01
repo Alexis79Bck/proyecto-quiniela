@@ -5,7 +5,7 @@ namespace App\Repositories\Contracts;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Collection;
 
-interface UserRepositoryInterface
+interface UsuarioRepositoryInterface
 {
     public function create(array $attributes): Usuario;
 
@@ -18,4 +18,6 @@ interface UserRepositoryInterface
     public function update(int $id, array $attributes): bool;
 
     public function delete(int $id): bool;
+
+    public function checkUserPassword(string $password, string $hashedPassword): bool;
 }

@@ -3,22 +3,24 @@
 namespace App\Services\Auth;
 
 use App\Models\Usuario;
-use Illuminate\Support\Facades\Hash;
+use App\Services\UsuarioService;
 use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
+    protected UsuarioService $usuarioService;
+
+    public function __construct(UsuarioService $usuarioService)
+    {
+        $this->usuarioService = $usuarioService;
+    }
+
     /**
      * Register a new user
      */
     public function register(array $data): Usuario
     {
-        return Usuario::create([
-            'nombre_completo' => $data['nombre_completo'],
-            'nombre_usuario' => $data['nombre_usuario'],
-            'correo_electronico' => $data['correo_electronico'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return $this->usuarioService->createUsuario($data);
     }
 
     /**
@@ -26,9 +28,9 @@ class AuthService
      */
     public function login(array $credentials): Usuario
     {
-        $user = Usuario::where('correo_electronico', $credentials['correo_electronico'])->first();
+        $user = $this->usuarioService->getUsuarioByCorreo($credentials['correo_electronico']);
 
-        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! $this->usuarioService->verificarPassword($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'correo_electronico' => ['Las credenciales proporcionadas son incorrectas.'],
             ]);

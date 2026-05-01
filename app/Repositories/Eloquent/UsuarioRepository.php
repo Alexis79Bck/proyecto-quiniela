@@ -3,10 +3,11 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Usuario;
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\UsuarioRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
-class UserRepository extends BaseEloquentRepository implements UserRepositoryInterface
+class UsuarioRepository extends BaseEloquentRepository implements UsuarioRepositoryInterface
 {
     public function __construct(Usuario $model)
     {
@@ -51,5 +52,10 @@ class UserRepository extends BaseEloquentRepository implements UserRepositoryInt
         }
 
         return false;
+    }
+
+    public function checkUserPassword(string $password, string $hashedPassword): bool
+    {
+        return Hash::check($password, $hashedPassword);
     }
 }

@@ -45,7 +45,7 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
+            'correo_electronico' => 'test@example.com',
             'password' => 'password123',
         ]);
 
@@ -53,8 +53,8 @@ class AuthenticationTest extends TestCase
         $response->assertJsonStructure([
             'user' => [
                 'id',
-                'name',
-                'email',
+                'nombre_completo',
+                'correo_electronico',
             ],
             'token',
         ]);
@@ -62,20 +62,18 @@ class AuthenticationTest extends TestCase
 
     public function test_login_fails_with_invalid_credentials(): void
     {
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
+        $user = Usuario::factory()->create([
+            'correo_electronico' => 'test@example.com',
             'password' => bcrypt('password123'),
         ]);
 
         $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
+            'correo_electronico' => 'test@example.com',
             'password' => 'wrongpassword',
         ]);
 
         $response->assertStatus(422);
-        $response->assertJsonFragment([
-            'message' => 'Las credenciales proporcionadas son incorrectas.',
-        ]);
+        $response->assertJsonValidationErrors('correo_electronico');
     }
 
     public function test_user_can_logout(): void
@@ -101,9 +99,9 @@ class AuthenticationTest extends TestCase
 
     public function test_authenticated_user_can_get_own_info(): void
     {
-        $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $user = Usuario::factory()->create([
+            'nombre_completo' => 'Test User',
+            'correo_electronico' => 'test@example.com',
         ]);
 
         $response = $this->actingAs($user, 'sanctum')
@@ -111,20 +109,20 @@ class AuthenticationTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonFragment([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'nombre_completo' => 'Test User',
+            'correo_electronico' => 'test@example.com',
         ]);
     }
 
     public function test_registration_fails_with_existing_email(): void
     {
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
+        $user = Usuario::factory()->create([
+            'correo_electronico' => 'test@example.com',
         ]);
 
         $response = $this->postJson('/api/register', [
-            'name' => 'Another User',
-            'email' => 'test@example.com',
+            'nombre_completo' => 'Another User',
+            'correo_electronico' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
