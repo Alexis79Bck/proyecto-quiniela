@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class UsuarioFactory extends Factory
 {
     protected $model = Usuario::class;
 
@@ -19,16 +19,8 @@ class UserFactory extends Factory
             'nombre_completo' => fake()->name(),
             'nombre_usuario' => fake()->unique()->userName(),
             'correo_electronico' => fake()->unique()->safeEmail(),
-            'correo_verificado' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
-    }
-
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'correo_verificado' => null,
-        ]);
     }
 }

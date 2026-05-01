@@ -18,4 +18,6 @@ interface UsuarioRepositoryInterface
     public function update(int $id, array $attributes): bool;
 
     public function delete(int $id): bool;
+
+    public function checkUserPassword(string $password, string $hashedPassword): bool;
 }

@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Usuario;
 use App\Repositories\Contracts\UsuarioRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioRepository extends BaseEloquentRepository implements UsuarioRepositoryInterface
 {
@@ -51,5 +52,10 @@ class UsuarioRepository extends BaseEloquentRepository implements UsuarioReposit
         }
 
         return false;
+    }
+
+    public function checkUserPassword(string $password, string $hashedPassword): bool
+    {
+        return Hash::check($password, $hashedPassword);
     }
 }

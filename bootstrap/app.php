@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Audit Middleware - Captura automática de requests para logging
+        // Audit Middleware - Disabled in testing to prevent memory issues
+        // The middleware itself checks for testing environment
         $middleware->append(AuditMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

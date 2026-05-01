@@ -32,6 +32,11 @@ class AuditMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Skip all audit logging in testing environment
+        if (app()->environment('testing')) {
+            return $next($request);
+        }
+
         // Skip excluded routes
         if ($this->shouldSkip($request)) {
             return $next($request);

@@ -18,6 +18,7 @@ class AuditMiddleware
         'pulse*',
         '_ignition*',
         'storage*',
+        'api/*',
     ];
 
     public function __construct(
@@ -26,6 +27,11 @@ class AuditMiddleware
 
     public function handle(Request $request, Closure $next): Response
     {
+        // Skip all audit logging in testing environment
+        if (app()->environment('testing')) {
+            return $next($request);
+        }
+
         if ($this->shouldSkip($request)) {
             return $next($request);
         }

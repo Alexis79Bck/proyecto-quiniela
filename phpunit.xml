@@ -4,6 +4,8 @@
          bootstrap="tests/TestCase.php"
          colors="true"
          cacheDirectory=".phpunit.cache"
+         failOnRisky="true"
+         failOnWarning="true"
 >
     <testsuites>
         <testsuite name="Unit">
@@ -33,5 +35,6 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="LOG_CHANNEL" value="null"/>
     </php>
 </phpunit>
