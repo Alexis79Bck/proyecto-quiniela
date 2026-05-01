@@ -5,7 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Juego;
 use App\Repositories\Contracts\JuegoRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JuegoRepository extends BaseEloquentRepository implements JuegoRepositoryInterface
 {
@@ -72,5 +72,87 @@ class JuegoRepository extends BaseEloquentRepository implements JuegoRepositoryI
     public function getWithPredictions(int $id): ?Juego
     {
         return $this->model->with(['predicciones.usuario'])->find($id);
+    }
+
+    // New methods implementation
+    public function getProgramados(): Collection
+    {
+        return $this->model->where('estado', 'Programado')
+            ->with(['equipoLocal', 'equipoVisitante', 'etapa'])
+            ->orderBy('fecha_hora')
+            ->get();
+    }
+
+    public function getEnProgreso(): Collection
+    {
+        return $this->model->where('estado', 'En Progreso')
+            ->with(['equipoLocal', 'equipoVisitante', 'etapa'])
+            ->orderBy('fecha_hora')
+            ->get();
+    }
+
+    public function getFinalizados(): Collection
+    {
+        return $this->model->where('estado', 'Finalizado')
+            ->with(['equipoLocal', 'equipoVisitante', 'etapa'])
+            ->orderBy('fecha_hora')
+            ->get();
+    }
+
+    public function getByStatus(string $status): Collection
+    {
+        return $this->model->where('estado', $status)
+            ->with(['equipoLocal', 'equipoVisitante', 'etapa'])
+            ->orderBy('fecha_hora')
+            ->get();
+    }
+
+    public function finalizarJuego(int $id, array $resultados): bool
+    {
+        return DB::transaction(function () use ($id, $resultados) {
+            $juego = $this->find($id);
+
+            if (! $juego) {
+                return false;
+            }
+
+            // Validate resultados
+            $golesLocal = $resultados['goles_local'] ?? null;
+            $golesVisitante = $resultados['goles_visitante'] ?? null;
+
+            if (! is_numeric($golesLocal) || ! is_numeric($golesVisitante) || $golesLocal < 0 || $golesVisitante < 0) {
+                throw new \InvalidArgumentException('Invalid scores provided');
+            }
+
+            // Update goals and status
+            $juego->equipo_local_goles = $golesLocal;
+            $juego->equipo_visitante_goles = $golesVisitante;
+            $juego->estado = 'Finalizado';
+
+            return $juego->save();
+        });
+    }
+
+    public function actualizarResultados(int $id, int $golesLocal, int $golesVisitante): bool
+    {
+        $juego = $this->find($id);
+
+        if (! $juego) {
+            return false;
+        }
+
+        // Update goals only if game is not finalized or if we're updating finalized game
+        $juego->equipo_local_goles = $golesLocal;
+        $juego->equipo_visitante_goles = $golesVisitante;
+
+        return $juego->save();
+    }
+
+    public function getJuegosPorEtapaConResultados(int $etapaId): Collection
+    {
+        return $this->model->where('etapa_id', $etapaId)
+            ->with(['equipoLocal', 'equipoVisitante', 'etapa', 'predicciones'])
+            ->orderBy('fecha_hora')
+            ->get();
     }
 }

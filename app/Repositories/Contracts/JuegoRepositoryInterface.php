@@ -24,4 +24,19 @@ interface JuegoRepositoryInterface
     public function getByDate(string $date): Collection;
 
     public function getWithPredictions(int $id): ?Juego;
+
+    // New methods for game state management
+    public function getProgramados(): Collection;
+
+    public function getEnProgreso(): Collection;
+
+    public function getFinalizados(): Collection;
+
+    public function getByStatus(string $status): Collection;
+
+    public function finalizarJuego(int $id, array $resultados): bool;
+
+    public function actualizarResultados(int $id, int $golesLocal, int $golesVisitante): bool;
+
+    public function getJuegosPorEtapaConResultados(int $etapaId): Collection;
 }

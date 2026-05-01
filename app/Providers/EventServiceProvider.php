@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\JuegoActualizado;
+use App\Events\JuegoFinalizado;
+use App\Events\JuegoIniciado;
 use App\Events\LogAuditEvent;
 use App\Listeners\AuditLogListener;
+use App\Listeners\NotificarResultadosJuego;
+use App\Listeners\ProcesarPuntosPredicciones;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -14,6 +19,16 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
+        JuegoActualizado::class => [
+            // Add listeners for JuegoActualizado if needed
+        ],
+        JuegoIniciado::class => [
+            // Add listeners for JuegoIniciado if needed
+        ],
+        JuegoFinalizado::class => [
+            ProcesarPuntosPredicciones::class,
+            NotificarResultadosJuego::class,
+        ],
         LogAuditEvent::class => [
             AuditLogListener::class,
         ],
