@@ -13,12 +13,12 @@ class EtapaSeeder extends Seeder
     public function run(): void
     {
         $etapas = [
-            ['nombre' => 'Fase de Grupos', 'descripcion' => 'La fase inicial del torneo donde los equipos se dividen en grupos.'],
-            ['nombre' => '16avos de Final', 'descripcion' => 'La primera ronda de eliminación directa después de la fase de grupos.'],
-            ['nombre' => 'Octavos de Final', 'descripcion' => 'La segunda ronda de eliminación directa después de la fase de grupos.'],
-            ['nombre' => 'Cuartos de Final', 'descripcion' => 'La ronda de eliminación directa que sigue a los octavos de final.'],
-            ['nombre' => 'Semifinales', 'descripcion' => 'La ronda que determina los finalistas del torneo.'],
-            ['nombre' => 'Final', 'descripcion' => 'El partido decisivo para determinar al campeón del torneo.'],
+            ['nombre' => 'Fase de Grupos'],
+            ['nombre' => '16avos de Final'],
+            ['nombre' => 'Octavos de Final'],
+            ['nombre' => 'Cuartos de Final'],
+            ['nombre' => 'Semifinales'],
+            ['nombre' => 'Final'],
         ];
 
         foreach ($etapas as $etapa) {

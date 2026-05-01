@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Permiso;
+use App\Enums\Rol;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -16,42 +18,16 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        $guard = config('auth.defaults.guard', 'web');
-
-        $permissions = [
-            'manage-users',
-            'manage-quinielas',
-            'manage-matches',
-            'manage-teams',
-            'make-predictions',
-            'view-results',
-            'view-leaderboard',
-            'view-audit-logs',
-        ];
-
-        foreach ($permissions as $permission) {
-            Permission::findOrCreate($permission, $guard);
+         // Crear permisos desde el Enum
+        foreach (Permiso::values() as $permiso) {
+            Permission::firstOrCreate(['name' => $permiso]);
         }
 
-        $roles = [
-            'admin' => $permissions,
-            'organizador' => [
-                'manage-quinielas',
-                'manage-matches',
-                'manage-teams',
-                'view-results',
-                'view-leaderboard',
-            ],
-            'jugador' => [
-                'make-predictions',
-                'view-results',
-                'view-leaderboard',
-            ],
-        ];
-
-        foreach ($roles as $roleName => $rolePermissions) {
-            $role = Role::findOrCreate($roleName, $guard);
-            $role->syncPermissions($rolePermissions);
+        // Crear roles y asignar permisos según el Enum
+        foreach (Rol::cases() as $rol) {
+            $roleModel = Role::firstOrCreate(['name' => $rol->value]);
+            $roleModel->syncPermissions($rol->permisos());
         }
+            $this->command->info('✅ Roles y permisos creados exitosamente.');
     }
 }

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Infrastructure\Logging\AuditLogger\AuditLogger;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function __construct(
-        protected AuthService $authService
+        protected AuthService $authService,
+        protected AuditLogger $auditLogger
     ) {}
 
     public function register(Request $request): JsonResponse
@@ -26,6 +29,9 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
+        // Log successful registration
+        $this->auditLogger->logRegister($user->id);
+
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -39,19 +45,33 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        $user = $this->authService->login($request->only(['correo_electronico', 'password']));
+        try {
+            $user = $this->authService->login($request->only(['correo_electronico', 'password']));
 
-        $token = $user->createToken('auth-token')->plainTextToken;
+            $token = $user->createToken('auth-token')->plainTextToken;
 
-        return response()->json([
-            'user' => $user,
-            'token' => $token,
-        ]);
+            // Log successful login
+            $this->auditLogger->logLogin($user->id);
+
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+            ]);
+        } catch (ValidationException $e) {
+            // Log failed login attempt
+            $this->auditLogger->logFailedLogin($request->input('correo_electronico'));
+
+            // Re-throw the exception to maintain original behavior
+            throw $e;
+        }
     }
 
     public function logout(Request $request): JsonResponse
     {
         $this->authService->logout($request->user());
+
+        // Log logout
+        $this->auditLogger->logLogout($request->user()->id);
 
         return response()->json(['message' => 'Sesión cerrada correctamente']);
     }

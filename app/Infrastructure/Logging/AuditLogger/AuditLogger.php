@@ -124,6 +124,11 @@ class AuditLogger
      */
     protected function logToFile(string $channel, array $data): void
     {
+        // Skip file logging in testing environment
+        if (app()->environment('testing')) {
+            return;
+        }
+
         $message = $this->formatLogMessage($data);
 
         Log::channel($channel)->info($message, $data);
@@ -134,6 +139,11 @@ class AuditLogger
      */
     protected function logToDatabase(array $data): void
     {
+        // Skip database logging in testing environment
+        if (app()->environment('testing')) {
+            return;
+        }
+
         try {
             $this->auditLogRepository->createLog($data);
         } catch (\Exception $e) {

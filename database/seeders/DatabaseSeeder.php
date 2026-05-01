@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Rol;
 use App\Models\Usuario;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,20 +17,20 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            //  RolesAndPermissionsSeeder::class,
+            RolesAndPermissionsSeeder::class,
             EtapaSeeder::class,
             EquipoSeeder::class,
             JuegoSeeder::class,
         ]);
 
-        // Crear usuarios de prueba si no existen
-        // if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
-        //     Usuario::factory()->create([
-        //         'nombre_completo' => 'Admin User',
-        //         'nombre_usuario' => 'admin',
-        //         'correo_electronico' => 'admin@app.com',
-        //     ])->assignRole('admin');
-        // }
+       // Crear usuarios de prueba si no existen
+        if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
+            Usuario::factory()->create([
+                'nombre_completo' => 'Admin User',
+                'nombre_usuario' => 'admin',
+                'correo_electronico' => 'admin@app.com',
+            ])->assignRole(Rol::ADMIN->value);
+        }
 
         // if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
         //     Usuario::factory()->create([
@@ -39,12 +40,14 @@ class DatabaseSeeder extends Seeder
         //     ])->assignRole('organizador');
         // }
 
-        // if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
-        //     Usuario::factory()->create([
-        //         'nombre_completo' => 'Jugador Test',
-        //         'nombre_usuario' => 'jugador',
-        //         'correo_electronico' => 'jugador@example.com',
-        //     ])->assignRole('jugador');
-        // }
+        if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
+            Usuario::factory()->create([
+                'nombre_completo' => 'Jugador Test',
+                'nombre_usuario' => 'jugador',
+                'correo_electronico' => 'jugador@example.com',
+            ])->assignRole(Rol::JUGADOR->value);
+        }
+
+            $this->command->info('✅ Usuarios de prueba creados exitosamente.');
     }
 }
