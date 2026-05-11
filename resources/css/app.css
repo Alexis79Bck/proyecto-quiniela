@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-
+<link rel="stylesheet" href="{{ asset('vendors/typicons/typicons.css') }}">
+<link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
