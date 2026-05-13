@@ -19,36 +19,44 @@
     <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('js/template.js') }}"></script>
  <body>
-   <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-    <div class="container">
-      <div class="card login-card">
-        <div class="row no-gutters">
-          <div class="col-md-5">
-            <img src="assets/images/login.jpg" alt="login" class="login-card-img">
-          </div>
-          <div class="col-md-7">
-            <div class="card-body">
-              <div class="brand-wrapper">
-                <img src="assets/images/logo.svg" alt="logo" class="logo">
-              </div>
-              <p class="login-card-description">Ingrese Sus php artisan make:controller UsuarioController --resourcenciales</p>
-              <form action="#!">
-                  <div class="form-group">
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address">
-                  </div>
-                  <div class="form-group mb-4">
-                    <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="***********">
-                  </div>
-                  <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login">
-                </form>
-                <a href="#!" class="forgot-password-link">Forgot password?</a>
-                <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
-                <nav class="login-card-footer-nav">
-                  <a href="#!">Terms of use.</a>
-                  <a href="#!">Privacy policy</a>
-                </nav>
+<div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <img src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+                            </div>
+                            <h4>Hola! Empecemos</h4>
+                            <h6 class="font-weight-light">Ingresa tus credenciales para continuar.</h6>
+                            
+                            <form class="pt-3">
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-lg" id="email" placeholder="Correo electrónico">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="password" placeholder="Contraseña">
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="button">LOGIN</button>
+                                </div>
+                                <div class="my-2 d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input">
+                                            Mantener sesión
+                                        </label>
+                                    </div>
+                                    <a href="#" class="auth-link text-black">¿Olvidaste tu contraseña?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             </div>
           </div>
         </div>

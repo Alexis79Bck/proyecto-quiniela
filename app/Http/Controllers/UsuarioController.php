@@ -12,7 +12,11 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+       // Traemos todos los usuarios de PostgreSQL
+        $usuarios = \App\Models\Usuario::all(); 
+
+        // Pasamos la variable a la vista
+        return view('home', compact('usuarios'));
     }
 
     /**

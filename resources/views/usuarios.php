@@ -5,27 +5,24 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Panel de Usuarios - Proyecto Quiniela</h4>
+                <h4 class="card-title">Listado de Usuarios</h4>
                 <p class="card-description">
-                    Lista de usuarios registrados en el sistema.
+                    Administración de integrantes de la quiniela
                 </p>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre Completo</th>
                                 <th>Usuario</th>
-                                <th>Email</th>
+                                <th>Correo</th>
                                 <th>Estado</th>
-                                <th>Fecha Registro</th>
-                                <th>Acciones</th>
+                                <th>Creado en</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($usuarios as $usuario)
                             <tr>
-                                <td>{{ $usuario->id }}</td>
                                 <td>{{ $usuario->nombre_completo }}</td>
                                 <td>{{ $usuario->nombre_usuario }}</td>
                                 <td>{{ $usuario->correo_electronico }}</td>
@@ -36,11 +33,7 @@
                                         <label class="badge badge-warning">Pendiente</label>
                                     @endif
                                 </td>
-                                <td>{{ $usuario->created_at ? $usuario->created_at->format('d/m/Y') : 'N/A' }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-info btn-sm">Editar</button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm">Eliminar</button>
-                                </td>
+                                <td>{{ $usuario->created_at->format('d/m/Y') }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -51,11 +44,3 @@
     </div>
 </div>
 @endsection
-
-
-{{-- @extends('layout.app')
-
-@section('content')
-    {{-- <h1>Bienvenido a mi sitio</h1>
-    <p>Este contenido viene de la plantilla HTML original.</p> --}}
-{{-- @endsection --}} --}}
