@@ -14,9 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Audit Middleware - Disabled in testing to prevent memory issues
-        // The middleware itself checks for testing environment
-        $middleware->append(AuditMiddleware::class);
+        // Append Audit Middleware only in non-testing environment to avoid container recursion during tests
+        $appEnv = $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?: 'production';
+        if ($appEnv !== 'testing') {
+            $middleware->append(AuditMiddleware::class);
+        }
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
