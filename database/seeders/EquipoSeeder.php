@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Grupo;
+use App\Enums\Group;
 use App\Models\Equipo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -18,13 +18,15 @@ class EquipoSeeder extends Seeder
         $datos = json_decode(File::get($jsonPath), true);
 
         foreach ($datos as $grupo) {
-            if (!isset($grupo['grupo'], $grupo['selecciones'])) {
+            if (! isset($grupo['grupo'], $grupo['selecciones'])) {
                 $this->command->error('⚠️ Formato de datos incorrecto en el JSON. Se esperaba "grupo" y "selecciones".');
+
                 continue;
             }
 
-            if (!Grupo::isValid($grupo['grupo'])) {
+            if (! Group::isValid($grupo['grupo'])) {
                 $this->command->error("⚠️ Grupo inválido: {$grupo['grupo']}. Se esperaba una letra de A a L.");
+
                 continue;
             }
 

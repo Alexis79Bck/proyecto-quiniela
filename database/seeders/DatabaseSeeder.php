@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Rol;
+use App\Enums\Role;
 use App\Models\Usuario;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
             JuegoSeeder::class,
         ]);
 
-       // Crear usuarios de prueba si no existen
-        if (!Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
+        // Crear usuarios de prueba si no existen
+        if (! Usuario::where('correo_electronico', 'admin@app.com')->exists()) {
             Usuario::factory()->create([
                 'nombre_completo' => 'Admin User',
                 'nombre_usuario' => 'admin',
                 'correo_electronico' => 'admin@app.com',
-            ])->assignRole(Rol::ADMIN->value);
+            ])->assignRole(Role::ADMIN->value);
         }
 
         // if (!Usuario::where('correo_electronico', 'organizador@example.com')->exists()) {
@@ -40,14 +40,14 @@ class DatabaseSeeder extends Seeder
         //     ])->assignRole('organizador');
         // }
 
-        if (!Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
+        if (! Usuario::where('correo_electronico', 'jugador@example.com')->exists()) {
             Usuario::factory()->create([
                 'nombre_completo' => 'Jugador Test',
                 'nombre_usuario' => 'jugador',
                 'correo_electronico' => 'jugador@example.com',
-            ])->assignRole(Rol::JUGADOR->value);
+            ])->assignRole(Role::JUGADOR->value);
         }
 
-            $this->command->info('✅ Usuarios de prueba creados exitosamente.');
+        $this->command->info('✅ Usuarios de prueba creados exitosamente.');
     }
 }

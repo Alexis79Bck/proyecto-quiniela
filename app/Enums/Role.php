@@ -10,7 +10,7 @@ enum Role: string
     // Opcional: mapeo de qué permisos tiene cada rol
     public function permisos(): array
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN => Permission::values(), // todos
             self::JUGADOR => [
                 Permission::VER_PARTIDOS->value,

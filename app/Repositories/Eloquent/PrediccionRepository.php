@@ -68,7 +68,7 @@ class PrediccionRepository extends BaseEloquentRepository implements PrediccionR
     public function calculatePoints(int $predictionId): int
     {
         $prediction = $this->find($predictionId);
-        if (!$prediction || !$prediction->juego) {
+        if (! $prediction || ! $prediction->juego) {
             return 0;
         }
 
@@ -99,8 +99,13 @@ class PrediccionRepository extends BaseEloquentRepository implements PrediccionR
 
     private function getMatchResult(int $local, int $visitante): string
     {
-        if ($local > $visitante) return 'local';
-        if ($local < $visitante) return 'visitante';
+        if ($local > $visitante) {
+            return 'local';
+        }
+        if ($local < $visitante) {
+            return 'visitante';
+        }
+
         return 'draw';
     }
 }
