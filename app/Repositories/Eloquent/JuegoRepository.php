@@ -5,7 +5,6 @@ namespace App\Repositories\Eloquent;
 use App\Models\Juego;
 use App\Repositories\Contracts\JuegoRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
 
 class JuegoRepository extends BaseEloquentRepository implements JuegoRepositoryInterface
 {

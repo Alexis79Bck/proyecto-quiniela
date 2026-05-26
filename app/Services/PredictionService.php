@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Prediccion;
 use App\Models\Juego;
+use App\Models\Prediccion;
 use App\Models\Usuario;
 use App\Repositories\Contracts\JuegoRepositoryInterface;
 use App\Repositories\Contracts\PrediccionRepositoryInterface;
-use Illuminate\Support\Facades\Config;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 class PredictionService
 {
@@ -20,7 +20,7 @@ class PredictionService
     public function createPrediction(Usuario $user, Juego $match, array $data): Prediccion
     {
         // Check if prediction is allowed (before deadline)
-        if (!$this->isPredictionAllowed($match)) {
+        if (! $this->isPredictionAllowed($match)) {
             throw new \Exception('Prediction deadline has passed.');
         }
 
@@ -34,7 +34,7 @@ class PredictionService
 
     public function updatePrediction(Prediccion $prediction, array $data): Prediccion
     {
-        if (!$this->isPredictionAllowed($prediction->juego)) {
+        if (! $this->isPredictionAllowed($prediction->juego)) {
             throw new \Exception('Prediction deadline has passed.');
         }
 
@@ -55,6 +55,7 @@ class PredictionService
     {
         $deadlineHours = Config::get('quiniela.deadlines.prediction_deadline_hours');
         $deadline = Carbon::parse($match->fecha_hora)->subHours($deadlineHours);
+
         return now()->lessThan($deadline);
     }
 }

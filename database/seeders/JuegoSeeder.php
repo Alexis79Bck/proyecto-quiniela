@@ -9,7 +9,6 @@ use App\Models\Juego;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class JuegoSeeder extends Seeder
 {
@@ -22,7 +21,7 @@ class JuegoSeeder extends Seeder
         $jsonPath = database_path('calendario_fifa_wc2026.json');
         $calendario = json_decode(File::get($jsonPath), true);
         $etapa = Etapa::where('nombre', $calendario[0]['etapa'])->first();
-        
+
         foreach ($calendario[0]['partidos'] as $partido) {
             // Parsear fecha y hora
             $fechaHora = Carbon::createFromFormat('d-m-Y H:i', "{$partido['fecha']} {$partido['hora']}");
