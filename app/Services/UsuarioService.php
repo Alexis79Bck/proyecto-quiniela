@@ -44,6 +44,11 @@ class UsuarioService
         return $this->usuarioRepository->findByEmail($correo);
     }
 
+    public function getUsuarioByEmailOrUsername(string $value): ?Usuario
+    {
+        return $this->usuarioRepository->findByEmailOrUsername($value);
+    }
+
     public function verificarPassword(string $password, string $hashedPassword): bool
     {
         return $this->usuarioRepository->checkUserPassword($password, $hashedPassword);

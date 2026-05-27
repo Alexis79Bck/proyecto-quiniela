@@ -28,7 +28,7 @@ class AuthService
      */
     public function login(array $credentials): Usuario
     {
-        $user = $this->usuarioService->getUsuarioByCorreo($credentials['correo_electronico']);
+        $user = $this->usuarioService->getUsuarioByEmailOrUsername($credentials['correo_electronico']);
 
         if (! $user || ! $this->usuarioService->verificarPassword($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([

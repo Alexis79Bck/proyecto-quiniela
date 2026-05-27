@@ -21,15 +21,12 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        $response->assertJsonStructure([
-            'user' => [
-                'id',
-                'nombre_completo',
-                'nombre_usuario',
-                'correo_electronico',
-            ],
-            'token',
+        $response->assertJson([
+            'success' => true,
+            'message' => 'Usuario creado con éxito',
         ]);
+        $this->assertNotNull($response->json('token'));
+        $this->assertNull($response->json('data')); // Since the user is not an admin
 
         $this->assertDatabaseHas('usuarios', [
             'correo_electronico' => 'test@example.com',
@@ -50,14 +47,15 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'user' => [
-                'id',
-                'nombre_completo',
-                'correo_electronico',
-            ],
-            'token',
+        $response->assertJson([
+            'success' => true,
+            'message' => 'Sesión iniciada correctamente',
         ]);
+        $this->assertNotNull($response->json('token'));
+        $this->assertNull($response->json('data')); // Since the user is not an admin
+
+        // Optionally, you can also assert that the token belongs to the user
+        // but we trust that the token is generated correctly.
     }
 
     public function test_login_fails_with_invalid_credentials(): void
@@ -72,8 +70,12 @@ class AuthenticationTest extends TestCase
             'password' => 'wrongpassword',
         ]);
 
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors('correo_electronico');
+        $response->assertStatus(401);
+        $response->assertJson([
+            'success' => false,
+            'message' => 'Las credenciales proporcionadas son incorrectas.',
+            'data' => null,
+        ]);
     }
 
     public function test_user_can_logout(): void
@@ -122,11 +124,17 @@ class AuthenticationTest extends TestCase
 
         $response = $this->postJson('/api/register', [
             'nombre_completo' => 'Another User',
+            'nombre_usuario' => 'anotheruser',
             'correo_electronico' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
 
         $response->assertStatus(422);
+        $response->assertJson([
+            'success' => false,
+            'message' => 'Este correo electrónico ya está registrado.',
+            'data' => null,
+        ]);
     }
 }

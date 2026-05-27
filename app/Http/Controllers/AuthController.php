@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Infrastructure\Logging\AuditLogger\AuditLogger;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
@@ -16,53 +18,73 @@ class AuthController extends Controller
         protected AuditLogger $auditLogger
     ) {}
 
-    public function register(Request $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
-        $request->validate([
-            'nombre_completo' => ['required', 'string', 'max:255'],
-            'nombre_usuario' => ['required', 'string', 'max:255', 'unique:usuarios'],
-            'correo_electronico' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $validated = $request->validated();
 
-        $user = $this->authService->register($request->only(['nombre_completo', 'nombre_usuario', 'correo_electronico', 'password']));
+        $user = $this->authService->register($validated);
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
         // Log successful registration
         $this->auditLogger->logRegister($user->id);
 
+        $data = null;
+        if ($user->hasRole('Administrador')) {
+            $data = [
+                'id' => $user->id,
+                'name' => $user->nombre_completo,
+                'role' => 'Administrador',
+            ];
+        }
+
         return response()->json([
-            'user' => $user,
+            'success' => true,
+            'message' => 'Usuario creado con éxito',
             'token' => $token,
+            'data' => $data,
         ], 201);
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        $request->validate([
-            'correo_electronico' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $validated = $request->validated();
 
         try {
-            $user = $this->authService->login($request->only(['correo_electronico', 'password']));
+            $user = $this->authService->login($validated);
 
             $token = $user->createToken('auth-token')->plainTextToken;
 
             // Log successful login
             $this->auditLogger->logLogin($user->id);
 
+            $data = null;
+            if ($user->hasRole('Administrador')) {
+                $data = [
+                    'id' => $user->id,
+                    'name' => $user->nombre_completo,
+                    'role' => 'Administrador',
+                ];
+            }
+
             return response()->json([
-                'user' => $user,
+                'success' => true,
+                'message' => 'Sesión iniciada correctamente',
                 'token' => $token,
+                'data' => $data,
             ]);
         } catch (ValidationException $e) {
             // Log failed login attempt
             $this->auditLogger->logFailedLogin($request->input('correo_electronico'));
 
-            // Re-throw the exception to maintain original behavior
-            throw $e;
+            // Re-throw to let FormRequest handle? Actually FormRequest already passed validation.
+            // This catch is for the authentication failure (invalid credentials).
+            // We'll return a unified error response.
+            return response()->json([
+                'success' => false,
+                'message' => 'Las credenciales proporcionadas son incorrectas.',
+                'data' => null,
+            ], 401);
         }
     }
 

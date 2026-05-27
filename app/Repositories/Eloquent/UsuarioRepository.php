@@ -29,6 +29,14 @@ class UsuarioRepository extends BaseEloquentRepository implements UsuarioReposit
         return $this->model->where('correo_electronico', $email)->first();
     }
 
+    public function findByEmailOrUsername(string $value): ?Usuario
+    {
+        return $this->model->where(function ($query) use ($value) {
+            $query->where('correo_electronico', $value)
+                ->orWhere('nombre_usuario', $value);
+        })->first();
+    }
+
     public function all(array $columns = ['*']): Collection
     {
         return parent::all($columns);

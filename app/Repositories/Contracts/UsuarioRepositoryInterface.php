@@ -13,6 +13,8 @@ interface UsuarioRepositoryInterface
 
     public function findByEmail(string $email): ?Usuario;
 
+    public function findByEmailOrUsername(string $value): ?Usuario;
+
     public function all(array $columns = ['*']): Collection;
 
     public function update(int $id, array $attributes): bool;

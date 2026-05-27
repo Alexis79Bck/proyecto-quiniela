@@ -6,6 +6,7 @@ use App\Events\LogAuditEvent;
 use App\Infrastructure\Logging\AuditLogger\AuditLogger;
 use App\Listeners\AuditLogListener;
 use App\Models\AuditLog;
+use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +16,7 @@ class AuditLogTest extends TestCase
 
     public function test_audit_logger_persists_audit_log_with_usuario_id_and_spanish_fields(): void
     {
-        $user = User::factory()->create();
+        $user = Usuario::factory()->create();
 
         $logger = $this->app->make(AuditLogger::class);
 
@@ -44,7 +45,7 @@ class AuditLogTest extends TestCase
 
     public function test_audit_logger_helper_methods_create_expected_audit_logs(): void
     {
-        $user = User::factory()->create();
+        $user = Usuario::factory()->create();
         $logger = $this->app->make(AuditLogger::class);
 
         $logger->logLogin($user->id, ['source' => 'test']);
@@ -86,7 +87,7 @@ class AuditLogTest extends TestCase
 
     public function test_event_listener_handles_log_audit_event_and_persists_audit_log(): void
     {
-        $user = User::factory()->create();
+        $user = Usuario::factory()->create();
 
         $event = new LogAuditEvent(
             $user->id,
@@ -116,7 +117,7 @@ class AuditLogTest extends TestCase
 
     public function test_audit_log_model_scopes_and_formatted_helpers(): void
     {
-        $user = User::factory()->create();
+        $user = Usuario::factory()->create();
 
         $auditLog = AuditLog::create([
             'usuario_id' => $user->id,
