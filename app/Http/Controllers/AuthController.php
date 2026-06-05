@@ -33,7 +33,9 @@ class AuthController extends Controller
         if ($user->hasRole('Administrador')) {
             $data = [
                 'id' => $user->id,
-                'name' => $user->nombre_completo,
+                'fullname' => $user->nombre_completo,
+                'username' => $user->nombre_usuario,
+                'email' => $user->correo_electronico,
                 'role' => 'Administrador',
             ];
         }
@@ -62,7 +64,8 @@ class AuthController extends Controller
             if ($user->hasRole('Administrador')) {
                 $data = [
                     'id' => $user->id,
-                    'name' => $user->nombre_completo,
+                    'fullname' => $user->nombre_completo,
+                    'username' => $user->nombre_usuario,
                     'role' => 'Administrador',
                 ];
             }
