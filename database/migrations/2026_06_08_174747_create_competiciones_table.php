@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('competiciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
             $table->string('proveedor');
             $table->string('nombre');
-            $table->string('nombre_corto')->nullable();
-            $table->string('codigo', 3)->unique();
+            $table->string('codigo')->nullable();
+            $table->string('tipo');
             $table->string('emblema_url')->nullable();
-            $table->string('pais')->nullable();
-            $table->string('bandera_url')->nullable();
-            $table->unsignedInteger('anio_fundado')->nullable();
+            $table->string('area_nombre')->nullable();
+            $table->string('area_codigo')->nullable();
+            $table->boolean('es_activa')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipos');
+        Schema::dropIfExists('competiciones');
     }
 };

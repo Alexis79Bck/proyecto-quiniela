@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('temporadas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
             $table->string('proveedor');
+            $table->foreignId('competicion_id')->constrained('competiciones')->onDelete('cascade');
             $table->string('nombre');
-            $table->string('nombre_corto')->nullable();
-            $table->string('codigo', 3)->unique();
-            $table->string('emblema_url')->nullable();
-            $table->string('pais')->nullable();
-            $table->string('bandera_url')->nullable();
-            $table->unsignedInteger('anio_fundado')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
+            $table->boolean('esta_activa')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipos');
+        Schema::dropIfExists('temporadas');
     }
 };
