@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Tabla de etapas: lista las fases o rondas de una competición, como grupos, semifinales, finales, etc.
-        Schema::create('etapas', function (Blueprint $table) {
+        // Tabla de equipos_temporadas: enlaza equipos con temporadas y grupos asignados.
+        Schema::create('equipos_temporadas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('equipo_id')->constrained('equipos')->onDelete('cascade');
             $table->foreignId('temporada_id')->constrained('temporadas')->onDelete('cascade');
-            $table->string('external_id')->unique();
-            $table->string('proveedor');
-            $table->string('nombre');
-            $table->unsignedInteger('orden')->default(0); // Para ordenar las etapas dentro de la temporada
+            $table->foreignId('grupo_id')->constrained('grupos')->nullable()->onDelete('set null');
             $table->timestamps();
+
+            $table->index(['equipo_id', 'temporada_id']); // Un equipo solo puede estar una vez por temporada
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('etapas');
+        Schema::dropIfExists('equipos_temporadas');
     }
 };

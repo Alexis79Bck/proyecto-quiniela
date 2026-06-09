@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de juegos: define los partidos, su calendario, estado, resultados y relaciones
+        // con equipos, temporada, etapa y grupo.
         Schema::create('juegos', function (Blueprint $table) {
             $table->id(); //Primary Key de la tabla
 
@@ -55,6 +57,10 @@ return new class extends Migration
             $table->index('equipo_visitante_id');
             $table->index('fecha_hora');
             $table->index('estado');
+            $table->index('temporada_id');
+            $table->index('grupo_id');
+            $table->index(['etapa_id', 'grupo_id']); // Para consultas que filtren por etapa y grupo
+            $table->index(['temporada_id', 'estado', 'fecha_hora']);
         });
     }
 

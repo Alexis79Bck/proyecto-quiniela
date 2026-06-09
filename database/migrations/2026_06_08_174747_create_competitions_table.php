@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de competiciones: registra las competiciones o torneos con datos de proveedor,
+        // nombre, tipo y área geográfica.
         Schema::create('competiciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
@@ -22,7 +24,9 @@ return new class extends Migration
             $table->string('area_nombre')->nullable();
             $table->string('area_codigo')->nullable();
             $table->boolean('es_activa')->default(true);
+            $table->string('slug')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

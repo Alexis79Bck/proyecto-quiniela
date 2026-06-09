@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de equipos: guarda la información de cada equipo, su proveedor de datos,
+        // nombres, código, país y recursos de emblema/ banderas.
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->string('bandera_url')->nullable();
             $table->unsignedInteger('anio_fundado')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

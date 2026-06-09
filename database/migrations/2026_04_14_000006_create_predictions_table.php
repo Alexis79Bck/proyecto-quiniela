@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de predicciones: almacena la apuesta de un usuario para cada juego,
+        // incluyendo el marcador previsto, fecha de cierre y puntos obtenidos.
         Schema::create('predicciones', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();

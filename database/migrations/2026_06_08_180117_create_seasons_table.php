@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de temporadas: asocia una temporada con su competición, fechas y estado activo.
         Schema::create('temporadas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
