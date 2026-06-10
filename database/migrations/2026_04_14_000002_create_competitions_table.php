@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Tabla de equipos: guarda la información de cada equipo, su proveedor de datos,
-        // nombres, código, país y recursos de emblema/ banderas.
-        Schema::create('equipos', function (Blueprint $table) {
+        // Tabla de competiciones: registra las competiciones o torneos con datos de proveedor,
+        // nombre, tipo y área geográfica.
+        Schema::create('competiciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('external_id')->unique();
             $table->string('proveedor');
             $table->string('nombre');
-            $table->string('nombre_corto')->nullable();
-            $table->string('codigo', 3)->unique();
+            $table->string('codigo')->nullable();
+            $table->string('tipo');
             $table->string('emblema_url')->nullable();
-            $table->string('pais')->nullable();
-            $table->string('bandera_url')->nullable();
-            $table->unsignedInteger('anio_fundado')->nullable();
+            $table->string('area_nombre')->nullable();
+            $table->string('area_codigo')->nullable();
+            $table->boolean('es_activa')->default(true);
+            $table->string('slug')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('equipos');
+        Schema::dropIfExists('competiciones');
     }
 };

@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('etapas', function (Blueprint $table) {
+        // Tabla de grupos: define los grupos dentro de una temporada, para organizar partidos y clasificaciones.
+        Schema::create('grupos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('temporada_id')->constrained('temporadas')->onDelete('cascade');
             $table->string('nombre');
             $table->timestamps();
         });
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('etapas');
+        Schema::dropIfExists('grupos');
     }
 };

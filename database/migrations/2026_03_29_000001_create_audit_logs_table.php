@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de audit_logs: registra acciones importantes del sistema para auditoría
+        // (usuario, acción, entidad afectada, valores antiguos/nuevos, IP y metadata).
         Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->nullable()->constrained('usuarios')->nullOnDelete();

@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'football_data' => [
+        'token' => env('FOOTBALL_DATA_API_KEY'),
+        'base_url' => env('FOOTBALL_DATA_BASE_URL', 'https://api.football-data.org/v4/'),
+    ],
 
 ];

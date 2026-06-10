@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tabla de usuarios: almacena la información básica de los usuarios del sistema
+        // (nombre, credenciales y marcas de tiempo).
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_completo');
@@ -28,6 +30,7 @@ return new class extends Migration
         //     $table->timestamp('created_at')->nullable();
         // });
 
+        // Tabla de sesiones: información de sesiones persistentes para autenticación
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index()->constrained('usuarios');
