@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Infrastructure\Contracts\API;
+namespace App\Integrations\FootballData\Contracts;
 
 /**
  * Interface para el proveedor Football-Data (contrato base)

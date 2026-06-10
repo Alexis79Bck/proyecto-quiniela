@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Infrastructure\Contracts\API\FootballDataProviderInterface;
+use App\Integrations\FootballData\Contracts\FootballDataProviderInterface;
 
 /**
  * Servicio para acceder a datos de Football-Data a través del proveedor concreto.
