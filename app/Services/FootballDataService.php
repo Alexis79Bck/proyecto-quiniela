@@ -17,7 +17,7 @@ class FootballDataService
         $this->provider = $provider;
     }
 
-    public function getCompetition($competitionId): array
+    public function getCompetition(int $competitionId): array
     {
         return $this->provider->getCompetition($competitionId);
     }
@@ -32,27 +32,27 @@ class FootballDataService
         return $this->provider->getMatches($params);
     }
 
-    public function getMatch($matchId): array
+    public function getMatch(int $matchId): array
     {
         return $this->provider->getMatch($matchId);
     }
 
-    public function listTeams($competitionId): array
+    public function listTeams(int $competitionId): array
     {
         return $this->provider->listTeams($competitionId);
     }
 
-    public function getTeam($teamId): array
+    public function getTeam(int $teamId): array
     {
         return $this->provider->getTeam($teamId);
     }
 
-    public function getStandings($competitionId): array
+    public function getStandings(int $competitionId): array
     {
         return $this->provider->getStandings($competitionId);
     }
 
-    public function getScorers($competitionId): array
+    public function getScorers(int$competitionId): array
     {
         return $this->provider->getScorers($competitionId);
     }
