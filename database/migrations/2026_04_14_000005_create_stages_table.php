@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('external_id')->unique();
             $table->string('proveedor');
             $table->string('nombre');
-            $table->unsignedInteger('orden')->default(0); // Para ordenar las etapas dentro de la temporada
+           // $table->unsignedInteger('orden')->default(0); // Para ordenar las etapas dentro de la temporada
             $table->timestamps();
         });
     }

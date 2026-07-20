@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('codigo')->nullable();
             $table->string('tipo');
             $table->string('emblema_url')->nullable();
-            $table->string('area_nombre')->nullable();
-            $table->string('area_codigo')->nullable();
             $table->boolean('es_activa')->default(true);
             $table->string('slug')->unique();
             $table->timestamps();
